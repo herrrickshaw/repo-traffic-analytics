@@ -17,6 +17,7 @@ freshness + liveness, not DORA):
 
 The human still makes the call — this file is the agenda, not the decision.
 """
+
 import json
 import re
 import subprocess
@@ -75,9 +76,7 @@ def traffic_30d(name):
         if date >= cutoff
     )
     views = sum(
-        v.get("count", 0)
-        for date, v in data.get("views", {}).items()
-        if date >= cutoff
+        v.get("count", 0) for date, v in data.get("views", {}).items() if date >= cutoff
     )
     return clones, views
 
@@ -143,8 +142,7 @@ def main():
         counts[r[0]] = counts.get(r[0], 0) + 1
     lines += [
         "",
-        "Summary: "
-        + ", ".join(f"{k}: {v}" for k, v in sorted(counts.items())),
+        "Summary: " + ", ".join(f"{k}: {v}" for k, v in sorted(counts.items())),
         "",
         "Checklist for the 30-minute pass:",
         "- [ ] Act on each ARCHIVE-CANDIDATE (archive, or note why kept)",

@@ -9,6 +9,7 @@ beyond that 14-day window into per-repo JSON files, upserting by date so
 re-running never creates duplicate entries even though each API call returns
 the last 14 days every time.
 """
+
 import json
 import subprocess
 import sys
@@ -34,11 +35,14 @@ def gh_api(path):
 def list_public_repos():
     result = subprocess.run(
         ["gh", "repo", "list", OWNER, "--limit", "200", "--json", "name,visibility"],
-        capture_output=True, text=True, timeout=30,
+        capture_output=True,
+        text=True,
+        timeout=30,
     )
     data = json.loads(result.stdout)
     return sorted(
-        r["name"] for r in data
+        r["name"]
+        for r in data
         if r["visibility"] == "PUBLIC" and not r["name"].endswith("-archive-2026-07-17")
     )
 
@@ -72,6 +76,7 @@ def snapshot_releases(name, data):
         for asset in rel.get("assets", [])
     )
     from datetime import date
+
     data["releases"][str(date.today())] = today_total
     return data
 
@@ -97,23 +102,41 @@ def main():
 
     # Rebuild a flat summary CSV for quick scanning
     import csv
+
     summary_path = REPO_ROOT / "summary.csv"
     with open(summary_path, "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["repo", "date", "clones", "clone_uniques", "views", "view_uniques", "release_downloads_cumulative"])
+        w.writerow(
+            [
+                "repo",
+                "date",
+                "clones",
+                "clone_uniques",
+                "views",
+                "view_uniques",
+                "release_downloads_cumulative",
+            ]
+        )
         for name in repos:
             data = load_repo_data(name)
-            all_dates = sorted(set(data["clones"]) | set(data["views"]) | set(data["releases"]))
+            all_dates = sorted(
+                set(data["clones"]) | set(data["views"]) | set(data["releases"])
+            )
             for d in all_dates:
                 c = data["clones"].get(d, {})
                 v = data["views"].get(d, {})
                 r = data["releases"].get(d, "")
-                w.writerow([
-                    name, d,
-                    c.get("count", ""), c.get("uniques", ""),
-                    v.get("count", ""), v.get("uniques", ""),
-                    r,
-                ])
+                w.writerow(
+                    [
+                        name,
+                        d,
+                        c.get("count", ""),
+                        c.get("uniques", ""),
+                        v.get("count", ""),
+                        v.get("uniques", ""),
+                        r,
+                    ]
+                )
     print(f"Wrote {summary_path}")
 
 
