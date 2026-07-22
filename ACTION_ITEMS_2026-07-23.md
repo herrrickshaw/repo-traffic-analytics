@@ -23,6 +23,21 @@ Statuses re-verified against live repo/cron state on 2026-07-23.
   GDrive mirror. Full code/docs history bundled to
   ~/repos/branch-archives/market-screener-backtests_full_pre-delete_2026-07-23.bundle
   (verified). Repo DELETION (frees 0.77GB LFS) awaiting user's call.
+- ✅ #10+#13 DELETED BY USER 2026-07-23: market-screener-backtests (+0.77GB LFS freed)
+  and tools-handling_data (empty). Catalog updated.
+- ✅ #11 fuel-retail-outlets REBUILT LFS-FREE (gmd pattern): old repo renamed
+  fuel-retail-outlets-lfs-legacy (deletion pending, frees 0.24GB); fresh repo pushed with
+  code+docs + canonical ssri_pumps_raw_20260722.jsonl.gz (105,035 pumps — NEWER than the
+  locked dumps) + crawl_ssri.py + REBUILD_NOTE.md + CI gate; history bundle
+  fuel-retail-outlets_full_pre-rebuild_2026-07-23.bundle in branch-archives.
+- ✅ #38 restore drill installed: repo-data-dedup/scripts/restore_drill.sh + cron 2nd
+  09:15 (samples 3 backup files <50MB, byte-verifies restore, cross-checks GDrive mirror,
+  gunzip-tests latest pg dump). First run: 2/2 PASS.
+- ✅ #35 canonical dataset registry: repo-traffic-analytics/datasets.yaml — 10 datasets,
+  canonical flags, the broken gmd US.parquet marked superseded_by with the do-not-cite
+  warning. Two-file trap now machine-readable.
+- 🔜 #9 working-files uniqueness check running (background verification vs gmrp history
+  + bundles); verdict pending.
 
 **Scope note:** Crunchbase was used only as a corroborating source in the cioindex.com
 historical trace (founding 2006, founder Sourabh Hajela, era analysis). No repo action
