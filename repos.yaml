@@ -1,6 +1,6 @@
 # Repo portfolio catalog — herrrickshaw
 # Generated 2026-07-22. Tiers: 1=active/automation, 2=data store or referenced research, 3=dormant (archive candidates)
-# Excludes: -archive-2026-07-17 private backups (35) and already-archived repos (4)
+# Excludes: already-archived repos. The 35 -archive-2026-07-17 twins were DELETED 2026-07-22 (LFS reclaim; verified + bundled first, see repo-data-dedup/audit/twin_verify.json)
 
 repos:
   working-files:
