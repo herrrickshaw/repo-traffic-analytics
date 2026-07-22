@@ -1,0 +1,283 @@
+# Repo portfolio catalog — herrrickshaw
+# Generated 2026-07-22. Tiers: 1=active/automation, 2=data store or referenced research, 3=dormant (archive candidates)
+# Excludes: -archive-2026-07-17 private backups (35) and already-archived repos (4)
+
+repos:
+  working-files:
+    tier: 1
+    size_mb: 263
+    visibility: PUBLIC
+    purpose: "HOME repo; hosts market-pipeline (India factor panel, CCC screen, signal ledger). ⚠ PUBLIC home dir "
+    notes: "HOME repo; hosts market-pipeline (India factor panel, CCC screen, signal ledger). ⚠ PUBLIC home dir — visibility decision pending"
+  BazaarTalks:
+    tier: 1
+    size_mb: 1
+    visibility: PUBLIC
+    purpose: "Multi-market quant research platform — DuckDB warehouse, Cassandra store, ticker dashboard"
+    notes: "Active quant research platform (DuckDB warehouse, live fundamentals)"
+  Bazartalks_Py2Cplus:
+    tier: 1
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "C++ reimplementation of BazaarTalks (storage/streaming/quant-core/backtest/serving), Python retained"
+    notes: "C++ reimplementation of BazaarTalks, in progress"
+  global-stock-screener:
+    tier: 1
+    size_mb: 2
+    visibility: PUBLIC
+    purpose: "20-market stock screener with cached OHLCV, 11 strategies, liquidity tiers, cash-conversion-cycle, m"
+    notes: "20-market screener; screener.in collector creds live here (.env, gitignored)"
+  global-market-data:
+    tier: 1
+    size_mb: 86
+    visibility: PUBLIC
+    purpose: "Deep 10-year point-in-time backtest engine + data across 20 markets (~44M OHLCV rows) — evidence on "
+    notes: "Deep 10y PIT OHLCV (LFS-backed, verified); backtest engine"
+  global-market-research-platform:
+    tier: 1
+    size_mb: 337
+    visibility: PUBLIC
+    purpose: "Quantitative multi-market (India/US/Europe/Japan/Korea) research platform — FastAPI+React screening,"
+    notes: "Main multi-market research platform"
+  repo-data-dedup:
+    tier: 1
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Live LFS-dedup project; rescue global-market-data first"
+    notes: "Live LFS-dedup project; rescue global-market-data first"
+  cng-cgd-retail-outlet-mapping:
+    tier: 1
+    size_mb: 10
+    visibility: PUBLIC
+    purpose: "CGD GA map + 82k fuel outlets (artifact live)"
+    notes: "CGD GA map + 82k fuel outlets (artifact live)"
+  digital-twin-for-ipa:
+    tier: 1
+    size_mb: 2
+    visibility: PUBLIC
+    purpose: "312-instrument incentive twin; cron daily 07:17 + Mon 08:23"
+    notes: "312-instrument incentive twin; cron daily 07:17 + Mon 08:23"
+  agri-commodity-tracker:
+    tier: 1
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Daily India APMC mandi commodity prices (Agmarknet/data.gov.in) + World Bank agriculture panel — ful"
+    notes: "Agmarknet mandi daily; cron 14:30"
+  india-trade-tracker:
+    tier: 1
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "India merchandise trade tracker — DGFT EIDB chapter-wise exports/imports (Selenium) + World Bank tra"
+    notes: "DGFT EIDB monthly; cron 15th"
+  repo-traffic-analytics:
+    tier: 1
+    size_mb: 0
+    visibility: PRIVATE
+    purpose: "Weekly traffic snapshots (Mon 9am scheduled task); hosts this catalog"
+    notes: "Weekly traffic snapshots (Mon 9am scheduled task); hosts this catalog"
+  market-data-artifacts:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Private LFS backup: generated stock-market data (EDGAR/fundamentals/warehouse caches + 19-market OHL"
+    notes: "CANONICAL backup store for dvm/fundamentals/edgar caches — check before re-collecting"
+  karz:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Deep 10y data on origin/karz branches; durable store for Downloads tree"
+    notes: "Deep 10y data on origin/karz branches; durable store for Downloads tree"
+  global-ticker-universe:
+    tier: 2
+    size_mb: 3
+    visibility: PUBLIC
+    purpose: "Ticker universe reference data"
+    notes: "Ticker universe reference data"
+  market-correlation-matrices:
+    tier: 2
+    size_mb: 63
+    visibility: PUBLIC
+    purpose: "Correlation matrix outputs"
+    notes: "Correlation matrix outputs"
+  colab-market-fundamentals:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Colab notebook that collects dated multi-market fundamentals via yfinance (curl_cffi anti-block) wit"
+    notes: "Colab dated multi-market fundamentals collector"
+  piotroski-liquidity-research:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Point-in-time research: the Piotroski F-score premium tracks illiquidity, not size. Capacity ~$250k."
+    notes: "Completed PIT research (illiquidity premium); referenced by ongoing work"
+  india-trade-data-analysis:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Descriptive analysis of India's trade, currency, and macro data (MoSPI/RBI/TRADESTAT) — the data hal"
+    notes: "Published descriptive trade analysis (split from mospi repo)"
+  india-trade-sector-policy-recommendations:
+    tier: 2
+    size_mb: 47
+    visibility: PUBLIC
+    purpose: "Sector and policy recommendations for India's trade strategy — the prescriptive half of a two-repo s"
+    notes: "Published prescriptive trade analysis (split from mospi repo)"
+  mospi-dataset-analysis:
+    tier: 2
+    size_mb: 0
+    visibility: PRIVATE
+    purpose: "Superseded by split repos; kept for history with banner"
+    notes: "Superseded by split repos; kept for history with banner"
+  mospi-dataset-analysis-public:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Superseded; kept for history"
+    notes: "Superseded; kept for history"
+  stock-screener-platform:
+    tier: 2
+    size_mb: 63
+    visibility: PUBLIC
+    purpose: "Multi-market investment research platform: FastAPI+React screening, portfolio P&L, backtesting (Indi"
+    notes: "Renamed/rescued screener platform (2026-07-13)"
+  ltm-warehouse-tests:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Postgres test harness verifying the LTM warehouse backfill scripts (Yahoo/NSE/SerpApi tiers, exchang"
+    notes: "Postgres test harness for LTM warehouse backfill"
+  fuel-retail-outlets:
+    tier: 2
+    size_mb: 5
+    visibility: PUBLIC
+    purpose: "India fuel/petrol retail outlet data, extractors (SSRI/BPCL/CashAtPOS), maps & gap-analysis heatmaps"
+    notes: "India fuel outlet data + extractors (feeds cng-cgd mapping)"
+  Merlin:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+  bms-battery-management:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Electric Vehicle Battery Management System — cell models, SOC/SOH estimators, thermal/power-limit mo"
+  claude-lmstudio-router:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Claude API + local LM Studio router — one-shot CLI (router.py) and a Claude Code local-model proxy ("
+  claude-stock-tools:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Curated stock toolkit — daily reports, market screeners, Colab notebooks, strategy reference & data "
+  colab-experiments:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Standalone Google Colab / ML experiments (e.g. DeOldify image colorization)"
+  data_validator:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+  discom-debt-and-revenue-models:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Revenue & cost-recovery models — DISCOM debt-reduction scenario calculator + Dirichlet subscription "
+  europe-stock-screener:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Darvas/Buffett + Piotroski stock screener scoped to the European equity universe (17 exchanges, 966 "
+  ev-battery-management-sim:
+    tier: 3
+    size_mb: 252
+    visibility: PUBLIC
+    purpose: "EV battery-management simulation — cell models, NASA battery-life notebook, Kaggle validation script"
+    notes: "252MB — git-sizer audit queued"
+  event-driven-stock-analysis:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+  focus-sector-investor-map:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+  heart-valve-defect-detection:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+  hydrogen-electrolyser-control:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Production-ready control system for PEM/AEM/Alkaline hydrogen electrolysers"
+  india-ec-subsector-analysis:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "State-wise Environmental Clearance analysis by EIA sub-sector — full PARIVESH 2.0 register (113,970 "
+  india-election-analysis:
+    tier: 3
+    size_mb: 25
+    visibility: PUBLIC
+    purpose: ""
+    notes: "25MB one-off analysis"
+  india-forex-analysis:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Strategic analysis of India's external account and fiscal situation (2020-2027)"
+  india-trade-export-analysis:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "India import/export trade analysis 2020-2026 (RBI reserves, fiscal, high-opportunity exports)"
+  interpreter_toolkit:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+  market-brief-base:
+    tier: 3
+    size_mb: 0
+    visibility: PRIVATE
+    purpose: ""
+  prenatal-care-toolkit:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Defensive prenatal-imaging toolkit: PHI de-identification, sex-ratio-at-birth analytics, PCPNDT comp"
+  saf-monitoring-system:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Sustainable Aviation Fuel compliance monitoring — feedstock tracking, GHG/CORSIA/ReFuelEU/ASTM D7566"
+  stock-portfolio-evaluator:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Stock portfolio analysis tool using the Newsvendor Model for inventory optimization applied to stock"
+  stock-screener-ddd:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+  toll-plaza-highways:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "India toll-plaza visualization + toll-to-retail-outlet distance analysis along highways"
+  tools-handling_data:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: "EMPTY repo (0 commits) — delete candidate"
