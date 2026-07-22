@@ -2,6 +2,21 @@
 Compiled 2026-07-23 from session "CIO Index tools and techniques" (2026-07-22).
 Statuses re-verified against live repo/cron state on 2026-07-23.
 
+## Progress log 2026-07-23
+- ✅ #1 cron fixed (cd prefix added, grep-verified; imports resolve under /usr/bin/python3)
+- ✅ #3 gitleaks full-history sweep of all 50 public repos: 44 clean, 15 findings in 6
+  repos, ALL benign (data.gov.in public sample key, Deutsche Börse shared public key,
+  SSR-guide placeholders sk_live_abc…/truncated JWT, chart variable names, Figma fileKey).
+  Zero rotations needed. Reports: scratchpad gitleaks_sweep/ (session-temporary).
+- ✅ #8 both trackers flipped off LFS (full 1MB blobs verified served by GitHub API)
+- ✅ #2 CI gate adopted in 6 more Tier-1 repos (repo-data-dedup, cng-cgd, digital-twin,
+  agri, india-trade, repo-traffic-analytics); python lint enabled only where ruff-clean
+  (repo-traffic-analytics); others gitleaks-only with TODO to flip after cleanup.
+  BazaarTalks/Py2Cplus/gss/gmd/gmrp already had CI. First runs green (5/6 + refix).
+- ✅ #7 monthly portfolio review installed: scripts/portfolio_review.py (this repo) +
+  cron 1st 09:30; first report reports/REVIEW_2026-07.md (all 50 KEEP — estate touched
+  this month).
+
 **Scope note:** Crunchbase was used only as a corroborating source in the cioindex.com
 historical trace (founding 2006, founder Sourabh Hajela, era analysis). No repo action
 items derive from Crunchbase itself — everything actionable came from the CIO-Index-framed
