@@ -203,7 +203,7 @@ repos:
   ev-battery-management-sim:
     tier: 3
     size_mb: 252
-    notes_data: "Kaggle data de-hosted 2026-07-22: tip references 6 original Kaggle datasets via scripts/fetch_kaggle_data.sh + kaggle_manifest.csv; 252MB pack remains in history pending filter-repo rewrite"
+    notes_data: "Kaggle data de-hosted 2026-07-22: tip references 6 original Kaggle datasets via scripts/fetch_kaggle_data.sh + kaggle_manifest.csv. History REWRITTEN (filter-repo): pack 252MB -> 0.9MB. Pre-rewrite bundle in ~/repos/branch-archives. cell-guardian likewise rewritten (252MB -> 0.6MB) and re-archived"
     visibility: PUBLIC
     purpose: "EV battery-management simulation — cell models, NASA battery-life notebook, Kaggle validation script"
     notes: "252MB — git-sizer audit queued"
