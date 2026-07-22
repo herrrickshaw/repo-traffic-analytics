@@ -32,7 +32,7 @@ repos:
     size_mb: 86
     visibility: PUBLIC
     purpose: "Deep 10-year point-in-time backtest engine + data across 20 markets (~44M OHLCV rows) — evidence on "
-    notes: "Deep 10y PIT OHLCV (LFS-backed, verified); backtest engine"
+    notes: "Deep 10y PIT OHLCV — REBUILT 2026-07-22 as LFS-FREE regular git (134 files 0.97GB, sha256-verified); old LFS repo renamed global-market-data-lfs-legacy pending deletion (-1.31GB LFS); full history bundled in ~/repos/branch-archives"
   global-market-research-platform:
     tier: 1
     size_mb: 337
