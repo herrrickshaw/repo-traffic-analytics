@@ -1,0 +1,76 @@
+# Canonical dataset registry — the fix for the "two-file trap"
+# (an analysis once ran on global-market-data/ltm/US.parquet — an interrupted,
+# letter-biased collection — when the canonical panel lived in global-stock-screener.
+# Every dataset with more than one plausible home gets an entry here.)
+#
+# Rules:
+#   - canonical: true  -> the ONE authoritative copy analyses may read
+#   - canonical: false -> known non-canonical twin; superseded_by names the canonical
+#   - scripts should assert their input path appears here as canonical before running
+# Generated 2026-07-23 from the CIO-review action items (open-literature item:
+# catalog-lite dataset registry, DataHub/OpenMetadata pattern distilled for n=1).
+
+datasets:
+
+  india_daily_ohlcv:
+    canonical: true
+    location: "postgres+duckdb: market_daily.cleaned_ohlcv (gmd warehouse)"
+    notes: "Load India from cleaned_ohlcv ONLY — NSE/BSE share bare symbols, 2,534 collide in raw tables. nse_raw/bse_raw are bronze (append-only inputs), never analysis inputs."
+    refresh: "daily_pipeline.sh step [15/16]; freshness via market_daily.ticker_freshness view"
+
+  india_ohlcv_raw_bhavcopy:
+    canonical: false
+    location: "warehouse nse_raw / bse_raw tables + raw bhavcopy archives"
+    superseded_by: india_daily_ohlcv
+    notes: "Bronze layer. Immutable as-landed. Symbol collisions live here."
+
+  us_price_panel_10y:
+    canonical: true
+    location: "repos/global-stock-screener/cache_seed/ltm/US.parquet"
+    notes: "9,278 symbols; 97% EDGAR overlap. THE canonical US panel."
+    backup: "dropbox:market-data-backup/current/gss-cache_seed/ltm/US.parquet + GDrive mirror"
+
+  us_price_panel_gmd:
+    canonical: false
+    location: "repos/global-market-data/ltm/US.parquet"
+    superseded_by: us_price_panel_10y
+    notes: "🔴 BROKEN: interrupted alphabetical collection (no D-L, O, U-Z; most-covered symbols all B's). Every 2026-07-15 US result on this file ran on 13% of the market. Never cite without re-running on the canonical panel."
+
+  deep_10y_pit_ohlcv:
+    canonical: true
+    location: "repos/global-market-data/cache_seed/ltm/*.parquet"
+    notes: "REAL 10.5y point-in-time OHLCV (IN 4.4M rows to 2016; 964/3,476 delisted names kept — survivorship passes). ⚠ raw Close not Adj Close: apply the split heuristic before any illiquidity/return claim (unadjusted prices faked a +12.2% premium once)."
+    backup: "GitHub (LFS-free rebuild) + dropbox gmd-cache_seed + GDrive"
+
+  fundamentals_history_panels:
+    canonical: true
+    location: "repos/global-stock-screener/cache_seed/fundamentals_history/*.parquet"
+    notes: "Dated (point-in-time) fundamentals per market. India 10y source = screener.in collector; US = SEC EDGAR."
+    backup: "dropbox gss-cache_seed/fundamentals_history (27 panels) + GDrive"
+
+  ssri_fuel_pumps:
+    canonical: true
+    location: "repos/cng-cgd-retail-outlet-mapping/data/ssri_pumps_raw_20260722.jsonl.gz"
+    notes: "105,035 pumps, crawled 2026-07-22 from public SSRI API. Re-crawl ~6 min via scripts/crawl_ssri.py."
+    mirrors:
+      - "fuel-retail-outlets/api-data-integration/outlet_data_ssri_complete/ (same file, LFS-free rebuild)"
+
+  agri_mandi_daily:
+    canonical: true
+    location: "repos/agri-commodity-tracker/data/agri.duckdb"
+    notes: "Agmarknet mandi daily (pull after 14:00 IST). Regular git since 2026-07-23 (no LFS)."
+
+  india_trade_monthly:
+    canonical: true
+    location: "repos/india-trade-tracker/data/trade.duckdb"
+    notes: "DGFT EIDB monthly. Regular git since 2026-07-23 (no LFS)."
+
+  reference_tables:
+    canonical: true
+    location: "$HOME data/market_data.duckdb"
+    notes: "Tracked reference tables (europe_all_list, frankfurt/london lists, NSE/BSE fundamental exports). NOT the same file as the deleted market-screener-backtests market_data.duckdb (that was a derived prices+fundamentals consolidation, rebuildable via its build_warehouse.py — bundle in branch-archives)."
+
+  daily_refreshed_instrument_lists:
+    canonical: true
+    location: "$HOME data/{us,japan,korea,nse_equity}_list.csv"
+    notes: "Same-day cache, rebuilt by run_app.sh each startup. Gitignored on purpose — never migrate to a DB table."

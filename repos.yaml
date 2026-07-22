@@ -152,7 +152,7 @@ repos:
     size_mb: 5
     visibility: PUBLIC
     purpose: "India fuel/petrol retail outlet data, extractors (SSRI/BPCL/CashAtPOS), maps & gap-analysis heatmaps"
-    notes: "India fuel outlet data + extractors (feeds cng-cgd mapping)"
+    notes: "India fuel outlet data + extractors (feeds cng-cgd mapping). REBUILT LFS-FREE 2026-07-23: canonical data = ssri_pumps_raw_20260722.jsonl.gz (105,035 pumps, regular git); old repo renamed fuel-retail-outlets-lfs-legacy pending deletion (-0.24GB LFS); history bundle in ~/repos/branch-archives"
   Merlin:
     tier: 3
     archived: 2026-07-22
@@ -298,8 +298,15 @@ repos:
     purpose: "India toll-plaza visualization + toll-to-retail-outlet distance analysis along highways"
   tools-handling_data:
     tier: 3
-    archived: 2026-07-22
+    deleted: 2026-07-23
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
-    notes: "EMPTY repo (0 commits) — delete candidate"
+    notes: "EMPTY repo (0 commits) — DELETED by user 2026-07-23"
+  market-screener-backtests:
+    tier: 3
+    deleted: 2026-07-23
+    size_mb: 768
+    visibility: PUBLIC
+    purpose: "python_files snapshot + 759MB market_data.duckdb (LFS)"
+    notes: "DELETED by user 2026-07-23 (freed 0.77GB LFS). duckdb verified derivable via build_warehouse.py from gss cache_seed (local + Dropbox + GDrive). History bundle: ~/repos/branch-archives/market-screener-backtests_full_pre-delete_2026-07-23.bundle"
