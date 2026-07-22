@@ -16,6 +16,13 @@ Statuses re-verified against live repo/cron state on 2026-07-23.
 - ✅ #7 monthly portfolio review installed: scripts/portfolio_review.py (this repo) +
   cron 1st 09:30; first report reports/REVIEW_2026-07.md (all 50 KEEP — estate touched
   this month).
+- ✅ #10 VERIFIED DERIVABLE: market-screener-backtests' market_data.duckdb (759MB LFS,
+  already unreadable — repo over LFS budget) is build_warehouse.py output from
+  cache_seed/ltm + fundamentals_history + exchange_reference — all present in local
+  gss clone AND dropbox:market-data-backup/current/gss-cache_seed (82 parquets) AND
+  GDrive mirror. Full code/docs history bundled to
+  ~/repos/branch-archives/market-screener-backtests_full_pre-delete_2026-07-23.bundle
+  (verified). Repo DELETION (frees 0.77GB LFS) awaiting user's call.
 
 **Scope note:** Crunchbase was used only as a corroborating source in the cioindex.com
 historical trace (founding 2006, founder Sourabh Hajela, era analysis). No repo action
