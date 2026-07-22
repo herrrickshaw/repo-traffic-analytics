@@ -36,8 +36,16 @@ Statuses re-verified against live repo/cron state on 2026-07-23.
 - ✅ #35 canonical dataset registry: repo-traffic-analytics/datasets.yaml — 10 datasets,
   canonical flags, the broken gmd US.parquet marked superseded_by with the do-not-cite
   warning. Two-file trap now machine-readable.
-- 🔜 #9 working-files uniqueness check running (background verification vs gmrp history
-  + bundles); verdict pending.
+- ⚠️ #9 working-files uniqueness VERDICT: NOT fully redundant. 97.6% content-contained,
+  but unique: 12-commit history + 26.7MB regular blobs + 98 LFS payloads (1.04GB —
+  older ltm snapshots incl. the letter-biased US panel, correlation_scan.duckdb 346MB
+  [outputs recomputed as CSVs 2026-07-23], dated scan xlsx). RESCUED NOW: full bundle
+  working-files_full_2026-07-23.bundle (276MB, verified — covers history + all unique
+  regular blobs) + 18 gc-vulnerable gmrp blobs extracted; both in branch-archives
+  (clouds tonight). PENDING: LFS payload rescue — reads still blocked 05:02 despite
+  freed 0.77GB (GitHub recalculates lazily); retry per
+  branch-archives/working-files-rescue-inventory-2026-07-23/README.md. Deletion
+  (frees 1.32GB LFS) only after LFS retry succeeds OR user accepts stale-snapshot loss.
 
 **Scope note:** Crunchbase was used only as a corroborating source in the cioindex.com
 historical trace (founding 2006, founder Sourabh Hajela, era analysis). No repo action
