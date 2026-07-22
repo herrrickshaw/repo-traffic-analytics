@@ -4,11 +4,11 @@
 
 repos:
   working-files:
-    tier: 1
+    tier: 2
     size_mb: 263
-    visibility: PUBLIC
+    visibility: PRIVATE  # flipped 2026-07-22
     purpose: "HOME repo; hosts market-pipeline (India factor panel, CCC screen, signal ledger). ⚠ PUBLIC home dir "
-    notes: "HOME repo; hosts market-pipeline (India factor panel, CCC screen, signal ledger). ⚠ PUBLIC home dir — visibility decision pending"
+    notes: "HOME repo; hosts market-pipeline (India factor panel, CCC screen, signal ledger). NOT the live HOME origin — older rescue copy of the home tree. Live $HOME pushes to global-market-research-platform"
   BazaarTalks:
     tier: 1
     size_mb: 1
@@ -38,7 +38,7 @@ repos:
     size_mb: 337
     visibility: PUBLIC
     purpose: "Quantitative multi-market (India/US/Europe/Japan/Korea) research platform — FastAPI+React screening,"
-    notes: "Main multi-market research platform"
+    notes: "⚠ This IS the live $HOME origin (public). Publish-by-accident risk lives here, not working-files. LFS-pointer Kaggle payload removed from branches 2026-07-22; bundles in ~/repos/branch-archives"
   repo-data-dedup:
     tier: 1
     size_mb: 0
@@ -155,6 +155,7 @@ repos:
     notes: "India fuel outlet data + extractors (feeds cng-cgd mapping)"
   Merlin:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
@@ -165,31 +166,37 @@ repos:
     purpose: "Electric Vehicle Battery Management System — cell models, SOC/SOH estimators, thermal/power-limit mo"
   claude-lmstudio-router:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Claude API + local LM Studio router — one-shot CLI (router.py) and a Claude Code local-model proxy ("
   claude-stock-tools:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Curated stock toolkit — daily reports, market screeners, Colab notebooks, strategy reference & data "
   colab-experiments:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Standalone Google Colab / ML experiments (e.g. DeOldify image colorization)"
   data_validator:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
   discom-debt-and-revenue-models:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Revenue & cost-recovery models — DISCOM debt-reduction scenario calculator + Dirichlet subscription "
   europe-stock-screener:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Darvas/Buffett + Piotroski stock screener scoped to the European equity universe (17 exchanges, 966 "
@@ -201,11 +208,13 @@ repos:
     notes: "252MB — git-sizer audit queued"
   event-driven-stock-analysis:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
   focus-sector-investor-map:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
@@ -216,37 +225,44 @@ repos:
     purpose: ""
   hydrogen-electrolyser-control:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Production-ready control system for PEM/AEM/Alkaline hydrogen electrolysers"
   india-ec-subsector-analysis:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "State-wise Environmental Clearance analysis by EIA sub-sector — full PARIVESH 2.0 register (113,970 "
   india-election-analysis:
     tier: 3
+    archived: 2026-07-22
     size_mb: 25
     visibility: PUBLIC
     purpose: ""
     notes: "25MB one-off analysis"
   india-forex-analysis:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Strategic analysis of India's external account and fiscal situation (2020-2027)"
   india-trade-export-analysis:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "India import/export trade analysis 2020-2026 (RBI reserves, fiscal, high-opportunity exports)"
   interpreter_toolkit:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
   market-brief-base:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PRIVATE
     purpose: ""
@@ -257,26 +273,31 @@ repos:
     purpose: "Defensive prenatal-imaging toolkit: PHI de-identification, sex-ratio-at-birth analytics, PCPNDT comp"
   saf-monitoring-system:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Sustainable Aviation Fuel compliance monitoring — feedstock tracking, GHG/CORSIA/ReFuelEU/ASTM D7566"
   stock-portfolio-evaluator:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "Stock portfolio analysis tool using the Newsvendor Model for inventory optimization applied to stock"
   stock-screener-ddd:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
   toll-plaza-highways:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: "India toll-plaza visualization + toll-to-retail-outlet distance analysis along highways"
   tools-handling_data:
     tier: 3
+    archived: 2026-07-22
     size_mb: 0
     visibility: PUBLIC
     purpose: ""
