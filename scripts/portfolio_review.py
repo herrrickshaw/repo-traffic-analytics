@@ -20,7 +20,6 @@ The human still makes the call — this file is the agenda, not the decision.
 import json
 import re
 import subprocess
-import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
