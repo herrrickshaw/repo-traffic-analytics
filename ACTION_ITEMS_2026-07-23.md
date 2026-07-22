@@ -46,6 +46,13 @@ Statuses re-verified against live repo/cron state on 2026-07-23.
   freed 0.77GB (GitHub recalculates lazily); retry per
   branch-archives/working-files-rescue-inventory-2026-07-23/README.md. Deletion
   (frees 1.32GB LFS) only after LFS retry succeeds OR user accepts stale-snapshot loss.
+- ✅ fuel-retail-outlets-lfs-legacy DELETED by user 2026-07-23 (+0.24GB; total LFS freed
+  today: 1.01GB). Retries at 05:09/05:10 still blocked — AUTO-RETRY CRON installed
+  (every 6h, repo-data-dedup/scripts/lfs_rescue_working_files.sh, self-terminating:
+  on unblock it fetches all 125 payloads → branch-archives → clouds, writes done-marker;
+  progress in state/wf_lfs_rescue.log). Side-finding: 27 election-analysis files match
+  LFS patterns but are stored as REAL blobs (pointer-mismatch class) — already safe in
+  the bundle.
 
 **Scope note:** Crunchbase was used only as a corroborating source in the cioindex.com
 historical trace (founding 2006, founder Sourabh Hajela, era analysis). No repo action
