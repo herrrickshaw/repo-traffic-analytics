@@ -247,3 +247,15 @@ sre.google/sre-book · atulgawande.com/book/the-checklist-manifesto
   ev-sim/cell-guardian rewritten <1MB; claims ledger `claims.yaml` (10 claims);
   `multiple_testing.py` (0/12 combos survive FDR q=0.10); `backfill_signals.py`
   (18,957 June signals); ETL registry + weekly replication matrix.
+
+## Progress log 2026-07-23 (research leg)
+- ✅ #20 regime conditioning (build_regimes.py PIT terciles; IN BUY 21d: 63% HIGH vs 43% MID)
+- ✅ #31 JP/KR/EU panels refreshed + JP/KR scoring join bug fixed (scored 0% forever)
+- ✅ EU 10y full collection (3.83M rows, 1,618 syms; anchoring 12%→100% of scoreable)
+- ✅ #30 XBRL×CA×bhavcopy join: PEAD weak (Q5−Q1 +0.86%); CA run-up +14%/+10% pre-ex
+- ✅ 3b intimation-anchored: drift +10-16% tradeable, 75-83% hit (claims: provisional)
+- ✅ Cost model PASSED: splits net +13.7%→+10.3% across sizes; capacity-limited
+  (~5 executable split events/yr at Rs2Cr), not cost-limited
+- ✅ Data gaps: NSE integrated-filing API discovered+wired (index 110,942→151,928);
+  XMLs 2,287→5,269, parsed 2,194→3,319 (1,950 IF-taxonomy files unparseable —
+  parser extension = next data task)
