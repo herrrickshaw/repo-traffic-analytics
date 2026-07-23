@@ -38,8 +38,8 @@ datasets:
 
   deep_10y_pit_ohlcv:
     canonical: true
-    location: "repos/global-market-data/cache_seed/ltm/*.parquet"
-    notes: "REAL 10.5y point-in-time OHLCV (IN 4.4M rows to 2016; 964/3,476 delisted names kept — survivorship passes). ⚠ raw Close not Adj Close: apply the split heuristic before any illiquidity/return claim (unadjusted prices faked a +12.2% premium once)."
+    location: "repos/global-market-data/warehouse/ohlcv/<MKT> (+ cache_seed/ltm legacy)"
+    notes: "REAL 10.5y point-in-time OHLCV (964/3,476 delisted names kept — survivorship passes). Adjustment status (2026-07-23): IN raw bhavcopy → read ohlcv_adj/IN; JP/KR/US yf-adjusted + residual overlays → OVERLAY-FIRST (ohlcv_adj/<MKT>/corrected_symbols.parquet supersedes those symbols); CN/EU yf-adjusted, no residuals → ohlcv direct. The old 'all raw Close' flag was overbroad — see claims.yaml non-india-panels-already-adjusted."
     backup: "GitHub (LFS-free rebuild) + dropbox gmd-cache_seed + GDrive"
 
   fundamentals_history_panels:

@@ -66,6 +66,18 @@ governance review and the analysis-exhaustiveness gap review in the same session
    worked as written. Fix: prepend `cd /Users/umashankar/market-pipeline/code/python_files &&`
    and verify with `crontab -l | grep -F "cd /Users"`.
 
+- ✅ #16 (D16) ADJUSTED-PRICE FIX COMPLETE — with a premise correction: JP/KR/CN/US
+  panels were NOT raw Close (verified yf-adjusted at collection: NTT 25:1, Samsung 50:1,
+  NVDA 10:1 all pre-adjusted in-panel); the raw-Close risk was INDIA-ONLY (bhavcopy,
+  already fixed). Real defect = post-assembly residual breaks: price_adjuster_global.py
+  detected 86 candidates (integer-ratio + calm-day + turnover gates), confirmed 8 vs the
+  yfinance split calendar, wrote sparse overlays ohlcv_adj/{JP,KR,US}/corrected_symbols
+  .parquet (overlay-first rule; CN/EU zero residuals). US validation 3/3 exact.
+  claims.yaml corrected + new claim non-india-panels-already-adjusted; DATA_ACCESS.md
+  adjustment-status table added. 🔴 NEW yfinance bug memorialised: auto_adjust serves
+  UNADJUSTED prices for recent JP/KR splits (validate by continuity, never yf returns).
+  Re-run the adjuster after any panel re-assembly (staleness trigger encoded).
+
 ## B. Governance review — still open
 2. **Adopt the `.github` reusable CI gate per-repo** — the reusable workflow
    (ruff+black+gitleaks+integrity) and NEW_REPO_CHECKLIST exist in `herrrickshaw/.github`,
