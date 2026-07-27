@@ -9,19 +9,20 @@ Produces reports/REVIEW_YYYY-MM.md with, per catalogued repo:
   - a suggested verdict: MISSING / KEEP / REVIEW / ARCHIVE-CANDIDATE
 
 Verdict heuristic (metrics chosen for n=1 operator per the review:
-freshness + liveness, not DORA):
+readership, not DORA):
   - repo 404s                    -> MISSING (catalogue entry is stale)
   - tier 1                       -> KEEP (active automation)
-  - pushed <90d                  -> KEEP
   - >= 3 distinct viewers        -> KEEP (someone is actually reading it)
-  - tier 2, stale + unread       -> REVIEW (is the data still canonical?)
-  - tier 3, stale + unread       -> ARCHIVE-CANDIDATE
+  - tier 2, unread               -> REVIEW (is the data still canonical?)
+  - tier 3, unread               -> ARCHIVE-CANDIDATE
 
-Liveness is measured in *distinct viewers*, not clones. Clone counts are
-dominated by automation and by the owner's own git commands — cloning a repo to
-look at it would otherwise renew its own KEEP verdict, which makes the signal
-circular. Clone columns are still reported (with the owner's own days excluded,
-alongside the raw figure) but they no longer decide anything.
+Readership is the only positive signal. Two things that look like liveness are
+reported but do not vote:
+
+  - *Push recency*: something the owner does to a repo, not evidence anyone
+    wants it. With a portfolio pushed by automation it marked everything alive.
+  - *Clone counts*: dominated by automation and by the owner's own git commands,
+    so cloning a repo to look at it would renew its own KEEP verdict.
 
 The viewer count is GitHub's deduplicated trailing-14-day `uniques`, the only
 honest distinct-person figure it exposes. Per-day uniques cannot be summed —
@@ -118,20 +119,27 @@ def traffic_30d(name, self_days):
     return external, raw, views, viewers
 
 
-def decide(tier, days_stale, viewers, exists=True):
+def decide(tier, viewers, exists=True):
     """Suggested verdict. `exists=False` short-circuits everything.
 
     A catalogued repo that 404s is gone from GitHub — renamed, deleted, or
     made private. Its accumulated traffic is historical, so letting the
     liveness test see it would keep a dead entry alive forever.
+
+    Recency of the last push is deliberately not a criterion. Pushing to a repo
+    is something the owner does to it, not evidence anyone wants it — and with
+    a portfolio pushed by automation it marked everything alive. Days stale is
+    still reported, it just no longer votes.
     """
     if not exists:
         return "MISSING"
-    if (
-        tier == 1
-        or (days_stale is not None and days_stale < 90)
-        or (viewers or 0) >= MIN_VIEWERS
-    ):
+    if tier == 1:
+        return "KEEP"
+    if viewers is None:
+        # No traffic snapshots — private repos aren't fetched. Absence of data
+        # is not absence of readers, so don't score it as zero.
+        return "NO-DATA"
+    if viewers >= MIN_VIEWERS:
         return "KEEP"
     return "REVIEW" if tier == 2 else "ARCHIVE-CANDIDATE"
 
@@ -158,9 +166,9 @@ def main():
             ).days
         clones, raw_clones, views, viewers = traffic_30d(name, self_days)
 
-        verdict = decide(tier, days_stale, viewers, exists)
-        # Did readership decide anything, or would freshness/tier alone do it?
-        if exists and verdict != decide(tier, days_stale, 0):
+        verdict = decide(tier, viewers, exists)
+        # Kept by readers rather than by its tier-1 automation exemption
+        if exists and verdict == "KEEP" and tier != 1:
             load_bearing.append(f"{name} ({viewers} viewers)")
 
         rows.append(
@@ -177,7 +185,13 @@ def main():
             )
         )
 
-    order = {"MISSING": 0, "ARCHIVE-CANDIDATE": 1, "REVIEW": 2, "KEEP": 3}
+    order = {
+        "MISSING": 0,
+        "NO-DATA": 1,
+        "ARCHIVE-CANDIDATE": 2,
+        "REVIEW": 3,
+        "KEEP": 4,
+    }
     rows.sort(key=lambda r: (order[r[0]], r[1], r[2]))
 
     lines = [
@@ -192,9 +206,15 @@ def main():
             f"Liveness = **{MIN_VIEWERS}+ distinct viewers**, using GitHub's "
             "deduplicated trailing-14-day count. Per-day uniques cannot be summed "
             "(that double-counts return visitors), so no 30-day equivalent exists. "
-            "Clone columns are informational only and decide nothing: **ext** drops "
-            "days the owner ran a clone/fetch, **raw** is unfiltered, and the true "
-            "external figure sits between them."
+            "Tier 1 repos are exempt as active automation."
+        ),
+        "",
+        (
+            "**Days stale and clone counts are reported but do not vote.** Push "
+            "recency is something the owner does to a repo, not evidence anyone "
+            "wants it; clone counts are dominated by automation and by the owner's "
+            "own git commands (**ext** drops days the owner ran a clone/fetch, "
+            "**raw** is unfiltered, the truth sits between them)."
         ),
         "",
         (
@@ -214,24 +234,21 @@ def main():
         "Summary: " + ", ".join(f"{k}: {v}" for k, v in sorted(counts.items())),
     ]
 
-    # If nothing is stale, every repo passes on freshness alone and readership
-    # is inert. Say so — otherwise a wall of KEEPs reads as a real result.
-    if not load_bearing:
+    tier1 = sum(1 for r in rows if r[0] == "KEEP" and r[1] == 1)
+    if load_bearing:
         lines += [
             "",
-            (
-                f"> Note: no repo is over the 90-day staleness line (max "
-                f"{max((r[3] for r in rows if isinstance(r[3], int)), default=0)}d), "
-                "so all verdicts come from freshness or tier alone. Readership "
-                "decided nothing this month — these KEEPs say the portfolio is "
-                "recently pushed, not that anything is being read."
-            ),
+            f"> Kept by readers ({len(load_bearing)}): " + ", ".join(load_bearing),
+            f"> Kept by tier-1 automation exemption: {tier1}.",
         ]
     else:
         lines += [
             "",
-            f"> Readership was the deciding signal for {len(load_bearing)} repo(s): "
-            + ", ".join(load_bearing),
+            (
+                f"> Every KEEP this month is a tier-1 automation exemption ({tier1}). "
+                f"No other repo cleared {MIN_VIEWERS} distinct viewers, so nothing "
+                "is being kept because someone reads it."
+            ),
         ]
 
     lines += [
@@ -240,6 +257,11 @@ def main():
         (
             "- [ ] Resolve each MISSING: repo 404s but is still catalogued in "
             "repos.yaml — renamed, deleted, or made private? Update or drop the entry"
+        ),
+        (
+            "- [ ] NO-DATA repos are private, so snapshot.py never fetches their "
+            "traffic and readership can't be judged — decide by hand, or extend "
+            "the snapshot to private repos"
         ),
         "- [ ] Act on each ARCHIVE-CANDIDATE (archive, or note why kept)",
         "- [ ] For each REVIEW: is its canonical data still referenced anywhere?",
