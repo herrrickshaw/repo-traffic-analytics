@@ -24,11 +24,25 @@ never duplicate).
 
 ## Known noise in the data
 
-**A large share of clone traffic is the account owner's own work.** Verified
-2026-07-27 by grepping local session transcripts (`~/.claude/projects/**/*.jsonl`)
-for `git clone` / `gh repo clone` / `git fetch` and matching them to the daily
-buckets. Days with 5+ own commands average **433 clones/day**; the three days
-with none average **108**. Every large spike lines up with a working session:
+**A large share of clone traffic is the account owner's own work — this is now
+detected and excluded automatically.** On every run `snapshot.py` scans local
+session transcripts (`~/.claude/projects/**/*.jsonl`) for `git clone` /
+`gh repo clone` / `git fetch`, resolves which tracked repos each command touched,
+and records the dates in `self_activity.json`. Those repo-days are flagged in
+`summary.csv` and dropped from `clones_7d_ex_self` in `views_summary.csv`.
+
+Nothing is removed or hidden: raw counts stay in both files, the raw
+`clones_7d_sum` sits next to the cleaned column, and `self_days_7d` says how
+many days were dropped. Views are never adjusted — browser page loads aren't
+produced by git commands.
+
+Effect on the current week: `digital-twin-for-ipa` 517 → **249**,
+`india-trade-sector-policy-recommendations` 379 → **83**,
+`stock-portfolio-evaluator` 20 → **2**. `FCI-warehouse-MSPvsMSV` stays at 229
+(no matching commands), which is what a genuinely external repo looks like.
+
+Days with 5+ own commands average **433 clones/day**; the three days with none
+average **108**. Every large spike lines up with a working session:
 
 | Date | Own commands | Repos touched | GitHub logged | What was happening |
 |---|---|---|---|---|
@@ -38,13 +52,19 @@ with none average **108**. Every large spike lines up with a working session:
 | 2026-07-12 | 6 clones + 7 fetches | 7 | 335 / 129 | Repo hygiene pass |
 | 2026-07-09 | 2 clones + 95 fetches | 4 | 218 / 99 | Screener/backtest work |
 
-Treat these dates as contaminated. Always check transcripts before reading a
-clone spike as outside interest, and add any newly-identified date here.
+**Attribution has a hard limit — `ex_self` is a floor, not a clean number.** The
+daily unique-cloner counts on those days (278, 539) far exceed what one machine
+can account for, so own activity and external traffic overlap rather than one
+explaining the other. Excluding a whole repo-day therefore also discards
+whatever external traffic occurred on it. GitHub exposes no per-source data, so
+the split cannot be resolved further — only bounded from both sides:
+`clones_7d_ex_self` under-counts, `clones_7d_sum` over-counts, and the truth is
+somewhere between.
 
-**Attribution has a hard limit.** The daily unique-cloner counts on those days
-(278, 539) far exceed what one machine can account for, so own activity and
-external traffic overlap rather than one explaining the other. GitHub exposes no
-per-source data, so the split cannot be resolved further — only bounded.
+Two more limits worth knowing: the scan sees only sessions still present under
+`~/.claude/projects`, so pruned transcripts leave older days unflagged; and
+commands that name no recognisable repo (a bare `git fetch` in an unrelated
+directory) are counted in `unattributed` and excluded from nothing.
 
 **Genuinely external, for contrast:** `FCI-warehouse-MSPvsMSV` (229 clones/week)
 and `india-omc-fuel-fleet-model` (104) have zero matching own commands and no
@@ -80,10 +100,18 @@ columns are upper bounds.
 - `data/<repo>.json` — per-repo time series (clones/views/releases keyed by
   date), plus `period_totals` — GitHub's deduplicated trailing-14-day
   clone/view totals, keyed by the snapshot date the window ends on
-- `summary.csv` — flattened per-repo-per-day view, rebuilt on every run
+- `summary.csv` — flattened per-repo-per-day view, rebuilt on every run.
+  `self_activity` marks repo-days on which the owner ran `clone`, `fetch`, or
+  both
+- `self_activity.json` — dates the owner ran clone/fetch commands, per repo,
+  derived from local transcripts. Only dates, repo names and counts — never
+  command text, file paths or session ids. The scan cache
+  (`.self_activity_cache.json`) is gitignored because its keys *are* local
+  paths; rebuild it with `python3 scripts/snapshot.py --rescan`
 - `views_summary.csv` — one row per repo, human-interest signal only, sorted
   most-read first. `view_uniques_14d` / `views_14d` are GitHub's deduplicated
   14-day figures; `*_7d_sum` and `*_tracked_sum` are sums of daily values and
   so are upper bounds. `days_with_views` and `last_viewed` show whether
-  interest is sustained or a one-day blip; `clones_7d_sum` is carried along
-  purely for machine-vs-human contrast
+  interest is sustained or a one-day blip; `clones_7d_ex_self` /
+  `clones_7d_sum` / `self_days_7d` carry clone volume with and without the
+  owner's own activity, purely for machine-vs-human contrast

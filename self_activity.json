@@ -1,0 +1,556 @@
+{
+ "_comment": "Dates on which the account owner ran git clone / gh repo clone / git fetch, derived from local session transcripts. Clone traffic on these dates is self-generated and is excluded from the ex_self columns. Only dates, repo names and counts are stored -- never command text, file paths or session ids.",
+ "days": {
+  "2026-06-23": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 4
+    }
+   },
+   "unattributed": 1
+  },
+  "2026-06-26": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-06-29": {
+   "repos": {
+    ".github": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 1
+  },
+  "2026-06-30": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-07-01": {
+   "repos": {
+    "global-stock-screener": {
+     "clone": 5,
+     "fetch": 0
+    },
+    "karz": {
+     "clone": 0,
+     "fetch": 2
+    }
+   },
+   "unattributed": 23
+  },
+  "2026-07-02": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "karz": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "global-stock-screener": {
+     "clone": 0,
+     "fetch": 1
+    },
+    ".github": {
+     "clone": 0,
+     "fetch": 2
+    }
+   },
+   "unattributed": 67
+  },
+  "2026-07-03": {
+   "repos": {
+    "Merlin": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "global-stock-screener": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "claude-stock-tools": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "stock-screener-ddd": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "karz": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 3
+  },
+  "2026-07-04": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-07-06": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "karz": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 11
+  },
+  "2026-07-07": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-07-08": {
+   "repos": {
+    "event-driven-stock-analysis": {
+     "clone": 6,
+     "fetch": 0
+    }
+   },
+   "unattributed": 1
+  },
+  "2026-07-09": {
+   "repos": {
+    "karz": {
+     "clone": 0,
+     "fetch": 60
+    },
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "global-stock-screener": {
+     "clone": 1,
+     "fetch": 19
+    },
+    "global-market-scanners": {
+     "clone": 1,
+     "fetch": 2
+    },
+    "event-driven-stock-analysis": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 31
+  },
+  "2026-07-10": {
+   "repos": {
+    "global-market-scanners": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "karz": {
+     "clone": 0,
+     "fetch": 3
+    },
+    "global-stock-screener": {
+     "clone": 0,
+     "fetch": 2
+    }
+   },
+   "unattributed": 8
+  },
+  "2026-07-12": {
+   "repos": {
+    "BazaarTalks": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "global-stock-screener": {
+     "clone": 1,
+     "fetch": 2
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "stock-portfolio-evaluator": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "prenatal-care-toolkit": {
+     "clone": 1,
+     "fetch": 1
+    },
+    "fuel-retail-outlets": {
+     "clone": 1,
+     "fetch": 1
+    },
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 3
+  },
+  "2026-07-13": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 26
+    },
+    "global-stock-screener": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-trade-export-analysis": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "fuel-retail-outlets": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "toll-plaza-highways": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "claude-stock-tools": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "colab-experiments": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "stock-screener-platform": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "global-market-scanners": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "global-market-data": {
+     "clone": 4,
+     "fetch": 0
+    }
+   },
+   "unattributed": 42
+  },
+  "2026-07-14": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 4
+    },
+    "global-market-data": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "stock-screener-platform": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 13
+  },
+  "2026-07-15": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "BazaarTalks": {
+     "clone": 1,
+     "fetch": 1
+    },
+    "stock-screener-platform": {
+     "clone": 1,
+     "fetch": 1
+    },
+    "global-market-data": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-07-16": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-07-17": {
+   "repos": {
+    "market-data-artifacts": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "stock-screener-platform": {
+     "clone": 5,
+     "fetch": 0
+    },
+    "saf-monitoring-system": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "colab-experiments": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "global-stock-screener": {
+     "clone": 6,
+     "fetch": 0
+    },
+    "global-market-data": {
+     "clone": 8,
+     "fetch": 0
+    },
+    "fuel-retail-outlets": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "india-trade-export-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "Merlin": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "claude-lmstudio-router": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "data_validator": {
+     "clone": 5,
+     "fetch": 0
+    },
+    "prenatal-care-toolkit": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "discom-debt-and-revenue-models": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "hydrogen-electrolyser-control": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "claude-stock-tools": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "BazaarTalks": {
+     "clone": 6,
+     "fetch": 0
+    },
+    "heart-valve-defect-detection": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "stock-portfolio-evaluator": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "global-ticker-universe": {
+     "clone": 5,
+     "fetch": 0
+    },
+    "ev-battery-management-sim": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "event-driven-stock-analysis": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "bms-battery-management": {
+     "clone": 5,
+     "fetch": 1
+    },
+    "europe-stock-screener": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "ltm-warehouse-tests": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "india-forex-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "colab-market-fundamentals": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-election-analysis": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "toll-plaza-highways": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "piotroski-liquidity-research": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "karz": {
+     "clone": 4,
+     "fetch": 1
+    },
+    "global-market-research-platform": {
+     "clone": 6,
+     "fetch": 3
+    },
+    "global-market-scanners": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "cell-guardian": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "interpreter_toolkit": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "stock-screener-ddd": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 13
+  },
+  "2026-07-18": {
+   "repos": {
+    "global-stock-screener": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 3
+    }
+   },
+   "unattributed": 5
+  },
+  "2026-07-19": {
+   "repos": {
+    "global-stock-screener": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-07-20": {
+   "repos": {
+    "focus-sector-investor-map": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "digital-twin-for-ipa": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 1
+  },
+  "2026-07-21": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-07-22": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 1,
+     "fetch": 4
+    },
+    "ev-battery-management-sim": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "cell-guardian": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "repo-data-dedup": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "market-data-artifacts": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "global-market-data": {
+     "clone": 1,
+     "fetch": 5
+    },
+    "digital-twin-for-ipa": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "fuel-retail-outlets": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "agri-commodity-tracker": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "india-trade-tracker": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "india-election-analysis": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "stock-portfolio-evaluator": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "prenatal-care-toolkit": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 9
+  },
+  "2026-07-23": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-07-24": {
+   "repos": {
+    "market-correlation-matrices": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "global-market-data": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-07-27": {
+   "repos": {},
+   "unattributed": 3
+  }
+ }
+}

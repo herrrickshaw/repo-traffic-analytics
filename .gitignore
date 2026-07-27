@@ -1,1 +1,6 @@
 reports/portfolio_review.log
+
+# Transcript scan cache — keys are local session paths and UUIDs, so it stays
+# machine-local. self_activity.json holds the derived dates and is versioned.
+# Rebuild with: python3 scripts/snapshot.py --rescan
+.self_activity_cache.json
