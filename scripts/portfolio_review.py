@@ -11,6 +11,7 @@ Produces reports/REVIEW_YYYY-MM.md with, per catalogued repo:
 Verdict heuristic (metrics chosen for n=1 operator per the review:
 readership, not DORA):
   - repo 404s                    -> MISSING (catalogue entry is stale)
+  - already archived on GitHub   -> ARCHIVED (nothing to do)
   - tier 1                       -> KEEP (active automation)
   - >= 3 distinct viewers        -> KEEP (someone is actually reading it)
   - tier 2, unread               -> REVIEW (is the data still canonical?)
@@ -119,12 +120,16 @@ def traffic_30d(name, self_days):
     return external, raw, views, viewers
 
 
-def decide(tier, viewers, exists=True):
+def decide(tier, viewers, exists=True, archived=False):
     """Suggested verdict. `exists=False` short-circuits everything.
 
     A catalogued repo that 404s is gone from GitHub — renamed, deleted, or
     made private. Its accumulated traffic is historical, so letting the
     liveness test see it would keep a dead entry alive forever.
+
+    Already-archived repos are reported as ARCHIVED, not re-proposed for
+    archiving. Without this the agenda fills with work that is already done —
+    19 of 22 archive candidates were archived months ago.
 
     Recency of the last push is deliberately not a criterion. Pushing to a repo
     is something the owner does to it, not evidence anyone wants it — and with
@@ -133,6 +138,8 @@ def decide(tier, viewers, exists=True):
     """
     if not exists:
         return "MISSING"
+    if archived:
+        return "ARCHIVED"
     if tier == 1:
         return "KEEP"
     if viewers is None:
@@ -166,7 +173,7 @@ def main():
             ).days
         clones, raw_clones, views, viewers = traffic_30d(name, self_days)
 
-        verdict = decide(tier, viewers, exists)
+        verdict = decide(tier, viewers, exists, info.get("archived", False))
         # Kept by readers rather than by its tier-1 automation exemption
         if exists and verdict == "KEEP" and tier != 1:
             load_bearing.append(f"{name} ({viewers} viewers)")
@@ -185,12 +192,14 @@ def main():
             )
         )
 
+    # Actionable first; ARCHIVED last — it's a statement of fact, not a task.
     order = {
         "MISSING": 0,
         "NO-DATA": 1,
         "ARCHIVE-CANDIDATE": 2,
         "REVIEW": 3,
         "KEEP": 4,
+        "ARCHIVED": 5,
     }
     rows.sort(key=lambda r: (order[r[0]], r[1], r[2]))
 
