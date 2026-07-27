@@ -24,11 +24,31 @@ never duplicate).
 
 ## Known noise in the data
 
-2026-07-17: all 35 originally-private repos in this account were made public,
-and each was `git clone --mirror`'d once that day as part of a pre-publish
-backup step (see `herrrickshaw/<name>-archive-2026-07-17` repos). Expect a
-one-time clone-count bump on 2026-07-17 for every repo that isn't organic
-external interest.
+**A large share of clone traffic is the account owner's own work.** Verified
+2026-07-27 by grepping local session transcripts (`~/.claude/projects/**/*.jsonl`)
+for `git clone` / `gh repo clone` / `git fetch` and matching them to the daily
+buckets. Days with 5+ own commands average **433 clones/day**; the three days
+with none average **108**. Every large spike lines up with a working session:
+
+| Date | Own commands | Repos touched | GitHub logged | What was happening |
+|---|---|---|---|---|
+| 2026-07-17 | 34 clones + 32 fetches | 29 | 1,658 clones / 278 uniques | Mass public flip + pre-publish `git clone --mirror` backup of all 35 repos |
+| 2026-07-22 | 13 clones + 19 fetches | 13 | 964 / 539 | LFS dedup + `blob:limit` inventory sweep |
+| 2026-07-13 | 10 clones + 65 fetches | 6 | 262 / 125 | Cross-repo contamination cleanup |
+| 2026-07-12 | 6 clones + 7 fetches | 7 | 335 / 129 | Repo hygiene pass |
+| 2026-07-09 | 2 clones + 95 fetches | 4 | 218 / 99 | Screener/backtest work |
+
+Treat these dates as contaminated. Always check transcripts before reading a
+clone spike as outside interest, and add any newly-identified date here.
+
+**Attribution has a hard limit.** The daily unique-cloner counts on those days
+(278, 539) far exceed what one machine can account for, so own activity and
+external traffic overlap rather than one explaining the other. GitHub exposes no
+per-source data, so the split cannot be resolved further — only bounded.
+
+**Genuinely external, for contrast:** `FCI-warehouse-MSPvsMSV` (229 clones/week)
+and `india-omc-fuel-fleet-model` (104) have zero matching own commands and no
+Actions workflows.
 
 ## Reading the numbers: clones are machines, views are people
 
