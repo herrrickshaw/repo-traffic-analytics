@@ -6,20 +6,26 @@ Produces reports/REVIEW_YYYY-MM.md with, per catalogued repo:
   - tier (from repos.yaml), visibility, size
   - last push date and days-since-push (gh api)
   - 30-day clone/view totals (from the accumulated data/*.json snapshots)
-  - a suggested verdict: KEEP / REVIEW / ARCHIVE-CANDIDATE
+  - a suggested verdict: MISSING / KEEP / REVIEW / ARCHIVE-CANDIDATE
 
 Verdict heuristic (metrics chosen for n=1 operator per the review:
 freshness + liveness, not DORA):
+  - repo 404s                    -> MISSING (catalogue entry is stale)
   - tier 1                       -> KEEP (active automation)
-  - pushed or trafficked <90d    -> KEEP
-  - tier 2, stale >90d           -> REVIEW (is the data still canonical?)
-  - tier 3, stale >90d           -> ARCHIVE-CANDIDATE
+  - pushed <90d                  -> KEEP
+  - >= 3 distinct viewers        -> KEEP (someone is actually reading it)
+  - tier 2, stale + unread       -> REVIEW (is the data still canonical?)
+  - tier 3, stale + unread       -> ARCHIVE-CANDIDATE
 
-"Trafficked" deliberately uses clone counts with the owner's own clone/fetch
-days removed. Raw clone traffic is heavily self-generated — cloning a repo to
-look at it would otherwise renew its own KEEP verdict, which makes the liveness
-signal circular. See the README's "Known noise" section; the exclusion is a
-floor, not a clean number, so the raw figure is reported alongside it.
+Liveness is measured in *distinct viewers*, not clones. Clone counts are
+dominated by automation and by the owner's own git commands — cloning a repo to
+look at it would otherwise renew its own KEEP verdict, which makes the signal
+circular. Clone columns are still reported (with the owner's own days excluded,
+alongside the raw figure) but they no longer decide anything.
+
+The viewer count is GitHub's deduplicated trailing-14-day `uniques`, the only
+honest distinct-person figure it exposes. Per-day uniques cannot be summed —
+that double-counts anyone who returns — so a 30-day equivalent does not exist.
 
 The human still makes the call — this file is the agenda, not the decision.
 """
@@ -36,6 +42,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
 REPORT_DIR = REPO_ROOT / "reports"
 OWNER = "herrrickshaw"
+
+# Distinct viewers (deduplicated, 14d) required to count a repo as read.
+MIN_VIEWERS = 3
 
 
 def gh_api(path):
@@ -85,11 +94,11 @@ def traffic_30d(name, self_days):
     """
     path = DATA_DIR / f"{name}.json"
     if not path.exists():
-        return None, None, None
+        return None, None, None, None
     try:
         data = json.loads(path.read_text())
     except json.JSONDecodeError:
-        return None, None, None
+        return None, None, None, None
     cutoff = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d")
     recent = {d: v for d, v in data.get("clones", {}).items() if d >= cutoff}
     raw = sum(v.get("count", 0) for v in recent.values())
@@ -101,10 +110,15 @@ def traffic_30d(name, self_days):
     views = sum(
         v.get("count", 0) for date, v in data.get("views", {}).items() if date >= cutoff
     )
-    return external, raw, views
+    # Distinct viewers: GitHub's own 14-day dedup, recorded by snapshot.py.
+    periods = data.get("period_totals", {})
+    viewers = None
+    if periods:
+        viewers = periods[max(periods)].get("views", {}).get("uniques")
+    return external, raw, views, viewers
 
 
-def decide(tier, days_stale, clones, views, exists=True):
+def decide(tier, days_stale, viewers, exists=True):
     """Suggested verdict. `exists=False` short-circuits everything.
 
     A catalogued repo that 404s is gone from GitHub — renamed, deleted, or
@@ -116,7 +130,7 @@ def decide(tier, days_stale, clones, views, exists=True):
     if (
         tier == 1
         or (days_stale is not None and days_stale < 90)
-        or (clones or 0) + (views or 0) > 0
+        or (viewers or 0) >= MIN_VIEWERS
     ):
         return "KEEP"
     return "REVIEW" if tier == 2 else "ARCHIVE-CANDIDATE"
@@ -130,7 +144,6 @@ def main():
     out = REPORT_DIR / f"REVIEW_{now.strftime('%Y-%m')}.md"
 
     rows = []
-    changed = []
     load_bearing = []
     for name, meta in sorted(catalog.items()):
         tier = int(meta.get("tier", 3))
@@ -143,16 +156,12 @@ def main():
             days_stale = (
                 now - datetime.fromisoformat(pushed.replace("Z", "+00:00"))
             ).days
-        clones, raw_clones, views = traffic_30d(name, self_days)
+        clones, raw_clones, views, viewers = traffic_30d(name, self_days)
 
-        verdict = decide(tier, days_stale, clones, views, exists)
-        # What the old, self-inclusive signal would have said
-        was = decide(tier, days_stale, raw_clones, views, exists)
-        if was != verdict:
-            changed.append((name, was, verdict, raw_clones, clones))
-        # Did traffic decide anything here, or would freshness/tier alone do it?
-        if exists and verdict != decide(tier, days_stale, 0, 0):
-            load_bearing.append(name)
+        verdict = decide(tier, days_stale, viewers, exists)
+        # Did readership decide anything, or would freshness/tier alone do it?
+        if exists and verdict != decide(tier, days_stale, 0):
+            load_bearing.append(f"{name} ({viewers} viewers)")
 
         rows.append(
             (
@@ -160,6 +169,7 @@ def main():
                 tier,
                 name,
                 days_stale if days_stale is not None else "?",
+                viewers if viewers is not None else "-",
                 clones if clones is not None else "-",
                 raw_clones if raw_clones is not None else "-",
                 views if views is not None else "-",
@@ -179,21 +189,22 @@ def main():
         ),
         "",
         (
-            "**Clones ext** excludes days the owner ran a clone/fetch against that "
-            "repo — without it, cloning a repo to inspect it renews its own KEEP "
-            "verdict. **Clones raw** is the unfiltered figure; the true external "
-            "number sits between the two (excluding a day also drops any genuine "
-            "outside traffic on it). Views are never adjusted."
+            f"Liveness = **{MIN_VIEWERS}+ distinct viewers**, using GitHub's "
+            "deduplicated trailing-14-day count. Per-day uniques cannot be summed "
+            "(that double-counts return visitors), so no 30-day equivalent exists. "
+            "Clone columns are informational only and decide nothing: **ext** drops "
+            "days the owner ran a clone/fetch, **raw** is unfiltered, and the true "
+            "external figure sits between them."
         ),
         "",
         (
-            "| Verdict | Tier | Repo | Days stale | Clones 30d ext | Clones 30d raw "
-            "| Views 30d | Visibility |"
+            "| Verdict | Tier | Repo | Days stale | Viewers 14d | Clones 30d ext "
+            "| Clones 30d raw | Views 30d | Visibility |"
         ),
-        "|---|---|---|---|---|---|---|---|",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
-    for v, t, n, d, c, rawc, vw, vis in rows:
-        lines.append(f"| {v} | {t} | {n} | {d} | {c} | {rawc} | {vw} | {vis} |")
+    for v, t, n, d, u, c, rawc, vw, vis in rows:
+        lines.append(f"| {v} | {t} | {n} | {d} | {u} | {c} | {rawc} | {vw} | {vis} |")
 
     counts = {}
     for r in rows:
@@ -203,37 +214,24 @@ def main():
         "Summary: " + ", ".join(f"{k}: {v}" for k, v in sorted(counts.items())),
     ]
 
-    # If nothing is stale, every repo passes on freshness alone and the traffic
-    # term is inert. Say so — otherwise a wall of KEEPs reads as a real result.
+    # If nothing is stale, every repo passes on freshness alone and readership
+    # is inert. Say so — otherwise a wall of KEEPs reads as a real result.
     if not load_bearing:
         lines += [
             "",
             (
                 f"> Note: no repo is over the 90-day staleness line (max "
                 f"{max((r[3] for r in rows if isinstance(r[3], int)), default=0)}d), "
-                "so all verdicts come from freshness or tier alone. The traffic "
-                "signal decided nothing this month — these KEEPs say the portfolio "
-                "is recently pushed, not that anything is being used."
+                "so all verdicts come from freshness or tier alone. Readership "
+                "decided nothing this month — these KEEPs say the portfolio is "
+                "recently pushed, not that anything is being read."
             ),
         ]
     else:
         lines += [
             "",
-            f"> Traffic was the deciding signal for {len(load_bearing)} repo(s): "
+            f"> Readership was the deciding signal for {len(load_bearing)} repo(s): "
             + ", ".join(load_bearing),
-        ]
-
-    if changed:
-        lines += [
-            "",
-            "## Verdicts changed by excluding own clone activity",
-            "",
-            "These were previously kept alive by the owner's own clones:",
-            "",
-        ]
-        lines += [
-            f"- **{n}**: {was} -> {now_v} ({raw} raw clones, {ext} external)"
-            for n, was, now_v, raw, ext in changed
         ]
 
     lines += [
