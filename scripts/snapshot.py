@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Daily traffic snapshot for all public repos under herrrickshaw.
+Daily traffic snapshot for every repo under herrrickshaw, private included.
 
 GitHub only retains 14 days of traffic/clones and traffic/views data, and
 exposes no per-IP or per-origin breakdown (this is a hard platform limit, not
@@ -57,7 +57,15 @@ def gh_api(path):
         return None
 
 
-def list_public_repos():
+def list_tracked_repos():
+    """Every repo under the account, private included.
+
+    Private repos are tracked too: the traffic API serves them to the owner,
+    and excluding them meant the portfolio review had no readership data for
+    them at all and could only score them as unread. The `-archive-2026-07-17`
+    twins were one-off pre-publish backups (deleted 2026-07-22); the filter
+    stays as a guard in case any are ever recreated.
+    """
     result = subprocess.run(
         ["gh", "repo", "list", OWNER, "--limit", "200", "--json", "name,visibility"],
         capture_output=True,
@@ -67,9 +75,7 @@ def list_public_repos():
     )
     data = json.loads(result.stdout)
     return sorted(
-        r["name"]
-        for r in data
-        if r["visibility"] == "PUBLIC" and not r["name"].endswith("-archive-2026-07-17")
+        r["name"] for r in data if not r["name"].endswith("-archive-2026-07-17")
     )
 
 
@@ -259,8 +265,8 @@ def scan_self_activity(known, rescan=False):
 
 def main():
     DATA_DIR.mkdir(exist_ok=True)
-    repos = list_public_repos()
-    print(f"Snapshotting {len(repos)} public repos...")
+    repos = list_tracked_repos()
+    print(f"Snapshotting {len(repos)} repos...")
 
     for name in repos:
         clones = gh_api(f"repos/{OWNER}/{name}/traffic/clones")

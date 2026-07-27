@@ -15,10 +15,12 @@ focus-sector-investor-map,1,1,1,1,1,1,1,2026-07-22,11,22,1
 global-stock-screener,1,4,0,0,3,11,3,2026-07-12,67,67,0
 india-trade-data-analysis,1,5,0,0,2,5,2,2026-07-19,7,7,0
 claude-stock-tools,1,2,0,0,3,4,3,2026-07-19,9,9,0
+mospi-dataset-analysis,1,2,0,0,1,2,1,2026-07-18,1,1,0
 toll-plaza-highways,1,1,0,0,2,2,2,2026-07-12,24,24,0
 Bazartalks_Py2Cplus,1,1,0,0,1,1,1,2026-07-13,5,5,0
 europe-stock-screener,1,1,0,0,1,1,1,2026-07-19,22,22,0
 interpreter_toolkit,1,1,0,0,1,1,1,2026-07-03,0,0,0
+working-files,1,1,0,0,1,1,1,2026-07-18,14,28,1
 fuel-retail-outlets,0,0,0,0,2,5,2,2026-07-08,17,31,1
 global-ticker-universe,0,0,0,0,2,5,1,2026-07-04,13,13,0
 saf-monitoring-system,0,0,0,0,4,5,3,2026-07-11,10,10,0
@@ -44,11 +46,13 @@ india-trade-export-analysis,0,0,0,0,0,0,0,,14,14,0
 india-trade-tracker,0,0,0,0,0,0,0,,88,115,1
 kalki_flooding,0,0,0,0,0,0,0,,30,30,0
 ltm-warehouse-tests,0,0,0,0,0,0,0,,13,13,0
+market-brief-base,0,0,0,0,0,0,0,,4,4,0
 market-correlation-matrices,0,0,0,0,0,0,0,,8,8,1
 market-data-artifacts,0,0,0,0,0,0,0,,4,9,1
 market_screener_rag,0,0,0,0,0,0,0,,0,0,0
 piotroski-liquidity-research,0,0,0,0,0,0,0,,23,23,0
 prenatal-care-toolkit,0,0,0,0,0,0,0,,5,23,1
 repo-data-dedup,0,0,0,0,0,0,0,,27,89,1
+repo-traffic-analytics,0,0,0,0,0,0,0,,26,26,0
 stock-screener-platform,0,0,0,0,0,0,0,,21,21,0
 vehicle_fuel_mileage,0,0,0,0,0,0,0,,2,2,0

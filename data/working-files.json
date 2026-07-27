@@ -63,6 +63,46 @@
     "2026-07-18": {
       "count": 3,
       "uniques": 3
+    },
+    "2026-07-19": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-07-20": {
+      "count": 13,
+      "uniques": 3
+    },
+    "2026-07-21": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-07-22": {
+      "count": 14,
+      "uniques": 8
+    },
+    "2026-07-23": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-24": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-25": {
+      "count": 0,
+      "uniques": 0
+    }
+  },
+  "period_totals": {
+    "2026-07-27": {
+      "clones": {
+        "count": 63,
+        "uniques": 33
+      },
+      "views": {
+        "count": 1,
+        "uniques": 1
+      }
     }
   },
   "releases": {},
@@ -130,6 +170,34 @@
     "2026-07-18": {
       "count": 1,
       "uniques": 1
+    },
+    "2026-07-19": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-20": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-21": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-22": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-23": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-24": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-25": {
+      "count": 0,
+      "uniques": 0
     }
   }
 }

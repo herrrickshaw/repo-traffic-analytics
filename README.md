@@ -1,7 +1,11 @@
 # repo-traffic-analytics
 
-Daily traffic snapshots for all public repos under `herrrickshaw`, run via
-`scripts/snapshot.py` on a scheduled task.
+Daily traffic snapshots for every repo under `herrrickshaw` — private included —
+run via `scripts/snapshot.py` on a scheduled task.
+
+> ⚠️ This repo is **private and must stay private**: `summary.csv`,
+> `views_summary.csv` and `data/` now carry the names and traffic of private
+> repos. Publishing it would disclose them.
 
 ## What this tracks
 
@@ -21,6 +25,10 @@ full ceiling of what GitHub's API provides.
 GitHub also only retains 14 days of clones/views history — this repo exists to
 accumulate a longer history via daily snapshots (upserted by date, so re-runs
 never duplicate).
+
+Private repos are included. The traffic API serves them to the owner, and
+leaving them out meant the portfolio review had no readership data for them and
+could only score them as unread — a bar they were structurally unable to clear.
 
 ## Known noise in the data
 
