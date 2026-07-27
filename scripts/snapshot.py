@@ -407,9 +407,18 @@ def write_views_summary(repos, self_days):
         reverse=True,
     )
 
+    # Stable column set so a zero-repo run (e.g. a transient `gh` outage that
+    # returns no tracked repos) still writes a valid header-only CSV instead of
+    # crashing on rows[0].
+    fieldnames = [
+        "repo", "view_uniques_14d", "views_14d", "view_uniques_7d_sum",
+        "views_7d_sum", "view_uniques_tracked_sum", "views_tracked_sum",
+        "days_with_views", "last_viewed", "clones_7d_ex_self",
+        "clones_7d_sum", "self_days_7d",
+    ]
     path = REPO_ROOT / "views_summary.csv"
     with open(path, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
         w.writerows(rows)
     print(f"Wrote {path}")

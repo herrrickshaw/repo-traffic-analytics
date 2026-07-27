@@ -205,3 +205,15 @@ def test_main_is_idempotent_across_reruns(wired_main):
     data = json.loads((data_dir / "repo-a.json").read_text())
     assert len(data["clones"]) == 1          # upsert by date -> not doubled
     assert data["clones"]["2026-07-20"] == {"count": 10, "uniques": 5}
+
+
+def test_write_views_summary_handles_zero_repos(tmp_path, monkeypatch):
+    """A transient `gh` outage can yield an empty repo list — the summary must
+    still write a valid header-only CSV, not IndexError on rows[0]."""
+    monkeypatch.setattr(sn, "REPO_ROOT", tmp_path)
+    sn.write_views_summary([], {})            # must not raise
+    out = tmp_path / "views_summary.csv"
+    assert out.exists()
+    rows = list(csv.reader(out.open()))
+    assert rows and rows[0][0] == "repo"      # header written
+    assert len(rows) == 1                      # header only, no data rows
