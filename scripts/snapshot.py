@@ -14,7 +14,7 @@ import csv
 import json
 import subprocess
 import sys
-from datetime import date, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -22,9 +22,18 @@ DATA_DIR = REPO_ROOT / "data"
 OWNER = "herrrickshaw"
 
 
+def today():
+    """UTC, to match the traffic API — its day buckets are UTC midnights.
+
+    Stamping with local dates would key snapshots a day off whenever the run
+    straddles the UTC boundary.
+    """
+    return datetime.now(UTC).date()
+
+
 def gh_api(path):
     result = subprocess.run(
-        ["gh", "api", path], capture_output=True, text=True, timeout=30
+        ["gh", "api", path], capture_output=True, text=True, timeout=30, check=False
     )
     if result.returncode != 0:
         return None
@@ -40,6 +49,7 @@ def list_public_repos():
         capture_output=True,
         text=True,
         timeout=30,
+        check=False,
     )
     data = json.loads(result.stdout)
     return sorted(
@@ -80,7 +90,7 @@ def snapshot_releases(name, data):
         for rel in releases
         for asset in rel.get("assets", [])
     )
-    data["releases"][str(date.today())] = today_total
+    data["releases"][str(today())] = today_total
     return data
 
 
@@ -101,7 +111,7 @@ def record_period_totals(data, clones, views):
                 "uniques": payload.get("uniques", 0),
             }
     if entry:
-        data["period_totals"][str(date.today())] = entry
+        data["period_totals"][str(today())] = entry
     return data
 
 
@@ -177,8 +187,8 @@ def write_views_summary(repos):
     GitHub's own deduplicated count. The `_sum` columns add up per-day uniques
     and are therefore upper bounds, not distinct-person counts.
     """
-    today = date.today()
-    since_7 = str(today - timedelta(days=7))
+    now = today()
+    since_7 = str(now - timedelta(days=7))
     rows = []
 
     for name in repos:

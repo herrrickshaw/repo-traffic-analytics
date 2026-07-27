@@ -32,7 +32,7 @@ OWNER = "herrrickshaw"
 
 def gh_api(path):
     result = subprocess.run(
-        ["gh", "api", path], capture_output=True, text=True, timeout=30
+        ["gh", "api", path], capture_output=True, text=True, timeout=30, check=False
     )
     if result.returncode != 0:
         return None
@@ -99,11 +99,11 @@ def main():
             ).days
         clones, views = traffic_30d(name)
 
-        if tier == 1:
-            verdict = "KEEP"
-        elif days_stale is not None and days_stale < 90:
-            verdict = "KEEP"
-        elif (clones or 0) + (views or 0) > 0:
+        if (
+            tier == 1
+            or (days_stale is not None and days_stale < 90)
+            or (clones or 0) + (views or 0) > 0
+        ):
             verdict = "KEEP"
         elif tier == 2:
             verdict = "REVIEW"
@@ -128,8 +128,10 @@ def main():
     lines = [
         f"# Portfolio review — {now.strftime('%Y-%m')}",
         "",
-        f"Generated {now.strftime('%Y-%m-%d %H:%M UTC')}. "
-        "Verdicts are suggestions; decide keep / archive / merge per repo.",
+        (
+            f"Generated {now.strftime('%Y-%m-%d %H:%M UTC')}. "
+            "Verdicts are suggestions; decide keep / archive / merge per repo."
+        ),
         "",
         "| Verdict | Tier | Repo | Days stale | Clones 30d | Views 30d | Visibility |",
         "|---|---|---|---|---|---|---|",
