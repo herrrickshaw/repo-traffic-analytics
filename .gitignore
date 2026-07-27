@@ -4,3 +4,6 @@ reports/portfolio_review.log
 # machine-local. self_activity.json holds the derived dates and is versioned.
 # Rebuild with: python3 scripts/snapshot.py --rescan
 .self_activity_cache.json
+graphify-out/
+.pytest_cache/
+__pycache__/
