@@ -10,9 +10,11 @@ re-running never creates duplicate entries even though each API call returns
 the last 14 days every time.
 """
 
+import csv
 import json
 import subprocess
 import sys
+from datetime import date, timedelta
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -50,8 +52,11 @@ def list_public_repos():
 def load_repo_data(name):
     f = DATA_DIR / f"{name}.json"
     if f.exists():
-        return json.loads(f.read_text())
-    return {"clones": {}, "views": {}, "releases": {}}
+        data = json.loads(f.read_text())
+        # period_totals was added later; older files predate it
+        data.setdefault("period_totals", {})
+        return data
+    return {"clones": {}, "views": {}, "releases": {}, "period_totals": {}}
 
 
 def save_repo_data(name, data):
@@ -75,9 +80,28 @@ def snapshot_releases(name, data):
         for rel in releases
         for asset in rel.get("assets", [])
     )
-    from datetime import date
-
     data["releases"][str(date.today())] = today_total
+    return data
+
+
+def record_period_totals(data, clones, views):
+    """Store GitHub's own 14-day deduplicated totals.
+
+    The daily series counts uniques per day, so summing it across days
+    double-counts anyone who returns on a later day. The top-level `uniques`
+    on each traffic endpoint is deduplicated across the whole trailing 14-day
+    window, which is the only honest "how many distinct people" figure GitHub
+    gives us. Keyed by snapshot date = the day that window ends.
+    """
+    entry = {}
+    for label, payload in (("clones", clones), ("views", views)):
+        if payload and "uniques" in payload:
+            entry[label] = {
+                "count": payload.get("count", 0),
+                "uniques": payload.get("uniques", 0),
+            }
+    if entry:
+        data["period_totals"][str(date.today())] = entry
     return data
 
 
@@ -95,14 +119,13 @@ def main():
             data["clones"] = upsert_series(data["clones"], clones["clones"])
         if views and "views" in views:
             data["views"] = upsert_series(data["views"], views["views"])
+        data = record_period_totals(data, clones, views)
         data = snapshot_releases(name, data)
 
         save_repo_data(name, data)
         print(f"  {name}: ok")
 
     # Rebuild a flat summary CSV for quick scanning
-    import csv
-
     summary_path = REPO_ROOT / "summary.csv"
     with open(summary_path, "w", newline="") as f:
         w = csv.writer(f)
@@ -138,6 +161,64 @@ def main():
                     ]
                 )
     print(f"Wrote {summary_path}")
+    write_views_summary(repos)
+
+
+def _window_sum(series, field, since):
+    return sum(v.get(field, 0) or 0 for d, v in series.items() if d >= since)
+
+
+def write_views_summary(repos):
+    """Human-interest rollup, kept apart from the machine-traffic columns.
+
+    Clones are overwhelmingly automated (mirrors, indexers, CI checkouts), so
+    they drown out the one signal that tracks actual people reading a repo.
+    This file isolates that signal. Read `view_uniques_14d` first: it is
+    GitHub's own deduplicated count. The `_sum` columns add up per-day uniques
+    and are therefore upper bounds, not distinct-person counts.
+    """
+    today = date.today()
+    since_7 = str(today - timedelta(days=7))
+    rows = []
+
+    for name in repos:
+        data = load_repo_data(name)
+        views, clones = data["views"], data["clones"]
+        periods = data.get("period_totals", {})
+        latest = periods.get(max(periods), {}) if periods else {}
+
+        viewed_days = sorted(d for d, v in views.items() if (v.get("count") or 0) > 0)
+        rows.append(
+            {
+                "repo": name,
+                "view_uniques_14d": latest.get("views", {}).get("uniques", ""),
+                "views_14d": latest.get("views", {}).get("count", ""),
+                "view_uniques_7d_sum": _window_sum(views, "uniques", since_7),
+                "views_7d_sum": _window_sum(views, "count", since_7),
+                "view_uniques_tracked_sum": _window_sum(views, "uniques", ""),
+                "views_tracked_sum": _window_sum(views, "count", ""),
+                "days_with_views": len(viewed_days),
+                "last_viewed": viewed_days[-1] if viewed_days else "",
+                "clones_7d_sum": _window_sum(clones, "count", since_7),
+            }
+        )
+
+    # Most-read first; the deduplicated figure is the one that ranks.
+    rows.sort(
+        key=lambda r: (
+            r["view_uniques_14d"] if isinstance(r["view_uniques_14d"], int) else -1,
+            r["view_uniques_7d_sum"],
+            r["views_tracked_sum"],
+        ),
+        reverse=True,
+    )
+
+    path = REPO_ROOT / "views_summary.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w.writeheader()
+        w.writerows(rows)
+    print(f"Wrote {path}")
 
 
 if __name__ == "__main__":

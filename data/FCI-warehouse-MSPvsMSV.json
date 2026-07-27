@@ -57,6 +57,18 @@
       "uniques": 10
     }
   },
+  "period_totals": {
+    "2026-07-27": {
+      "clones": {
+        "count": 229,
+        "uniques": 114
+      },
+      "views": {
+        "count": 2,
+        "uniques": 1
+      }
+    }
+  },
   "releases": {},
   "views": {
     "2026-07-12": {
