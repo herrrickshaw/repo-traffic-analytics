@@ -136,7 +136,11 @@ def _repos_in_command(cmd, known):
     names can't produce phantom hits. Falls back to the $HOME repo for a bare
     `cd ~ && git fetch`, which is how the home working tree gets updated.
     """
-    hits = {r for r in known if re.search(rf"(?:^|[/\s'\"]){re.escape(r)}(?:\.git)?(?:$|[/\s'\";&)])", cmd)}
+    hits = {
+        r
+        for r in known
+        if re.search(rf"(?:^|[/\s'\"]){re.escape(r)}(?:\.git)?(?:$|[/\s'\";&)])", cmd)
+    }
     if not hits and HOME_CD.search(cmd) and HOME_REPO in known:
         hits.add(HOME_REPO)
     return hits
