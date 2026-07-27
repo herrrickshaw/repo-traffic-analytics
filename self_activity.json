@@ -50,13 +50,13 @@
      "clone": 0,
      "fetch": 2
     },
-    "global-stock-screener": {
-     "clone": 0,
-     "fetch": 1
-    },
     ".github": {
      "clone": 0,
      "fetch": 2
+    },
+    "global-stock-screener": {
+     "clone": 0,
+     "fetch": 1
     }
    },
    "unattributed": 67
@@ -134,12 +134,16 @@
      "clone": 1,
      "fetch": 2
     },
+    "market-screener-backtests": {
+     "clone": 7,
+     "fetch": 16
+    },
     "event-driven-stock-analysis": {
      "clone": 1,
      "fetch": 0
     }
    },
-   "unattributed": 31
+   "unattributed": 9
   },
   "2026-07-10": {
    "repos": {
@@ -151,12 +155,16 @@
      "clone": 0,
      "fetch": 3
     },
+    "market-screener-backtests": {
+     "clone": 0,
+     "fetch": 2
+    },
     "global-stock-screener": {
      "clone": 0,
      "fetch": 2
     }
    },
-   "unattributed": 8
+   "unattributed": 6
   },
   "2026-07-12": {
    "repos": {
@@ -172,13 +180,17 @@
      "clone": 1,
      "fetch": 0
     },
+    "prenatal-care-toolkit": {
+     "clone": 1,
+     "fetch": 1
+    },
     "stock-portfolio-evaluator": {
      "clone": 1,
      "fetch": 0
     },
-    "prenatal-care-toolkit": {
+    "working-files": {
      "clone": 1,
-     "fetch": 1
+     "fetch": 0
     },
     "fuel-retail-outlets": {
      "clone": 1,
@@ -189,7 +201,7 @@
      "fetch": 1
     }
    },
-   "unattributed": 3
+   "unattributed": 2
   },
   "2026-07-13": {
    "repos": {
@@ -197,8 +209,8 @@
      "clone": 0,
      "fetch": 26
     },
-    "global-stock-screener": {
-     "clone": 2,
+    "claude-stock-tools": {
+     "clone": 1,
      "fetch": 0
     },
     "india-trade-export-analysis": {
@@ -213,12 +225,16 @@
      "clone": 1,
      "fetch": 0
     },
-    "claude-stock-tools": {
+    "colab-experiments": {
      "clone": 1,
      "fetch": 0
     },
-    "colab-experiments": {
-     "clone": 1,
+    "global-stock-screener": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "ocaml-stock-screener": {
+     "clone": 3,
      "fetch": 0
     },
     "stock-screener-platform": {
@@ -234,7 +250,7 @@
      "fetch": 0
     }
    },
-   "unattributed": 42
+   "unattributed": 39
   },
   "2026-07-14": {
    "repos": {
@@ -246,12 +262,16 @@
      "clone": 1,
      "fetch": 0
     },
+    "ocaml-stock-screener": {
+     "clone": 1,
+     "fetch": 0
+    },
     "stock-screener-platform": {
      "clone": 1,
      "fetch": 0
     }
    },
-   "unattributed": 13
+   "unattributed": 12
   },
   "2026-07-15": {
    "repos": {
@@ -280,103 +300,27 @@
   },
   "2026-07-17": {
    "repos": {
-    "market-data-artifacts": {
-     "clone": 3,
+    "prenatal-care-toolkit": {
+     "clone": 4,
      "fetch": 0
     },
-    "stock-screener-platform": {
+    "working-files": {
      "clone": 5,
+     "fetch": 0
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 3,
      "fetch": 0
     },
     "saf-monitoring-system": {
      "clone": 4,
      "fetch": 0
     },
-    "colab-experiments": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "global-stock-screener": {
-     "clone": 6,
-     "fetch": 0
-    },
-    "global-market-data": {
-     "clone": 8,
-     "fetch": 0
-    },
-    "fuel-retail-outlets": {
-     "clone": 4,
-     "fetch": 0
-    },
-    "india-trade-export-analysis": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "Merlin": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "claude-lmstudio-router": {
-     "clone": 3,
-     "fetch": 0
-    },
-    "data_validator": {
+    "stock-screener-platform": {
      "clone": 5,
      "fetch": 0
-    },
-    "prenatal-care-toolkit": {
-     "clone": 4,
-     "fetch": 0
-    },
-    "discom-debt-and-revenue-models": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "hydrogen-electrolyser-control": {
-     "clone": 4,
-     "fetch": 0
-    },
-    "claude-stock-tools": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "BazaarTalks": {
-     "clone": 6,
-     "fetch": 0
-    },
-    "heart-valve-defect-detection": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "stock-portfolio-evaluator": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "global-ticker-universe": {
-     "clone": 5,
-     "fetch": 0
-    },
-    "ev-battery-management-sim": {
-     "clone": 3,
-     "fetch": 0
-    },
-    "event-driven-stock-analysis": {
-     "clone": 4,
-     "fetch": 0
-    },
-    "bms-battery-management": {
-     "clone": 5,
-     "fetch": 1
     },
     "europe-stock-screener": {
-     "clone": 2,
-     "fetch": 0
-    },
-    "ltm-warehouse-tests": {
-     "clone": 3,
-     "fetch": 0
-    },
-    "india-forex-analysis": {
      "clone": 2,
      "fetch": 0
     },
@@ -384,11 +328,59 @@
      "clone": 2,
      "fetch": 0
     },
+    "global-stock-screener": {
+     "clone": 6,
+     "fetch": 0
+    },
+    "bms-battery-management": {
+     "clone": 5,
+     "fetch": 1
+    },
+    "india-trade-export-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "fuel-retail-outlets": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "event-driven-stock-analysis": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "claude-lmstudio-router": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "BazaarTalks": {
+     "clone": 6,
+     "fetch": 0
+    },
+    "ev-battery-management-sim": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "global-market-data": {
+     "clone": 8,
+     "fetch": 0
+    },
     "india-election-analysis": {
      "clone": 3,
      "fetch": 0
     },
-    "Bazartalks_Py2Cplus": {
+    "hydrogen-electrolyser-control": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "market-data-artifacts": {
+     "clone": 3,
+     "fetch": 0
+    },
+    "claude-stock-tools": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "ltm-warehouse-tests": {
      "clone": 3,
      "fetch": 0
     },
@@ -396,17 +388,61 @@
      "clone": 4,
      "fetch": 0
     },
-    "piotroski-liquidity-research": {
-     "clone": 4,
+    "Merlin": {
+     "clone": 2,
      "fetch": 0
     },
     "karz": {
      "clone": 4,
      "fetch": 1
     },
+    "stock-portfolio-evaluator": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "heart-valve-defect-detection": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-forex-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "data_validator": {
+     "clone": 5,
+     "fetch": 0
+    },
+    "tools-handling_data": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "discom-debt-and-revenue-models": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "global-ticker-universe": {
+     "clone": 5,
+     "fetch": 0
+    },
+    "piotroski-liquidity-research": {
+     "clone": 4,
+     "fetch": 0
+    },
+    "colab-experiments": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "ocaml-stock-screener": {
+     "clone": 3,
+     "fetch": 0
+    },
     "global-market-research-platform": {
      "clone": 6,
      "fetch": 3
+    },
+    "market-screener-backtests": {
+     "clone": 3,
+     "fetch": 0
     },
     "global-market-scanners": {
      "clone": 2,
@@ -425,7 +461,7 @@
      "fetch": 0
     }
    },
-   "unattributed": 13
+   "unattributed": 9
   },
   "2026-07-18": {
    "repos": {
@@ -436,9 +472,13 @@
     "global-market-research-platform": {
      "clone": 0,
      "fetch": 3
+    },
+    "working-files": {
+     "clone": 1,
+     "fetch": 0
     }
    },
-   "unattributed": 5
+   "unattributed": 4
   },
   "2026-07-19": {
    "repos": {
@@ -488,6 +528,10 @@
      "clone": 0,
      "fetch": 1
     },
+    "ocaml-stock-screener": {
+     "clone": 1,
+     "fetch": 0
+    },
     "market-data-artifacts": {
      "clone": 2,
      "fetch": 0
@@ -508,6 +552,14 @@
      "clone": 0,
      "fetch": 1
     },
+    "market-screener-backtests": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "working-files": {
+     "clone": 2,
+     "fetch": 0
+    },
     "agri-commodity-tracker": {
      "clone": 0,
      "fetch": 1
@@ -520,16 +572,16 @@
      "clone": 1,
      "fetch": 0
     },
-    "stock-portfolio-evaluator": {
+    "prenatal-care-toolkit": {
      "clone": 1,
      "fetch": 0
     },
-    "prenatal-care-toolkit": {
+    "stock-portfolio-evaluator": {
      "clone": 1,
      "fetch": 0
     }
    },
-   "unattributed": 9
+   "unattributed": 5
   },
   "2026-07-23": {
    "repos": {},

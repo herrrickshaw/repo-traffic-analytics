@@ -277,7 +277,10 @@ def main():
         save_repo_data(name, data)
         print(f"  {name}: ok")
 
-    self_days = scan_self_activity(set(repos), rescan="--rescan" in sys.argv)
+    # Include every repo ever snapshotted, not just currently-public ones, so
+    # renamed or deleted repos still resolve when scanning old transcripts.
+    known = set(repos) | {p.stem for p in DATA_DIR.glob("*.json")}
+    self_days = scan_self_activity(known, rescan="--rescan" in sys.argv)
 
     # Rebuild a flat summary CSV for quick scanning
     summary_path = REPO_ROOT / "summary.csv"
