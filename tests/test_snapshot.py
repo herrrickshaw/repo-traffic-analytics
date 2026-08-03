@@ -12,13 +12,11 @@ temp output dir (mocked API, no transcripts) that verifies the emitted rows,
 columns, and same-day idempotency.
 """
 import csv
-import datetime
 import json
 
 import pytest
 
 from scripts import snapshot as sn
-
 
 # --------------------------- upsert_series() : date-keyed dedup ---------------------------
 
@@ -198,7 +196,7 @@ def test_main_writes_per_repo_json_and_summaries(wired_main):
 
 
 def test_main_is_idempotent_across_reruns(wired_main):
-    root, data_dir = wired_main
+    _root, data_dir = wired_main
     sn.main()
     sn.main()   # second run pulls the same trailing-14-day window again
 
