@@ -1,0 +1,131 @@
+{
+  "clones": {
+    "2026-07-18": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-19": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-20": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-21": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-22": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-23": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-24": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-25": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-26": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-27": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-28": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-29": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-30": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-31": {
+      "count": 31,
+      "uniques": 23
+    }
+  },
+  "period_totals": {
+    "2026-08-03": {
+      "clones": {
+        "count": 31,
+        "uniques": 23
+      },
+      "views": {
+        "count": 9,
+        "uniques": 2
+      }
+    }
+  },
+  "releases": {},
+  "views": {
+    "2026-07-18": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-19": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-20": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-21": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-22": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-23": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-24": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-25": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-26": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-27": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-28": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-29": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-30": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-31": {
+      "count": 9,
+      "uniques": 2
+    }
+  }
+}

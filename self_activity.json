@@ -602,12 +602,246 @@
   },
   "2026-07-27": {
    "repos": {
+    "agri-commodity-tracker": {
+     "clone": 0,
+     "fetch": 1
+    },
     "repo-traffic-analytics": {
      "clone": 1,
      "fetch": 1
+    },
+    "global-ticker-universe": {
+     "clone": 1,
+     "fetch": 0
+    },
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 1
     }
    },
-   "unattributed": 2
+   "unattributed": 3
+  },
+  "2026-07-28": {
+   "repos": {
+    "agri-commodity-tracker": {
+     "clone": 0,
+     "fetch": 2
+    }
+   },
+   "unattributed": 3
+  },
+  "2026-07-29": {
+   "repos": {
+    "stock-screener-ddd": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "cell-guardian": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "market-data-artifacts": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "saf-monitoring-system": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "prenatal-care-toolkit": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "claude-lmstudio-router": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "mospi-dataset-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "stock-portfolio-evaluator": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "claude-stock-tools": {
+     "clone": 2,
+     "fetch": 0
+    },
+    ".github": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "event-driven-stock-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "colab-market-fundamentals": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "colab-experiments": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "toll-plaza-highways": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-election-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-omc-fuel-fleet-model": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "data_validator": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "ltm-warehouse-tests": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "ev-battery-management-sim": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "discom-debt-and-revenue-models": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "interpreter_toolkit": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "europe-stock-screener": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "karz": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "mospi-dataset-analysis-public": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-trade-export-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "Merlin": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "stock-screener-platform": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "working-files": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "heart-valve-defect-detection": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "fuel-retail-outlets": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "kalki_flooding": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "bms-battery-management": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "hydrogen-electrolyser-control": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "india-forex-analysis": {
+     "clone": 2,
+     "fetch": 0
+    },
+    "global-market-research-platform": {
+     "clone": 1,
+     "fetch": 1
+    },
+    "BazaarTalks": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "global-market-scanners": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-07-31": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "jal_jeevan_lottery": {
+     "clone": 1,
+     "fetch": 0
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-08-01": {
+   "repos": {
+    "piotroski-liquidity-research": {
+     "clone": 0,
+     "fetch": 3
+    },
+    "global-market-scanners": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "BazaarTalks": {
+     "clone": 0,
+     "fetch": 2
+    },
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 18
+    },
+    "global-market-data": {
+     "clone": 0,
+     "fetch": 6
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-08-02": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 1
+    },
+    "mospi-dataset-analysis": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-08-03": {
+   "repos": {
+    "repo-traffic-analytics": {
+     "clone": 0,
+     "fetch": 1
+    }
+   },
+   "unattributed": 0
   }
  }
 }
