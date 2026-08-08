@@ -11,6 +11,7 @@ network-touching helpers with `gh` mocked, and an end-to-end main() run against 
 temp output dir (mocked API, no transcripts) that verifies the emitted rows,
 columns, and same-day idempotency.
 """
+
 import csv
 import json
 
@@ -20,11 +21,12 @@ from scripts import snapshot as sn
 
 # --------------------------- upsert_series() : date-keyed dedup ---------------------------
 
+
 def test_upsert_series_keys_by_date_truncating_timestamp():
     existing = {}
     pts = [{"timestamp": "2026-07-20T00:00:00Z", "count": 10, "uniques": 5}]
     out = sn.upsert_series(existing, pts)
-    assert out == {"2026-07-20": {"count": 10, "uniques": 5}}   # ISO time dropped
+    assert out == {"2026-07-20": {"count": 10, "uniques": 5}}  # ISO time dropped
 
 
 def test_upsert_series_is_idempotent_by_date():
@@ -32,11 +34,12 @@ def test_upsert_series_is_idempotent_by_date():
     # same date pulled again (API always returns trailing 14 days) -> replace, not add
     pts = [{"timestamp": "2026-07-20T00:00:00Z", "count": 12, "uniques": 6}]
     out = sn.upsert_series(existing, pts)
-    assert len(out) == 1                       # not doubled
-    assert out["2026-07-20"] == {"count": 12, "uniques": 6}   # newest wins
+    assert len(out) == 1  # not doubled
+    assert out["2026-07-20"] == {"count": 12, "uniques": 6}  # newest wins
 
 
 # --------------------------- record_period_totals() : 14-day dedup reconciliation ---------
+
 
 def test_record_period_totals_stores_deduplicated_uniques():
     data = {"period_totals": {}}
@@ -50,11 +53,12 @@ def test_record_period_totals_stores_deduplicated_uniques():
 
 def test_record_period_totals_skips_payloads_without_uniques():
     data = {"period_totals": {}}
-    sn.record_period_totals(data, None, {"count": 5})   # no 'uniques' key
-    assert data["period_totals"] == {}                  # nothing honest to store
+    sn.record_period_totals(data, None, {"count": 5})  # no 'uniques' key
+    assert data["period_totals"] == {}  # nothing honest to store
 
 
 # --------------------------- _repos_in_command() : attribution ---------------------------
+
 
 def test_repos_in_command_matches_known_repo_with_git_suffix():
     known = {"repo-a", "repo-b"}
@@ -63,43 +67,65 @@ def test_repos_in_command_matches_known_repo_with_git_suffix():
 
 
 def test_repos_in_command_ignores_substring_phantom_hits():
-    known = {"ab"}   # short name must not match inside a longer repo name
+    known = {"ab"}  # short name must not match inside a longer repo name
     assert sn._repos_in_command("git clone https://x/repo-abc", known) == set()
 
 
 def test_repos_in_command_home_cd_falls_back_to_home_repo():
     known = {sn.HOME_REPO}
     hits = sn._repos_in_command("cd ~ && git fetch", known)
-    assert hits == {sn.HOME_REPO}   # bare home working-tree update attributed to HOME_REPO
+    assert hits == {
+        sn.HOME_REPO
+    }  # bare home working-tree update attributed to HOME_REPO
 
 
 # --------------------------- self_label() / _window_sum() : CSV shaping -------------------
 
+
 def test_self_label_reports_clone_fetch_combo():
     days = {"2026-07-20": {"repos": {"r": {"clone": 1, "fetch": 1}}}}
     assert sn.self_label(days, "r", "2026-07-20") == "clone+fetch"
-    assert sn.self_label(days, "r", "2026-07-19") == ""      # no activity that day
+    assert sn.self_label(days, "r", "2026-07-19") == ""  # no activity that day
     assert sn.self_label({}, "r", "2026-07-20") == ""
 
 
 def test_window_sum_respects_since_cutoff():
     series = {
         "2026-07-20": {"count": 5},
-        "2026-07-10": {"count": 3},   # before cutoff, excluded
+        "2026-07-10": {"count": 3},  # before cutoff, excluded
     }
     assert sn._window_sum(series, "count", "2026-07-15") == 5
-    assert sn._window_sum(series, "count", "") == 8          # empty cutoff -> all
+    assert sn._window_sum(series, "count", "") == 8  # empty cutoff -> all
 
 
 # --------------------------- _scan_transcript() : local activity parse -------------------
 
+
 def test_scan_transcript_attributes_clone_and_flags_unattributed(tmp_path):
     known = {"repo-a"}
     lines = [
-        {"timestamp": "2026-07-20T10:00:00Z", "message": {"content": [
-            {"type": "tool_use", "input": {"command": "git clone https://x/repo-a"}}]}},
-        {"timestamp": "2026-07-20T11:00:00Z", "message": {"content": [
-            {"type": "tool_use", "input": {"command": "git clone https://x/unknown-repo"}}]}},
+        {
+            "timestamp": "2026-07-20T10:00:00Z",
+            "message": {
+                "content": [
+                    {
+                        "type": "tool_use",
+                        "input": {"command": "git clone https://x/repo-a"},
+                    }
+                ]
+            },
+        },
+        {
+            "timestamp": "2026-07-20T11:00:00Z",
+            "message": {
+                "content": [
+                    {
+                        "type": "tool_use",
+                        "input": {"command": "git clone https://x/unknown-repo"},
+                    }
+                ]
+            },
+        },
     ]
     f = tmp_path / "session.jsonl"
     f.write_text("\n".join(json.dumps(x) for x in lines) + "\n")
@@ -107,10 +133,11 @@ def test_scan_transcript_attributes_clone_and_flags_unattributed(tmp_path):
     days = sn._scan_transcript(f, known)
     day = days["2026-07-20"]
     assert day["repos"]["repo-a"] == {"clone": 1, "fetch": 0}
-    assert day["unattributed"] == 1        # the clone of an untracked repo
+    assert day["unattributed"] == 1  # the clone of an untracked repo
 
 
 # --------------------------- gh_api() / list_tracked_repos() : network mocked ------------
+
 
 class _Completed:
     def __init__(self, returncode=0, stdout=""):
@@ -119,14 +146,16 @@ class _Completed:
 
 
 def test_gh_api_returns_parsed_json(monkeypatch):
-    monkeypatch.setattr(sn.subprocess, "run",
-                        lambda *a, **k: _Completed(0, json.dumps({"count": 3})))
+    monkeypatch.setattr(
+        sn.subprocess, "run", lambda *a, **k: _Completed(0, json.dumps({"count": 3}))
+    )
     assert sn.gh_api("repos/x/y/traffic/clones") == {"count": 3}
 
 
 def test_gh_api_returns_none_on_error(monkeypatch):
-    monkeypatch.setattr(sn.subprocess, "run",
-                        lambda *a, **k: _Completed(1, ""))   # gh exited nonzero
+    monkeypatch.setattr(
+        sn.subprocess, "run", lambda *a, **k: _Completed(1, "")
+    )  # gh exited nonzero
     assert sn.gh_api("repos/x/y/traffic/clones") is None
 
 
@@ -134,14 +163,16 @@ def test_list_tracked_repos_filters_archive_twins(monkeypatch):
     payload = [
         {"name": "repo-b", "visibility": "public"},
         {"name": "repo-a", "visibility": "private"},
-        {"name": "old-archive-2026-07-17", "visibility": "private"},   # excluded
+        {"name": "old-archive-2026-07-17", "visibility": "private"},  # excluded
     ]
-    monkeypatch.setattr(sn.subprocess, "run",
-                        lambda *a, **k: _Completed(0, json.dumps(payload)))
-    assert sn.list_tracked_repos() == ["repo-a", "repo-b"]   # sorted, archive dropped
+    monkeypatch.setattr(
+        sn.subprocess, "run", lambda *a, **k: _Completed(0, json.dumps(payload))
+    )
+    assert sn.list_tracked_repos() == ["repo-a", "repo-b"]  # sorted, archive dropped
 
 
 # --------------------------- main() : end-to-end, mocked net + temp output dir -----------
+
 
 @pytest.fixture
 def wired_main(monkeypatch, tmp_path):
@@ -157,11 +188,21 @@ def wired_main(monkeypatch, tmp_path):
 
     def fake_gh_api(path):
         if path.endswith("/traffic/clones"):
-            return {"count": 10, "uniques": 5, "clones": [
-                {"timestamp": "2026-07-20T00:00:00Z", "count": 10, "uniques": 5}]}
+            return {
+                "count": 10,
+                "uniques": 5,
+                "clones": [
+                    {"timestamp": "2026-07-20T00:00:00Z", "count": 10, "uniques": 5}
+                ],
+            }
         if path.endswith("/traffic/views"):
-            return {"count": 8, "uniques": 2, "views": [
-                {"timestamp": "2026-07-20T00:00:00Z", "count": 8, "uniques": 2}]}
+            return {
+                "count": 8,
+                "uniques": 2,
+                "views": [
+                    {"timestamp": "2026-07-20T00:00:00Z", "count": 8, "uniques": 2}
+                ],
+            }
         if path.endswith("/releases"):
             return [{"assets": [{"download_count": 7}]}]
         return None
@@ -178,7 +219,7 @@ def test_main_writes_per_repo_json_and_summaries(wired_main):
     data = json.loads((data_dir / "repo-a.json").read_text())
     assert data["clones"]["2026-07-20"] == {"count": 10, "uniques": 5}
     assert data["views"]["2026-07-20"] == {"count": 8, "uniques": 2}
-    assert data["releases"][str(sn.today())] == 7          # summed asset downloads
+    assert data["releases"][str(sn.today())] == 7  # summed asset downloads
     assert data["period_totals"][str(sn.today())]["clones"]["uniques"] == 5
 
     # flat summary.csv: expected columns + one row per repo-date
@@ -192,16 +233,16 @@ def test_main_writes_per_repo_json_and_summaries(wired_main):
         vrows = list(csv.DictReader(f))
     assert len(vrows) == 2
     assert {"view_uniques_14d", "clones_7d_ex_self", "self_days_7d"} <= set(vrows[0])
-    assert vrows[0]["view_uniques_14d"] == "2"   # GitHub's own 14-day dedup count
+    assert vrows[0]["view_uniques_14d"] == "2"  # GitHub's own 14-day dedup count
 
 
 def test_main_is_idempotent_across_reruns(wired_main):
     _root, data_dir = wired_main
     sn.main()
-    sn.main()   # second run pulls the same trailing-14-day window again
+    sn.main()  # second run pulls the same trailing-14-day window again
 
     data = json.loads((data_dir / "repo-a.json").read_text())
-    assert len(data["clones"]) == 1          # upsert by date -> not doubled
+    assert len(data["clones"]) == 1  # upsert by date -> not doubled
     assert data["clones"]["2026-07-20"] == {"count": 10, "uniques": 5}
 
 
@@ -209,9 +250,9 @@ def test_write_views_summary_handles_zero_repos(tmp_path, monkeypatch):
     """A transient `gh` outage can yield an empty repo list — the summary must
     still write a valid header-only CSV, not IndexError on rows[0]."""
     monkeypatch.setattr(sn, "REPO_ROOT", tmp_path)
-    sn.write_views_summary([], {})            # must not raise
+    sn.write_views_summary([], {})  # must not raise
     out = tmp_path / "views_summary.csv"
     assert out.exists()
     rows = list(csv.reader(out.open()))
-    assert rows and rows[0][0] == "repo"      # header written
-    assert len(rows) == 1                      # header only, no data rows
+    assert rows and rows[0][0] == "repo"  # header written
+    assert len(rows) == 1  # header only, no data rows
