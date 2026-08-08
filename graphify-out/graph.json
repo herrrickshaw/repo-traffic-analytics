@@ -292,6 +292,206 @@
       "_origin": "ast"
     },
     {
+      "id": "tests_conftest",
+      "label": "conftest.py",
+      "file_type": "code",
+      "source_file": "tests/conftest.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot",
+      "label": "test_snapshot.py",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_upsert_series_keys_by_date_truncating_timestamp",
+      "label": "test_upsert_series_keys_by_date_truncating_timestamp()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_upsert_series_is_idempotent_by_date",
+      "label": "test_upsert_series_is_idempotent_by_date()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L30",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_record_period_totals_stores_deduplicated_uniques",
+      "label": "test_record_period_totals_stores_deduplicated_uniques()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L41",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_record_period_totals_skips_payloads_without_uniques",
+      "label": "test_record_period_totals_skips_payloads_without_uniques()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L51",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_repos_in_command_matches_known_repo_with_git_suffix",
+      "label": "test_repos_in_command_matches_known_repo_with_git_suffix()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L59",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_repos_in_command_ignores_substring_phantom_hits",
+      "label": "test_repos_in_command_ignores_substring_phantom_hits()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L65",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_repos_in_command_home_cd_falls_back_to_home_repo",
+      "label": "test_repos_in_command_home_cd_falls_back_to_home_repo()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L70",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_self_label_reports_clone_fetch_combo",
+      "label": "test_self_label_reports_clone_fetch_combo()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L78",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_window_sum_respects_since_cutoff",
+      "label": "test_window_sum_respects_since_cutoff()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L85",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_scan_transcript_attributes_clone_and_flags_unattributed",
+      "label": "test_scan_transcript_attributes_clone_and_flags_unattributed()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L96",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_completed",
+      "label": "_Completed",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L115",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_completed_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L116",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_gh_api_returns_parsed_json",
+      "label": "test_gh_api_returns_parsed_json()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L121",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_gh_api_returns_none_on_error",
+      "label": "test_gh_api_returns_none_on_error()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L127",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_list_tracked_repos_filters_archive_twins",
+      "label": "test_list_tracked_repos_filters_archive_twins()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L133",
+      "_origin": "ast"
+    },
+    {
+      "id": "fixture",
+      "label": "fixture",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_wired_main",
+      "label": "wired_main()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L147",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_main_writes_per_repo_json_and_summaries",
+      "label": "test_main_writes_per_repo_json_and_summaries()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L173",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_main_is_idempotent_across_reruns",
+      "label": "test_main_is_idempotent_across_reruns()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L198",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_test_write_views_summary_handles_zero_repos",
+      "label": "test_write_views_summary_handles_zero_repos()",
+      "file_type": "code",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L208",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_rationale_1",
+      "label": "Tests for scripts/snapshot.py — the daily GitHub traffic snapshotter.  GitHub re",
+      "file_type": "rationale",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_rationale_148",
+      "label": "Point every write target at tmp_path and mock all GitHub calls.",
+      "file_type": "rationale",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L148",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_test_snapshot_rationale_209",
+      "label": "A transient `gh` outage can yield an empty repo list — the summary must     stil",
+      "file_type": "rationale",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L209",
+      "_origin": "ast"
+    },
+    {
       "id": "action_items_2026_07_23",
       "label": "ACTION_ITEMS_2026-07-23.md",
       "file_type": "document",
@@ -505,6 +705,46 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L106",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_data_discovery",
+      "label": "📊 Data Discovery",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L132",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_quick_links",
+      "label": "Quick Links",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L136",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_datasets_in_this_repository",
+      "label": "Datasets in This Repository",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L142",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_browse_the_full_catalog",
+      "label": "Browse the Full Catalog",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L161",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_finding_data_across_all_repos",
+      "label": "Finding Data Across All Repos",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L180",
       "_origin": "ast"
     },
     {
@@ -1273,6 +1513,336 @@
       "_origin": "ast"
     },
     {
+      "source": "tests_conftest",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/conftest.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_conftest",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/conftest.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "csv",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "pytest",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "scripts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_upsert_series_keys_by_date_truncating_timestamp",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_upsert_series_is_idempotent_by_date",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_record_period_totals_stores_deduplicated_uniques",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_record_period_totals_skips_payloads_without_uniques",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_repos_in_command_matches_known_repo_with_git_suffix",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_repos_in_command_ignores_substring_phantom_hits",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_repos_in_command_home_cd_falls_back_to_home_repo",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_self_label_reports_clone_fetch_combo",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_window_sum_respects_since_cutoff",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_scan_transcript_attributes_clone_and_flags_unattributed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_completed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_completed",
+      "target": "tests_test_snapshot_completed_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_gh_api_returns_parsed_json",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_gh_api_returns_none_on_error",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L127",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_list_tracked_repos_filters_archive_twins",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L133",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_wired_main",
+      "target": "fixture",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L146",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_wired_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_main_writes_per_repo_json_and_summaries",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L173",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_main_is_idempotent_across_reruns",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L198",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot",
+      "target": "tests_test_snapshot_test_write_views_summary_handles_zero_repos",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_test_gh_api_returns_parsed_json",
+      "target": "tests_test_snapshot_completed",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_test_gh_api_returns_none_on_error",
+      "target": "tests_test_snapshot_completed",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_test_list_tracked_repos_filters_archive_twins",
+      "target": "tests_test_snapshot_completed",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_rationale_1",
+      "target": "tests_test_snapshot",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_rationale_148",
+      "target": "tests_test_snapshot_wired_main",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L148",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_test_snapshot_rationale_209",
+      "target": "tests_test_snapshot_test_write_views_summary_handles_zero_repos",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/test_snapshot.py",
+      "source_location": "L209",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "action_items_2026_07_23",
       "target": "action_items_2026_07_23_action_items_cio_index_governance_review_cioindex_com_crunchbase_historical_review",
       "relation": "contains",
@@ -1519,6 +2089,66 @@
       "confidence": "EXTRACTED",
       "source_file": "README.md",
       "source_location": "L106",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_repo_traffic_analytics",
+      "target": "readme_data_discovery",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L132",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_data_discovery",
+      "target": "readme_quick_links",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L136",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "users_umashankar_repo_traffic_analytics_ruflo_data_library_readme_md",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_data_discovery",
+      "target": "readme_datasets_in_this_repository",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_data_discovery",
+      "target": "readme_browse_the_full_catalog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_data_discovery",
+      "target": "readme_finding_data_across_all_repos",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L180",
       "weight": 1.0,
       "_origin": "ast"
     },
