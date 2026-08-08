@@ -123,6 +123,11 @@ columns are upper bounds.
   interest is sustained or a one-day blip; `clones_7d_ex_self` /
   `clones_7d_sum` / `self_days_7d` carry clone volume with and without the
   owner's own activity, purely for machine-vs-human contrast
+- `graphify-out/` — local code knowledge graph (`graph.json`, `graph.html`,
+  `GRAPH_REPORT.md`) used for navigation, not part of the traffic data.
+  Gitignored because it is derived output that churns on every edit; rebuild
+  it with `~/.venvs/graphifyy/bin/graphify update .` (re-extracts code, no LLM
+  needed). Doc and image changes need `/graphify --update` in the assistant
 
 <!-- 
 DATA LIBRARY LINK - Add this section to every repo README.md
