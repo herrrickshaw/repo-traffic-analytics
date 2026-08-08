@@ -5,4 +5,4 @@ jobs:
   quality:
     uses: herrrickshaw/.github/.github/workflows/quality.yml@main
     with:
-      python: "true"   # TODO flip to "true" after ruff cleanup pass
+      python: "true"
