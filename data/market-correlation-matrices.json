@@ -107,6 +107,10 @@
     "2026-08-07": {
       "count": 0,
       "uniques": 0
+    },
+    "2026-08-08": {
+      "count": 0,
+      "uniques": 0
     }
   },
   "period_totals": {
@@ -134,6 +138,16 @@
       "clones": {
         "count": 6,
         "uniques": 6
+      },
+      "views": {
+        "count": 0,
+        "uniques": 0
+      }
+    },
+    "2026-08-10": {
+      "clones": {
+        "count": 5,
+        "uniques": 5
       },
       "views": {
         "count": 0,
@@ -248,6 +262,10 @@
       "uniques": 0
     },
     "2026-08-07": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-08": {
       "count": 0,
       "uniques": 0
     }
