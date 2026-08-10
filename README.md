@@ -94,6 +94,12 @@ corresponding views. Clone counts are therefore **not** readership.
 
 `views_summary.csv` isolates the human-interest signal so it isn't buried.
 
+That signature is quantified in
+[`reports/CLONE_SPIKES_2026-08-10.md`](reports/CLONE_SPIKES_2026-08-10.md): 25
+of the 29 repos with a peak day above 30 clones peak within two days of first
+publication, and the unique count distinguishes a crawler swarm (many uniques,
+one day) from your own cron (exactly one unique, sustained).
+
 ### Daily uniques do not sum
 
 GitHub reports uniques *per day*, so adding them across days double-counts
