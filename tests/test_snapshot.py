@@ -14,6 +14,7 @@ columns, and same-day idempotency.
 
 import csv
 import json
+import subprocess
 
 import pytest
 
@@ -183,6 +184,9 @@ def wired_main(monkeypatch, tmp_path):
     monkeypatch.setattr(sn, "SELF_ACTIVITY_PATH", tmp_path / "self_activity.json")
     monkeypatch.setattr(sn, "SELF_CACHE_PATH", tmp_path / ".self_activity_cache.json")
     monkeypatch.setattr(sn, "TRANSCRIPT_ROOT", tmp_path / "no_transcripts")  # absent
+    # Keep the local-clone discovery inside tmp_path: unpatched it walks $HOME,
+    # which is both slow and non-hermetic.
+    monkeypatch.setattr(sn, "LOCAL_SCAN_ROOT", tmp_path / "no_clones")
     monkeypatch.setattr(sn.sys, "argv", ["snapshot.py"])
     monkeypatch.setattr(sn, "list_tracked_repos", lambda: ["repo-a", "repo-b"])
 
@@ -232,8 +236,15 @@ def test_main_writes_per_repo_json_and_summaries(wired_main):
     with open(root / "views_summary.csv") as f:
         vrows = list(csv.DictReader(f))
     assert len(vrows) == 2
-    assert {"view_uniques_14d", "clones_7d_ex_self", "self_days_7d"} <= set(vrows[0])
+    assert {
+        "view_uniques_14d",
+        "clones_7d_ex_self",
+        "self_days_7d",
+        "local_copies",
+    } <= set(vrows[0])
     assert vrows[0]["view_uniques_14d"] == "2"  # GitHub's own 14-day dedup count
+    # No local copy exists -> self_days_7d = 0 is authoritative, not undetected
+    assert vrows[0]["local_copies"] == "0"
 
 
 def test_main_is_idempotent_across_reruns(wired_main):
@@ -250,9 +261,117 @@ def test_write_views_summary_handles_zero_repos(tmp_path, monkeypatch):
     """A transient `gh` outage can yield an empty repo list — the summary must
     still write a valid header-only CSV, not IndexError on rows[0]."""
     monkeypatch.setattr(sn, "REPO_ROOT", tmp_path)
-    sn.write_views_summary([], {})  # must not raise
+    sn.write_views_summary([], {}, {})  # must not raise
     out = tmp_path / "views_summary.csv"
     assert out.exists()
     rows = list(csv.reader(out.open()))
     assert rows and rows[0][0] == "repo"  # header written
     assert len(rows) == 1  # header only, no data rows
+
+
+# ------------------- local clone discovery + reflog : the second evidence source -------------------
+#
+# `self_days_7d = 0` used to be ambiguous: it meant either "no local copy exists,
+# so no own traffic is possible" or "a copy exists but nothing was detected".
+# Discovery answers the first; the reflog scan closes most of the second, since
+# the transcript scan cannot see terminal or cron activity.
+
+
+def _make_repo(path, remote=None, commit_message="init"):
+    """A real git repo on disk — the reflog logic is git behaviour, not ours."""
+    path.mkdir(parents=True, exist_ok=True)
+
+    def run(*args):
+        subprocess.run(["git", "-C", str(path), *args], capture_output=True, check=True)
+
+    run("init", "-q", "-b", "main")
+    run("config", "user.email", "t@example.com")
+    run("config", "user.name", "t")
+    (path / "f.txt").write_text("x")
+    run("add", "f.txt")
+    run("commit", "-qm", commit_message)
+    if remote:
+        run("remote", "add", "origin", remote)
+    return path
+
+
+def test_discover_local_clones_maps_remote_url_to_tracked_repo(tmp_path, monkeypatch):
+    _make_repo(tmp_path / "work", remote=f"https://github.com/{sn.OWNER}/repo-a.git")
+    monkeypatch.setattr(sn, "LOCAL_SCAN_ROOT", tmp_path)
+    found = sn.discover_local_clones({"repo-a", "repo-b"})
+    assert set(found) == {"repo-a"}
+    assert found["repo-a"] == [str(tmp_path / "work")]
+
+
+def test_discover_local_clones_ignores_other_owners_and_untracked(
+    tmp_path, monkeypatch
+):
+    _make_repo(tmp_path / "other", remote="https://github.com/someone-else/repo-a.git")
+    _make_repo(tmp_path / "untracked", remote=f"git@github.com:{sn.OWNER}/nope.git")
+    monkeypatch.setattr(sn, "LOCAL_SCAN_ROOT", tmp_path)
+    assert sn.discover_local_clones({"repo-a"}) == {}
+
+
+def test_discover_local_clones_skips_pruned_directories(tmp_path, monkeypatch):
+    _make_repo(
+        tmp_path / "node_modules" / "dep",
+        remote=f"https://github.com/{sn.OWNER}/repo-a.git",
+    )
+    monkeypatch.setattr(sn, "LOCAL_SCAN_ROOT", tmp_path)
+    assert sn.discover_local_clones({"repo-a"}) == {}
+
+
+def test_scan_reflog_ignores_commits_whose_message_mentions_cloning(tmp_path):
+    """The reflog subject starts with the command; a commit *about* cloning is
+    still a commit. Matching anywhere in the line would misread it as activity."""
+    repo = _make_repo(tmp_path / "w", commit_message="Detect our own clone days")
+    assert sn.scan_reflog_activity({"repo-a": [str(repo)]}) == {}
+
+
+def test_scan_reflog_records_a_real_fetch(tmp_path):
+    origin = _make_repo(tmp_path / "origin")
+    clone_dir = tmp_path / "clone"
+    subprocess.run(
+        ["git", "clone", "-q", str(origin), str(clone_dir)],
+        capture_output=True,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(clone_dir), "fetch", "origin"],
+        capture_output=True,
+        check=True,
+    )
+    days = sn.scan_reflog_activity({"repo-a": [str(clone_dir)]})
+    # `git clone` writes a "clone: from ..." reflog entry, dated today
+    assert days, "clone/fetch left no reflog entry"
+    entry = days[str(sn.today())]["repos"]["repo-a"]
+    assert entry["clone"] >= 1
+
+
+def test_merge_activity_unions_sources_and_records_which_saw_each_day():
+    transcript = {
+        "2026-08-10": {"repos": {"r": {"clone": 1, "fetch": 0}}, "unattributed": 2}
+    }
+    reflog = {
+        "2026-08-10": {"repos": {"r": {"clone": 0, "fetch": 3}}, "unattributed": 0},
+        "2026-08-14": {"repos": {"r": {"clone": 0, "fetch": 1}}, "unattributed": 0},
+    }
+    merged = sn.merge_activity(transcript, reflog)
+    assert merged["2026-08-10"]["repos"]["r"] == {
+        "clone": 1,
+        "fetch": 3,
+        "via": ["transcript", "reflog"],
+    }
+    assert merged["2026-08-10"]["unattributed"] == 2
+    # the cron day only the reflog can see
+    assert merged["2026-08-14"]["repos"]["r"]["via"] == ["reflog"]
+
+
+def test_self_label_still_reads_merged_entries():
+    """`via` rides alongside the counts, so the existing label logic must not
+    start reporting it as an activity kind."""
+    merged = sn.merge_activity(
+        {},
+        {"2026-08-14": {"repos": {"r": {"clone": 1, "fetch": 2}}, "unattributed": 0}},
+    )
+    assert sn.self_label(merged, "r", "2026-08-14") == "clone+fetch"

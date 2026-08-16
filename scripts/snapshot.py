@@ -12,6 +12,7 @@ the last 14 days every time.
 
 import csv
 import json
+import os
 import re
 import subprocess
 import sys
@@ -34,6 +35,38 @@ HOME_REPO = "global-market-research-platform"  # $HOME itself is a working tree
 CLONE_CMD = re.compile(r"\b(?:git\s+clone|gh\s+repo\s+clone)\b")
 FETCH_CMD = re.compile(r"\bgit\s+(?:fetch|pull)\b")
 HOME_CD = re.compile(r"cd\s+(?:\"?\$HOME\"?|~|/Users/[^/\s]+)(?=\s|$|&|;)")
+
+# Local working copies are the second evidence source for own-activity. The
+# transcript scan only sees commands run inside a Claude session, so terminal
+# work and cron jobs were invisible to it; git's own reflog records every
+# clone/fetch/pull regardless of who ran it. Discovery also answers the
+# question a bare `self_days_7d = 0` could not: whether a local copy that
+# could generate self-traffic exists at all.
+LOCAL_SCAN_ROOT = Path.home()
+LOCAL_SCAN_DEPTH = 5
+# Skipped for speed, and because reading inside a cloud-sync folder can force
+# a placeholder file to download.
+PRUNE_DIRS = {
+    ".Trash",
+    ".cache",
+    ".npm",
+    ".tox",
+    "CloudStorage",
+    "Dropbox",
+    "Google Drive",
+    "Library",
+    "__pycache__",
+    "node_modules",
+    "site-packages",
+    "venv",
+    ".venv",
+}
+REMOTE_URL = re.compile(rf"[:/]{OWNER}/([A-Za-z0-9_.-]+?)(?:\.git)?$")
+# Reflog subjects start with the command that wrote them ("fetch origin ...",
+# "pull --ff-only ...", "clone: from ..."). Anchored so a commit whose *message*
+# mentions cloning is not mistaken for a clone.
+REFLOG_OP = re.compile(r"^(clone|fetch|pull)\b")
+REFLOG_DATE = re.compile(r"@\{(\d{4}-\d{2}-\d{2})")
 
 
 def today():
@@ -191,6 +224,142 @@ def _scan_transcript(path, known):
     return days
 
 
+def discover_local_clones(known):
+    """Map tracked repo -> local working copies of it, by reading git remotes.
+
+    A repo with no local copy cannot produce own clone traffic, which is what
+    makes its `self_days_7d = 0` authoritative rather than merely undetected.
+
+    Paths are returned for reflog scanning but never persisted: they are local
+    filesystem paths, and `self_activity.json` deliberately carries only dates,
+    repo names and counts.
+    """
+    found = {}
+
+    def walk(directory, depth):
+        try:
+            entries = list(os.scandir(directory))
+        except OSError:
+            return
+        if any(e.name == ".git" and e.is_dir(follow_symlinks=False) for e in entries):
+            repo = _remote_repo(Path(directory) / ".git" / "config", known)
+            if repo:
+                found.setdefault(repo, []).append(directory)
+            # Keep descending: some repos are nested inside another repo's tree.
+        if depth >= LOCAL_SCAN_DEPTH:
+            return
+        for e in entries:
+            if not e.is_dir(follow_symlinks=False):
+                continue
+            if e.name == ".git" or e.name in PRUNE_DIRS:
+                continue
+            walk(e.path, depth + 1)
+
+    walk(str(LOCAL_SCAN_ROOT), 0)
+    return found
+
+
+def _remote_repo(config_path, known):
+    """The tracked repo a working copy points at, via its remote URLs."""
+    try:
+        config = config_path.read_text(errors="replace")
+    except OSError:
+        return None
+    for line in config.splitlines():
+        line = line.strip()
+        if not line.startswith("url"):
+            continue
+        match = REMOTE_URL.search(line.split("=", 1)[-1].strip())
+        if match and match.group(1) in known:
+            return match.group(1)
+    return None
+
+
+def scan_reflog_activity(local_clones):
+    """Own clone/fetch/pull dates read from each local copy's git reflog.
+
+    This is the half of own-activity the transcript scan structurally cannot
+    see: commands run in a plain terminal, or by cron. The 09:05 archive cron
+    shows up here and nowhere else.
+
+    Reflog only records entries that actually *moved a ref*, so a fetch that
+    brought nothing new leaves no trace — this remains a floor, not a census.
+    """
+    days = {}
+    for repo, paths in local_clones.items():
+        for path in paths:
+            result = subprocess.run(
+                [
+                    "git",
+                    "-C",
+                    path,
+                    "reflog",
+                    "--all",
+                    "--date=short",
+                    "--format=%gd|%gs",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=60,
+                check=False,
+            )
+            if result.returncode != 0:
+                continue
+            for line in result.stdout.splitlines():
+                selector, _, subject = line.partition("|")
+                stamp = REFLOG_DATE.search(selector)
+                op = REFLOG_OP.match(subject.strip())
+                if not stamp or not op:
+                    continue
+                day = days.setdefault(stamp.group(1), {"repos": {}, "unattributed": 0})
+                entry = day["repos"].setdefault(repo, {"clone": 0, "fetch": 0})
+                # `pull` fetches, so it counts on the fetch side, matching how
+                # the transcript scanner classifies `git pull`.
+                entry["clone" if op.group(1) == "clone" else "fetch"] += 1
+    return days
+
+
+def merge_activity(transcript_days, reflog_days):
+    """Union the two evidence sources, recording which one saw each repo-day."""
+    merged = {}
+    for source, payload in (("transcript", transcript_days), ("reflog", reflog_days)):
+        for day, contents in payload.items():
+            target = merged.setdefault(day, {"repos": {}, "unattributed": 0})
+            target["unattributed"] += contents.get("unattributed", 0)
+            for repo, counts in contents.get("repos", {}).items():
+                entry = target["repos"].setdefault(
+                    repo, {"clone": 0, "fetch": 0, "via": []}
+                )
+                entry["clone"] += counts.get("clone", 0)
+                entry["fetch"] += counts.get("fetch", 0)
+                if source not in entry["via"]:
+                    entry["via"].append(source)
+    return merged
+
+
+def write_self_activity(merged, local_clones):
+    SELF_ACTIVITY_PATH.write_text(
+        json.dumps(
+            {
+                "_comment": (
+                    "Dates on which the account owner ran git clone / gh repo "
+                    "clone / git fetch / git pull, from two sources: local "
+                    "session transcripts, and the git reflog of each local "
+                    "working copy (which also catches terminal and cron "
+                    "activity). `via` says which source saw each repo-day. "
+                    "Only dates, repo names and counts are stored -- never "
+                    "command text, file paths or session ids."
+                ),
+                "repos_with_local_copy": sorted(local_clones),
+                "days": dict(sorted(merged.items())),
+            },
+            indent=1,
+            sort_keys=False,
+        )
+        + "\n"
+    )
+
+
 def scan_self_activity(known, rescan=False):
     """Build {date: {repo: {...}}} of the owner's own clone/fetch commands.
 
@@ -242,24 +411,7 @@ def scan_self_activity(known, rescan=False):
     SELF_CACHE_PATH.write_text(
         json.dumps({"by_file": by_file, "scanned_through": high_water}) + "\n"
     )
-    SELF_ACTIVITY_PATH.write_text(
-        json.dumps(
-            {
-                "_comment": (
-                    "Dates on which the account owner ran git clone / gh repo clone "
-                    "/ git fetch, derived from local session transcripts. Clone "
-                    "traffic on these dates is self-generated and is excluded from "
-                    "the ex_self columns. Only dates, repo names and counts are "
-                    "stored -- never command text, file paths or session ids."
-                ),
-                "days": dict(sorted(merged.items())),
-            },
-            indent=1,
-            sort_keys=False,
-        )
-        + "\n"
-    )
-    print(f"Self-activity: {len(merged)} dates flagged ({parsed} transcripts parsed)")
+    print(f"Transcript scan: {len(merged)} dates flagged ({parsed} transcripts parsed)")
     return merged
 
 
@@ -286,7 +438,17 @@ def main():
     # Include every repo ever snapshotted, not just currently-public ones, so
     # renamed or deleted repos still resolve when scanning old transcripts.
     known = set(repos) | {p.stem for p in DATA_DIR.glob("*.json")}
-    self_days = scan_self_activity(known, rescan="--rescan" in sys.argv)
+    transcript_days = scan_self_activity(known, rescan="--rescan" in sys.argv)
+    local_clones = discover_local_clones(known)
+    reflog_days = scan_reflog_activity(local_clones)
+    self_days = merge_activity(transcript_days, reflog_days)
+    write_self_activity(self_days, local_clones)
+    print(
+        f"Local copies: {len(local_clones)}/{len(repos)} tracked repos have one "
+        f"({len(repos) - len(local_clones)} can only be external)"
+    )
+    print(f"Reflog scan: {len(reflog_days)} dates flagged")
+    print(f"Self-activity: {len(self_days)} dates flagged after merge")
 
     # Rebuild a flat summary CSV for quick scanning
     summary_path = REPO_ROOT / "summary.csv"
@@ -326,7 +488,7 @@ def main():
                     ]
                 )
     print(f"Wrote {summary_path}")
-    write_views_summary(repos, self_days)
+    write_views_summary(repos, self_days, local_clones)
 
 
 def self_label(self_days, repo, day):
@@ -346,7 +508,7 @@ def _window_sum(series, field, since):
     return sum(v.get(field, 0) or 0 for d, v in series.items() if d >= since)
 
 
-def write_views_summary(repos, self_days):
+def write_views_summary(repos, self_days, local_clones):
     """Human-interest rollup, kept apart from the machine-traffic columns.
 
     Clones are overwhelmingly automated (mirrors, indexers, CI checkouts) or
@@ -360,6 +522,12 @@ def write_views_summary(repos, self_days):
     shown, never applied silently — and `self_days_7d` says how many days were
     dropped. Views are left untouched: browser page loads aren't produced by
     git commands, so there is nothing to exclude.
+
+    `local_copies` disambiguates a zero in `self_days_7d`, which otherwise
+    conflated two very different situations: at 0 there is no local working
+    copy, so no own clone traffic is possible and the zero is authoritative;
+    above 0 a copy exists and was scanned, so the zero means "none found this
+    week" — likelier than not, but not proof.
     """
     now = today()
     since_7 = str(now - timedelta(days=7))
@@ -394,6 +562,7 @@ def write_views_summary(repos, self_days):
                 "clones_7d_ex_self": clean,
                 "clones_7d_sum": _window_sum(clones, "count", since_7),
                 "self_days_7d": len(dropped),
+                "local_copies": len(local_clones.get(name, [])),
             }
         )
 
@@ -423,6 +592,7 @@ def write_views_summary(repos, self_days):
         "clones_7d_ex_self",
         "clones_7d_sum",
         "self_days_7d",
+        "local_copies",
     ]
     path = REPO_ROOT / "views_summary.csv"
     with open(path, "w", newline="") as f:
