@@ -84,24 +84,53 @@ Neither is readership. Only `view_uniques_14d` is.
 
 ## Consequence for `self_days`
 
-`masaladeutsch` correctly shows `self_days_7d = 0`: there is **no local working
-copy of that repo on this machine** — every git remote under `~` was checked and
-none points at it. It's an API/Pages-only repo, so no `git clone`/`git fetch`
-ever runs against it locally and there is genuinely nothing for the exclusion to
-drop. `clones_7d_ex_self = clones_7d_sum = 136` is right, and all 136 are
-external automation.
+A zero in `self_days_7d` had two very different meanings, and nothing in the CSV
+distinguished them:
 
-This is worth stating because a zero in `self_days_7d` has two very different
-meanings:
+1. **Nothing to exclude** — no local working copy of the repo exists, so own
+   clone traffic is impossible and the zero is authoritative.
+2. **Nothing detected** — a local copy exists, but the activity happened outside
+   a Claude session and was therefore invisible to a detector that only reads
+   `~/.claude/projects/**/*.jsonl`.
 
-1. **Nothing to exclude** — the repo isn't cloned locally at all (`masaladeutsch`).
-2. **Nothing detected** — the repo is cloned locally, but the activity happened
-   outside a Claude session and so was invisible.
+> **Correction (2026-08-16).** This document originally placed `masaladeutsch`
+> in case 1, on the strength of a `find -maxdepth 3` sweep for git remotes. That
+> search was too shallow to support the claim: a copy exists at
+> `~/.graphify/gh-clones/masaladeutsch`, four levels down, cloned 2026-08-10.
+> The repo belongs in case 2.
+>
+> The **finding about the 136 clones is unaffected**: that traffic is dated
+> 2026-08-08, two days before the local copy was created, and 62 distinct cloner
+> identities in one day cannot come from one machine. It was external
+> automation. Only the supporting argument was wrong, not the conclusion.
 
-The detector only reads `~/.claude/projects/**/*.jsonl`. Terminal work and cron
-jobs never appear in it. On 2026-08-08 it logged 5 clone/fetch commands it could
-not attribute to any repo. So `self_days_7d = 0` means "no evidence found", not
-"proven zero" — check whether a local clone exists before reading it as case 1.
+`scripts/snapshot.py` now resolves the ambiguity directly rather than leaving it
+to be reasoned about case by case:
+
+- **`local_copies`**, a new column in `views_summary.csv`, counts the local
+  working copies found for each repo by reading git remotes under `$HOME`. At 0
+  the zero is authoritative; above 0 it means "none found this week". Currently
+  18 of 71 repos have no local copy at all.
+- **Reflog scanning** adds git's own record of every `clone`/`fetch`/`pull` to
+  the transcript evidence, whoever ran it. This closes most of case 2: on the
+  current data it catches 14 repo-days the transcript scan missed, including the
+  09:05 archive cron that fires daily and had never appeared in the data.
+
+### `~/.graphify/gh-clones/` is a standing self-clone source
+
+Discovery surfaced something the transcript scan had only ever caught in part:
+the knowledge-graph tooling keeps its own clones of **24 tracked repos** under
+`~/.graphify/gh-clones/`, created in batches (8 repos on 2026-08-10, others on
+08-03 and 07-27). Every one of those is own clone traffic recorded against the
+account. The reflog scan now picks them up automatically.
+
+### What is still not covered
+
+Reflog only records entries that actually moved a ref, so a fetch that brings
+nothing new leaves no trace. `clones_7d_ex_self` therefore remains a floor.
+Bare mirror clones (`git clone --mirror`) have reflogs disabled by default and
+would go unseen — none exist on this machine today, but the 2026-07-17 mirror
+backup was exactly that shape.
 
 ## How to read a spike in future weekly reports
 

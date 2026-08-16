@@ -33,11 +33,27 @@ could only score them as unread — a bar they were structurally unable to clear
 ## Known noise in the data
 
 **A large share of clone traffic is the account owner's own work — this is now
-detected and excluded automatically.** On every run `snapshot.py` scans local
-session transcripts (`~/.claude/projects/**/*.jsonl`) for `git clone` /
-`gh repo clone` / `git fetch`, resolves which tracked repos each command touched,
-and records the dates in `self_activity.json`. Those repo-days are flagged in
-`summary.csv` and dropped from `clones_7d_ex_self` in `views_summary.csv`.
+detected and excluded automatically.** On every run `snapshot.py` gathers own
+activity from two independent sources and records the dates in
+`self_activity.json`, where `via` says which source saw each repo-day. Those
+repo-days are flagged in `summary.csv` and dropped from `clones_7d_ex_self` in
+`views_summary.csv`.
+
+1. **Session transcripts** (`~/.claude/projects/**/*.jsonl`) — scanned for
+   `git clone` / `gh repo clone` / `git fetch` / `git pull`, resolving which
+   tracked repos each command touched.
+2. **Git reflogs of local working copies** — every local clone of a tracked repo
+   is located by reading git remotes under `$HOME`, and its reflog gives the
+   dates of every clone/fetch/pull *whoever ran it*. This is the half the
+   transcript scan structurally cannot see: terminal work and cron jobs. The
+   09:05 archive cron shows up here and nowhere else, as do the knowledge-graph
+   tooling's own clones of 24 repos under `~/.graphify/gh-clones/`.
+
+**A zero in `self_days_7d` is no longer ambiguous.** It used to conflate "no
+local copy exists, so own traffic is impossible" with "a copy exists but nothing
+was detected". The `local_copies` column now separates them: at 0 the zero is
+authoritative, above 0 it means none was found this week. 18 of 71 repos have no
+local copy at all.
 
 Nothing is removed or hidden: raw counts stay in both files, the raw
 `clones_7d_sum` sits next to the cleaned column, and `self_days_7d` says how
@@ -69,10 +85,14 @@ the split cannot be resolved further — only bounded from both sides:
 `clones_7d_ex_self` under-counts, `clones_7d_sum` over-counts, and the truth is
 somewhere between.
 
-Two more limits worth knowing: the scan sees only sessions still present under
-`~/.claude/projects`, so pruned transcripts leave older days unflagged; and
-commands that name no recognisable repo (a bare `git fetch` in an unrelated
-directory) are counted in `unattributed` and excluded from nothing.
+Three more limits worth knowing: the transcript scan sees only sessions still
+present under `~/.claude/projects`, so pruned transcripts leave older days
+unflagged (the reflog source is unaffected by pruning); commands that name no
+recognisable repo (a bare `git fetch` in an unrelated directory) are counted in
+`unattributed` and excluded from nothing; and a reflog entry is only written
+when a ref actually moves, so a fetch that brings nothing new leaves no trace.
+Bare mirror clones have reflogs disabled by default and would go unseen — none
+exist today, but the 2026-07-17 `--mirror` backup was exactly that shape.
 
 **Genuinely external, for contrast:** `FCI-warehouse-MSPvsMSV` (229 clones/week)
 and `india-omc-fuel-fleet-model` (104) have zero matching own commands and no
@@ -128,7 +148,9 @@ columns are upper bounds.
   so are upper bounds. `days_with_views` and `last_viewed` show whether
   interest is sustained or a one-day blip; `clones_7d_ex_self` /
   `clones_7d_sum` / `self_days_7d` carry clone volume with and without the
-  owner's own activity, purely for machine-vs-human contrast
+  owner's own activity, purely for machine-vs-human contrast; `local_copies`
+  counts local working copies of the repo, which is what makes a
+  `self_days_7d` of 0 authoritative (0 copies) rather than merely undetected
 - `graphify-out/` — local code knowledge graph (`graph.json`, `graph.html`,
   `GRAPH_REPORT.md`) used for navigation, not part of the traffic data.
   Gitignored because it is derived output that churns on every edit; rebuild
