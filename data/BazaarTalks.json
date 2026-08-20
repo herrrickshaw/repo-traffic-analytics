@@ -258,6 +258,16 @@
         "count": 2,
         "uniques": 2
       }
+    },
+    "2026-08-20": {
+      "clones": {
+        "count": 5,
+        "uniques": 5
+      },
+      "views": {
+        "count": 2,
+        "uniques": 2
+      }
     }
   },
   "releases": {},

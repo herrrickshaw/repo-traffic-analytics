@@ -66,11 +66,17 @@ REMOTE_URL = re.compile(rf"[:/]{OWNER}/([A-Za-z0-9_.-]+?)(?:\.git)?$")
 # "pull --ff-only ...", "clone: from ..."). Anchored so a commit whose *message*
 # mentions cloning is not mistaken for a clone.
 REFLOG_OP = re.compile(r"^(clone|fetch|pull)\b")
-# Read as iso-strict, not --date=short: git stamps the reflog in local time,
+# Read as --date=unix, not --date=short: git stamps the reflog in local time,
 # while the traffic API buckets by UTC midnight. Below UTC+0 in the evening (or
 # above it after midnight) the two disagree, and a self-day keyed to the local
 # date then fails to line up with the clone-day it was meant to excuse.
-REFLOG_DATE = re.compile(r"@\{(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2})\}")
+#
+# Epoch rather than an ISO string because iso-strict renders a UTC machine's
+# entries as "...T00:06:51Z" and an offset machine's as "...+05:30" — two shapes
+# to match, and missing one silently yields no self-days at all rather than an
+# error. An integer has one shape and already means UTC.
+REFLOG_DATE = re.compile(r"@\{(\d+)\}")
+GIT_EPOCH_FLOOR = 1104537600  # 2005-01-01: git did not exist before it
 
 
 def today():
@@ -331,6 +337,20 @@ def _remote_repo(config_path, known):
     return None
 
 
+def reflog_utc_day(selector):
+    """UTC date from a `--date=unix` reflog selector, e.g. `main@{1787184411}`.
+
+    Returns None when the selector carries no usable epoch. A git that ignored
+    `--date` emits ordinals instead (`HEAD@{0}`, `HEAD@{1}`), which would parse
+    as 1970 and quietly match no traffic day, so anything predating git itself
+    is rejected rather than dated.
+    """
+    stamp = REFLOG_DATE.search(selector)
+    if not stamp or int(stamp.group(1)) < GIT_EPOCH_FLOOR:
+        return None
+    return str(datetime.fromtimestamp(int(stamp.group(1)), UTC).date())
+
+
 def scan_reflog_activity(local_clones):
     """Own clone/fetch/pull dates read from each local copy's git reflog.
 
@@ -351,7 +371,7 @@ def scan_reflog_activity(local_clones):
                     path,
                     "reflog",
                     "--all",
-                    "--date=iso-strict",
+                    "--date=unix",
                     "--format=%gd|%gs",
                 ],
                 capture_output=True,
@@ -363,13 +383,12 @@ def scan_reflog_activity(local_clones):
                 continue
             for line in result.stdout.splitlines():
                 selector, _, subject = line.partition("|")
-                stamp = REFLOG_DATE.search(selector)
                 op = REFLOG_OP.match(subject.strip())
-                if not stamp or not op:
+                if not op:
                     continue
-                utc_day = str(
-                    datetime.fromisoformat(stamp.group(1)).astimezone(UTC).date()
-                )
+                utc_day = reflog_utc_day(selector)
+                if not utc_day:
+                    continue
                 day = days.setdefault(utc_day, {"repos": {}, "unattributed": 0})
                 entry = day["repos"].setdefault(repo, {"clone": 0, "fetch": 0})
                 # `pull` fetches, so it counts on the fetch side, matching how

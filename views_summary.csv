@@ -68,5 +68,5 @@ market-data-artifacts,0,0,0,0,0,0,0,,3,3,2,2,0,0,0,1
 market-pipeline,0,0,0,0,0,0,0,,0,1,0,0,0,0,0,1
 piotroski-liquidity-research,0,0,0,0,0,0,0,,5,5,2,2,0,0,0,1
 repo-data-dedup,0,0,0,0,0,0,0,,8,9,2,2,0,1,0,1
-repo-traffic-analytics,0,0,0,0,0,0,0,,0,1,0,6,4,22,2,1
+repo-traffic-analytics,0,0,0,0,0,0,0,,0,1,0,6,6,24,2,1
 stock-screener-platform,0,0,0,0,0,0,0,,5,6,2,8,11,22,0,1

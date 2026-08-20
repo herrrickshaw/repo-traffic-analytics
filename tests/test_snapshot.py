@@ -451,6 +451,24 @@ def test_scan_reflog_records_a_real_fetch(tmp_path):
     assert entry["clone"] >= 1
 
 
+def test_reflog_selector_resolves_to_a_utc_day_not_a_local_one():
+    """Reflog dates must land in the same UTC buckets the traffic API uses.
+
+    2026-08-20T00:06:51Z is still 2026-08-19 in the Americas and already
+    2026-08-20 in Asia; the epoch pins it to the UTC day regardless of where
+    the scan runs. Parsed from an integer rather than an ISO string because
+    `--date=iso-strict` renders UTC as `Z` and everywhere else as `+05:30` —
+    matching only one shape yielded zero self-days on a UTC runner, which reads
+    as a clean week rather than an error.
+    """
+    assert sn.reflog_utc_day("main@{1787184411}") == "2026-08-20"
+    # An ordinal selector means --date went unhonoured. Rejected rather than
+    # dated to 1970, which would match no traffic day and look like a clean week
+    assert sn.reflog_utc_day("HEAD@{0}") is None
+    assert sn.reflog_utc_day("HEAD@{2}") is None
+    assert sn.reflog_utc_day("HEAD@{upstream}") is None
+
+
 def test_merge_activity_unions_sources_and_records_which_saw_each_day():
     transcript = {
         "2026-08-10": {"repos": {"r": {"clone": 1, "fetch": 0}}, "unattributed": 2}
