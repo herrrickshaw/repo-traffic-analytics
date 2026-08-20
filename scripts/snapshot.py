@@ -66,7 +66,11 @@ REMOTE_URL = re.compile(rf"[:/]{OWNER}/([A-Za-z0-9_.-]+?)(?:\.git)?$")
 # "pull --ff-only ...", "clone: from ..."). Anchored so a commit whose *message*
 # mentions cloning is not mistaken for a clone.
 REFLOG_OP = re.compile(r"^(clone|fetch|pull)\b")
-REFLOG_DATE = re.compile(r"@\{(\d{4}-\d{2}-\d{2})")
+# Read as iso-strict, not --date=short: git stamps the reflog in local time,
+# while the traffic API buckets by UTC midnight. Below UTC+0 in the evening (or
+# above it after midnight) the two disagree, and a self-day keyed to the local
+# date then fails to line up with the clone-day it was meant to excuse.
+REFLOG_DATE = re.compile(r"@\{(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2})\}")
 
 
 def today():
@@ -88,6 +92,51 @@ def gh_api(path):
         return json.loads(result.stdout)
     except json.JSONDecodeError:
         return None
+
+
+def gh_api_lines(path, jq):
+    """Paginated `gh api`, returning one output line per matched element.
+
+    The runs endpoint caps at 100 per page and a busy repo can exceed that in a
+    single week, so the unpaginated helper above would silently truncate.
+    """
+    result = subprocess.run(
+        ["gh", "api", "--paginate", path, "--jq", jq],
+        capture_output=True,
+        text=True,
+        timeout=120,
+        check=False,
+    )
+    if result.returncode != 0:
+        return []
+    return [line for line in result.stdout.splitlines() if line]
+
+
+def fetch_ci_runs(name, since):
+    """Daily GitHub Actions run counts for a repo, from `since` onward.
+
+    Every run checks the repo out, and `actions/checkout` is a real git clone
+    from GitHub's side, so it lands in traffic/clones indistinguishably from an
+    outsider's. On repos with push-triggered workflows this is the single
+    largest source of clone traffic: blogger_writeups_code booked 278 clones in
+    a fortnight from 2 unique cloners, matching its Actions run count almost
+    day for day, while never being viewed once.
+
+    Runs, not jobs, are counted. A matrix run checks out once per job, so this
+    under-counts checkouts on matrix workflows and the subtraction stays a
+    floor. Repos with no workflows at all skip the second call entirely.
+    """
+    workflows = gh_api(f"repos/{OWNER}/{name}/actions/workflows")
+    if not workflows or not workflows.get("total_count"):
+        return {}
+    stamps = gh_api_lines(
+        f"repos/{OWNER}/{name}/actions/runs?per_page=100&created=%3E%3D{since}",
+        ".workflow_runs[].created_at",
+    )
+    daily = {}
+    for stamp in stamps:
+        daily[stamp[:10]] = daily.get(stamp[:10], 0) + 1
+    return daily
 
 
 def list_tracked_repos():
@@ -116,10 +165,17 @@ def load_repo_data(name):
     f = DATA_DIR / f"{name}.json"
     if f.exists():
         data = json.loads(f.read_text())
-        # period_totals was added later; older files predate it
+        # period_totals and ci_runs were added later; older files predate them
         data.setdefault("period_totals", {})
+        data.setdefault("ci_runs", {})
         return data
-    return {"clones": {}, "views": {}, "releases": {}, "period_totals": {}}
+    return {
+        "clones": {},
+        "views": {},
+        "releases": {},
+        "period_totals": {},
+        "ci_runs": {},
+    }
 
 
 def save_repo_data(name, data):
@@ -295,7 +351,7 @@ def scan_reflog_activity(local_clones):
                     path,
                     "reflog",
                     "--all",
-                    "--date=short",
+                    "--date=iso-strict",
                     "--format=%gd|%gs",
                 ],
                 capture_output=True,
@@ -311,7 +367,10 @@ def scan_reflog_activity(local_clones):
                 op = REFLOG_OP.match(subject.strip())
                 if not stamp or not op:
                     continue
-                day = days.setdefault(stamp.group(1), {"repos": {}, "unattributed": 0})
+                utc_day = str(
+                    datetime.fromisoformat(stamp.group(1)).astimezone(UTC).date()
+                )
+                day = days.setdefault(utc_day, {"repos": {}, "unattributed": 0})
                 entry = day["repos"].setdefault(repo, {"clone": 0, "fetch": 0})
                 # `pull` fetches, so it counts on the fetch side, matching how
                 # the transcript scanner classifies `git pull`.
@@ -420,6 +479,11 @@ def main():
     repos = list_tracked_repos()
     print(f"Snapshotting {len(repos)} repos...")
 
+    # Actions history outlives the 14-day traffic window, so re-fetching a
+    # slightly wider span each run backfills any day a run was missed.
+    ci_since = str(today() - timedelta(days=20))
+    ci_repos = 0
+
     for name in repos:
         clones = gh_api(f"repos/{OWNER}/{name}/traffic/clones")
         views = gh_api(f"repos/{OWNER}/{name}/traffic/views")
@@ -432,8 +496,14 @@ def main():
         data = record_period_totals(data, clones, views)
         data = snapshot_releases(name, data)
 
+        ci = fetch_ci_runs(name, ci_since)
+        data["ci_runs"].update(ci)
+        ci_repos += bool(ci)
+
         save_repo_data(name, data)
-        print(f"  {name}: ok")
+        print(f"  {name}: ok" + (f" (CI runs: {sum(ci.values())})" if ci else ""))
+
+    print(f"Actions checkouts attributed on {ci_repos} repos")
 
     # Include every repo ever snapshotted, not just currently-public ones, so
     # renamed or deleted repos still resolve when scanning old transcripts.
@@ -517,11 +587,23 @@ def write_views_summary(repos, self_days, local_clones):
     first: it is GitHub's own deduplicated count. The `_sum` columns add up
     per-day uniques and are therefore upper bounds, not distinct-person counts.
 
-    `clones_7d_ex_self` drops days on which the owner ran a clone/fetch against
-    that repo. The raw `clones_7d_sum` stays alongside it — the exclusion is
-    shown, never applied silently — and `self_days_7d` says how many days were
-    dropped. Views are left untouched: browser page loads aren't produced by
-    git commands, so there is nothing to exclude.
+    Read `ext_cloners_14d` first on the machine-traffic side. Counts cannot be
+    cleaned into a person-count, but GitHub's 14-day *unique* cloner figure can
+    be: the Actions runner presents as one cloner across the window and the
+    owner's machine as another, so subtracting one for each — when there is
+    evidence each was active — leaves the distinct third parties. It reduces
+    blogger_writeups_code, 278 clones of a private repo driven by a
+    push-triggered workflow, to the 0 outsiders it actually had.
+
+    On the count side `clones_7d_ext` subtracts Actions runs day by day rather
+    than discarding the day, so a repo whose CI ran still reports the external
+    clones it received. Self-activity is the exception and is still handled by
+    dropping the whole day: the reflog scan counts one entry per ref a fetch
+    moved, not one per clone event, so those counts cannot be subtracted
+    without wild over-correction. Raw `clones_7d_sum`, `ci_runs_7d` and
+    `self_days_7d` all stay alongside — every exclusion is shown, never applied
+    silently. Views need none of this: browser page loads aren't produced by
+    git commands or by CI.
 
     `local_copies` disambiguates a zero in `self_days_7d`, which otherwise
     conflated two very different situations: at 0 there is no local working
@@ -531,20 +613,33 @@ def write_views_summary(repos, self_days, local_clones):
     """
     now = today()
     since_7 = str(now - timedelta(days=7))
+    since_14 = str(now - timedelta(days=14))
     rows = []
 
     for name in repos:
         data = load_repo_data(name)
         views, clones = data["views"], data["clones"]
+        ci_runs = data.get("ci_runs", {})
         periods = data.get("period_totals", {})
         latest = periods.get(max(periods), {}) if periods else {}
 
         recent_clone_days = [d for d in clones if d >= since_7]
         dropped = [d for d in recent_clone_days if is_self_day(self_days, name, d)]
-        clean = sum(
-            clones[d].get("count", 0) or 0
+        external = sum(
+            max(0, (clones[d].get("count", 0) or 0) - ci_runs.get(d, 0))
             for d in recent_clone_days
             if d not in set(dropped)
+        )
+
+        # A cloner GitHub deduplicates across the window: CI is one identity,
+        # the owner's machine another. Only subtract for evidence of each.
+        ci_14 = sum(n for d, n in ci_runs.items() if d >= since_14)
+        self_14 = any(is_self_day(self_days, name, d) for d in clones if d >= since_14)
+        raw_cloners = latest.get("clones", {}).get("uniques", "")
+        ext_cloners = (
+            max(0, raw_cloners - bool(ci_14) - bool(self_14))
+            if isinstance(raw_cloners, int)
+            else ""
         )
 
         viewed_days = sorted(d for d, v in views.items() if (v.get("count") or 0) > 0)
@@ -559,8 +654,12 @@ def write_views_summary(repos, self_days, local_clones):
                 "views_tracked_sum": _window_sum(views, "count", ""),
                 "days_with_views": len(viewed_days),
                 "last_viewed": viewed_days[-1] if viewed_days else "",
-                "clones_7d_ex_self": clean,
+                "ext_cloners_14d": ext_cloners,
+                "clone_uniques_14d": raw_cloners,
+                "clones_7d_ext": external,
                 "clones_7d_sum": _window_sum(clones, "count", since_7),
+                "ci_runs_7d": sum(n for d, n in ci_runs.items() if d >= since_7),
+                "ci_runs_14d": ci_14,
                 "self_days_7d": len(dropped),
                 "local_copies": len(local_clones.get(name, [])),
             }
@@ -589,8 +688,12 @@ def write_views_summary(repos, self_days, local_clones):
         "views_tracked_sum",
         "days_with_views",
         "last_viewed",
-        "clones_7d_ex_self",
+        "ext_cloners_14d",
+        "clone_uniques_14d",
+        "clones_7d_ext",
         "clones_7d_sum",
+        "ci_runs_7d",
+        "ci_runs_14d",
         "self_days_7d",
         "local_copies",
     ]

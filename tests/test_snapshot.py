@@ -15,6 +15,7 @@ columns, and same-day idempotency.
 import csv
 import json
 import subprocess
+from datetime import timedelta
 
 import pytest
 
@@ -209,9 +210,17 @@ def wired_main(monkeypatch, tmp_path):
             }
         if path.endswith("/releases"):
             return [{"assets": [{"download_count": 7}]}]
+        if path.endswith("/actions/workflows"):
+            return {"total_count": 1}
         return None
 
     monkeypatch.setattr(sn, "gh_api", fake_gh_api)
+    # Four Actions runs on the same day the traffic API reports 10 clones.
+    monkeypatch.setattr(
+        sn,
+        "gh_api_lines",
+        lambda path, jq: ["2026-07-20T04:00:00Z"] * 4,
+    )
     return tmp_path, data_dir
 
 
@@ -238,13 +247,19 @@ def test_main_writes_per_repo_json_and_summaries(wired_main):
     assert len(vrows) == 2
     assert {
         "view_uniques_14d",
-        "clones_7d_ex_self",
+        "ext_cloners_14d",
+        "clone_uniques_14d",
+        "clones_7d_ext",
+        "ci_runs_7d",
         "self_days_7d",
         "local_copies",
     } <= set(vrows[0])
     assert vrows[0]["view_uniques_14d"] == "2"  # GitHub's own 14-day dedup count
     # No local copy exists -> self_days_7d = 0 is authoritative, not undetected
     assert vrows[0]["local_copies"] == "0"
+
+    # Actions runs are archived per day alongside the traffic series
+    assert data["ci_runs"]["2026-07-20"] == 4
 
 
 def test_main_is_idempotent_across_reruns(wired_main):
@@ -255,6 +270,91 @@ def test_main_is_idempotent_across_reruns(wired_main):
     data = json.loads((data_dir / "repo-a.json").read_text())
     assert len(data["clones"]) == 1  # upsert by date -> not doubled
     assert data["clones"]["2026-07-20"] == {"count": 10, "uniques": 5}
+
+
+def _ci_fixture(tmp_path, monkeypatch, ci_runs, clone_uniques=3):
+    """One repo with 20 clones yesterday, plus whatever CI history is passed."""
+    data_dir = tmp_path / "data"
+    data_dir.mkdir(exist_ok=True)  # tests may re-seed the same tmp_path
+    monkeypatch.setattr(sn, "DATA_DIR", data_dir)
+    monkeypatch.setattr(sn, "REPO_ROOT", tmp_path)
+    yesterday = str(sn.today() - timedelta(days=1))
+    (data_dir / "repo-a.json").write_text(
+        json.dumps(
+            {
+                "clones": {yesterday: {"count": 20, "uniques": clone_uniques}},
+                "views": {},
+                "releases": {},
+                "ci_runs": {yesterday: ci_runs},
+                "period_totals": {
+                    yesterday: {
+                        "clones": {"count": 20, "uniques": clone_uniques},
+                        "views": {"count": 0, "uniques": 0},
+                    }
+                },
+            }
+        )
+    )
+    return yesterday
+
+
+def test_actions_runs_are_subtracted_from_the_clone_count(tmp_path, monkeypatch):
+    """Every Actions run checks the repo out, and GitHub books that as a clone.
+
+    Subtraction is per-day, so a repo whose CI ran still reports the external
+    clones it received that day — unlike dropping the day wholesale.
+    """
+    _ci_fixture(tmp_path, monkeypatch, ci_runs=14)
+    sn.write_views_summary(["repo-a"], {}, {})
+    row = next(csv.DictReader((tmp_path / "views_summary.csv").open()))
+
+    assert row["clones_7d_sum"] == "20"  # raw figure still shown
+    assert row["ci_runs_7d"] == "14"
+    assert row["clones_7d_ext"] == "6"  # 20 - 14
+
+
+def test_ci_subtraction_never_goes_negative(tmp_path, monkeypatch):
+    """Matrix runs check out once per job, so runs can exceed booked clones.
+
+    The count is a floor, not a signed residual — it must clamp at zero rather
+    than lending negative traffic to the next day in the sum.
+    """
+    _ci_fixture(tmp_path, monkeypatch, ci_runs=95)
+    sn.write_views_summary(["repo-a"], {}, {})
+    row = next(csv.DictReader((tmp_path / "views_summary.csv").open()))
+    assert row["clones_7d_ext"] == "0"
+
+
+def test_ext_cloners_discounts_ci_and_self_identities(tmp_path, monkeypatch):
+    """GitHub dedups cloners over 14 days: CI is one identity, the owner another.
+
+    This is the only figure that survives cleaning into a person-count, so it
+    has to discount both — and only on evidence that each was actually active.
+    """
+    day = _ci_fixture(tmp_path, monkeypatch, ci_runs=14, clone_uniques=3)
+    self_days = {day: {"repos": {"repo-a": {"clone": 1, "fetch": 0}}}}
+
+    sn.write_views_summary(["repo-a"], self_days, {})
+    row = next(csv.DictReader((tmp_path / "views_summary.csv").open()))
+    assert row["clone_uniques_14d"] == "3"  # raw
+    assert row["ext_cloners_14d"] == "1"  # minus CI, minus self
+
+    # With no CI and no self-activity, every unique cloner is a third party.
+    _ci_fixture(tmp_path, monkeypatch, ci_runs=0, clone_uniques=3)
+    sn.write_views_summary(["repo-a"], {}, {})
+    row = next(csv.DictReader((tmp_path / "views_summary.csv").open()))
+    assert row["ext_cloners_14d"] == "3"
+
+
+def test_private_repo_driven_entirely_by_ci_reports_no_outsiders(tmp_path, monkeypatch):
+    """The blogger_writeups_code shape: heavy clone traffic, 2 unique cloners,
+    never viewed. Both identities are accounted for, so the answer is zero."""
+    day = _ci_fixture(tmp_path, monkeypatch, ci_runs=20, clone_uniques=2)
+    sn.write_views_summary(
+        ["repo-a"], {day: {"repos": {"repo-a": {"clone": 0, "fetch": 3}}}}, {}
+    )
+    row = next(csv.DictReader((tmp_path / "views_summary.csv").open()))
+    assert row["ext_cloners_14d"] == "0"
 
 
 def test_write_views_summary_handles_zero_repos(tmp_path, monkeypatch):
@@ -342,7 +442,10 @@ def test_scan_reflog_records_a_real_fetch(tmp_path):
         check=True,
     )
     days = sn.scan_reflog_activity({"repo-a": [str(clone_dir)]})
-    # `git clone` writes a "clone: from ..." reflog entry, dated today
+    # `git clone` writes a "clone: from ..." reflog entry, dated today.
+    # Keyed in UTC to match the traffic API's buckets, NOT in the local time
+    # git stamps the reflog with — this assertion fails on a machine whose
+    # offset puts it on a different calendar day, which is the whole point.
     assert days, "clone/fetch left no reflog entry"
     entry = days[str(sn.today())]["repos"]["repo-a"]
     assert entry["clone"] >= 1

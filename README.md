@@ -32,12 +32,33 @@ could only score them as unread — a bar they were structurally unable to clear
 
 ## Known noise in the data
 
-**A large share of clone traffic is the account owner's own work — this is now
-detected and excluded automatically.** On every run `snapshot.py` gathers own
-activity from two independent sources and records the dates in
-`self_activity.json`, where `via` says which source saw each repo-day. Those
-repo-days are flagged in `summary.csv` and dropped from `clones_7d_ex_self` in
-`views_summary.csv`.
+**The largest single source of clone traffic is this account's own CI.** Every
+GitHub Actions run checks the repo out, and `actions/checkout` is a real clone
+from GitHub's side, so it lands in `traffic/clones` indistinguishable from an
+outsider's. `snapshot.py` now fetches each repo's Actions run counts per day
+(archived in `ci_runs` in the per-repo JSON) and subtracts them from that day's
+clones in `clones_7d_ext`.
+
+The effect is not marginal. `blogger_writeups_code` booked 278 clones in a
+fortnight from **2 unique cloners**, with **zero views ever** — a private repo
+nobody outside the account can even reach. Its clone series matches its Actions
+run count almost day for day (87/87, 15/15, 50/50, 41/41), driven by a
+`push`-triggered link audit on `posts/**`. It now correctly reports **0**
+external clones and **0** external cloners. Across the account, 201 of last
+week's 486 clones were Actions checkouts, on 21 repos.
+
+Subtraction is per-day and clamped at zero, so a repo whose CI ran still reports
+the external clones it received that day. It remains a floor: a matrix run
+checks out once per job while only the run is counted.
+
+**A large share of the rest is the account owner's own work — also detected and
+excluded automatically.** On every run `snapshot.py` gathers own activity from
+two independent sources and records the dates in `self_activity.json`, where
+`via` says which source saw each repo-day. Those repo-days are flagged in
+`summary.csv` and dropped from `clones_7d_ext` in `views_summary.csv` — dropped
+rather than subtracted, because the reflog records one entry per ref a fetch
+moved, not one per clone event, so those counts cannot be subtracted without
+wild over-correction.
 
 1. **Session transcripts** (`~/.claude/projects/**/*.jsonl`) — scanned for
    `git clone` / `gh repo clone` / `git fetch` / `git pull`, resolving which
@@ -76,14 +97,22 @@ average **108**. Every large spike lines up with a working session:
 | 2026-07-12 | 6 clones + 7 fetches | 7 | 335 / 129 | Repo hygiene pass |
 | 2026-07-09 | 2 clones + 95 fetches | 4 | 218 / 99 | Screener/backtest work |
 
-**Attribution has a hard limit — `ex_self` is a floor, not a clean number.** The
-daily unique-cloner counts on those days (278, 539) far exceed what one machine
-can account for, so own activity and external traffic overlap rather than one
-explaining the other. Excluding a whole repo-day therefore also discards
-whatever external traffic occurred on it. GitHub exposes no per-source data, so
-the split cannot be resolved further — only bounded from both sides:
-`clones_7d_ex_self` under-counts, `clones_7d_sum` over-counts, and the truth is
-somewhere between.
+**Counts have a hard limit — `clones_7d_ext` is a floor, not a clean number.**
+The daily unique-cloner counts on those days (278, 539) far exceed what one
+machine can account for, so own activity and external traffic overlap rather
+than one explaining the other. Dropping a whole repo-day for self-activity
+therefore also discards whatever external traffic occurred on it. GitHub exposes
+no per-source data, so the split cannot be resolved further — only bounded from
+both sides: `clones_7d_ext` under-counts, `clones_7d_sum` over-counts, and the
+truth is somewhere between.
+
+**Unique cloners survive the cleaning that counts cannot.** GitHub deduplicates
+cloners across the trailing 14 days, and over that window CI presents as one
+identity and the owner's machine as another. `ext_cloners_14d` subtracts one for
+each, on evidence that each was actually active, leaving the distinct third
+parties — 651 raw unique cloners last week, **627** external. That is the figure
+to quote when asking how many outside parties took a copy; the count columns
+answer only how much traffic they generated.
 
 Three more limits worth knowing: the transcript scan sees only sessions still
 present under `~/.claude/projects`, so pruned transcripts leave older days
@@ -132,8 +161,10 @@ columns are upper bounds.
 ## Files
 
 - `data/<repo>.json` — per-repo time series (clones/views/releases keyed by
-  date), plus `period_totals` — GitHub's deduplicated trailing-14-day
-  clone/view totals, keyed by the snapshot date the window ends on
+  date), plus `ci_runs` — GitHub Actions runs per day, the checkout traffic
+  subtracted from that day's clones — and `period_totals`, GitHub's
+  deduplicated trailing-14-day clone/view totals, keyed by the snapshot date
+  the window ends on
 - `summary.csv` — flattened per-repo-per-day view, rebuilt on every run.
   `self_activity` marks repo-days on which the owner ran `clone`, `fetch`, or
   both
@@ -146,9 +177,11 @@ columns are upper bounds.
   most-read first. `view_uniques_14d` / `views_14d` are GitHub's deduplicated
   14-day figures; `*_7d_sum` and `*_tracked_sum` are sums of daily values and
   so are upper bounds. `days_with_views` and `last_viewed` show whether
-  interest is sustained or a one-day blip; `clones_7d_ex_self` /
-  `clones_7d_sum` / `self_days_7d` carry clone volume with and without the
-  owner's own activity, purely for machine-vs-human contrast; `local_copies`
+  interest is sustained or a one-day blip; `ext_cloners_14d` /
+  `clone_uniques_14d` give distinct third-party cloners before and after
+  discounting CI and the owner, and `clones_7d_ext` / `clones_7d_sum` /
+  `ci_runs_7d` / `ci_runs_14d` / `self_days_7d` carry clone volume with and
+  without that traffic, purely for machine-vs-human contrast; `local_copies`
   counts local working copies of the repo, which is what makes a
   `self_days_7d` of 0 authoritative (0 copies) rather than merely undetected
 - `graphify-out/` — local code knowledge graph (`graph.json`, `graph.html`,
