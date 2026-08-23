@@ -310,3 +310,10 @@ repos:
     visibility: PUBLIC
     purpose: "python_files snapshot + 759MB market_data.duckdb (LFS)"
     notes: "DELETED by user 2026-07-23 (freed 0.77GB LFS). duckdb verified derivable via build_warehouse.py from gss cache_seed (local + Dropbox + GDrive). History bundle: ~/repos/branch-archives/market-screener-backtests_full_pre-delete_2026-07-23.bundle"
+  ship2shore_rag:
+    tier: 1
+    created: 2026-08-23
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "RAG system for maritime/ocean-freight shipping literature — Postgres/pgvector + local sentence-transformer embeddings + optional Claude generation"
+    notes: "New 2026-08-23. Ingests free/legal sources (arXiv, Wikipedia, curated PDFs). Local dev DB is an isolated postgresql@17 instance on port 5433 (pgvector has no bottle for the existing postgresql@16 service) — see README. gitleaks pre-commit hook + quality-gates CI installed at creation."
