@@ -112,6 +112,26 @@
     "2026-08-17": {
       "count": 1,
       "uniques": 1
+    },
+    "2026-08-18": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-19": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-20": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-21": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-22": {
+      "count": 0,
+      "uniques": 0
     }
   },
   "period_totals": {
@@ -179,6 +199,16 @@
       "clones": {
         "count": 6,
         "uniques": 6
+      },
+      "views": {
+        "count": 0,
+        "uniques": 0
+      }
+    },
+    "2026-08-24": {
+      "clones": {
+        "count": 3,
+        "uniques": 3
       },
       "views": {
         "count": 0,
@@ -297,6 +327,26 @@
       "uniques": 0
     },
     "2026-08-17": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-18": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-19": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-20": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-21": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-22": {
       "count": 0,
       "uniques": 0
     }
