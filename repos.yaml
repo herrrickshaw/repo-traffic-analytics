@@ -24,9 +24,9 @@ repos:
   global-stock-screener:
     tier: 1
     size_mb: 2
-    visibility: PUBLIC
+    visibility: PRIVATE  # flipped 2026-09-01: cache_seed/fundamentals_history/IN.parquet + IN_screener_only_backup.parquet (14,162 rows, screener.in authenticated export incl. promoter/FII/DII holdings) were on main, publicly readable
     purpose: "20-market stock screener with cached OHLCV, 11 strategies, liquidity tiers, cash-conversion-cycle, m"
-    notes: "20-market screener; screener.in collector creds live here (.env, gitignored)"
+    notes: "20-market screener; screener.in collector creds live here (.env, gitignored). NOT YET REMEDIATED: files still in git history (main + compact-snapshot-2026-07-23 branch, both pushed) - repo went private but history purge/force-push was deferred, decide before ever making public again"
   global-market-data:
     tier: 1
     size_mb: 86
@@ -36,9 +36,9 @@ repos:
   global-market-research-platform:
     tier: 1
     size_mb: 337
-    visibility: PUBLIC
+    visibility: PRIVATE  # flipped 2026-09-01: the documented "publish-by-accident" risk below materialized — screener.in authenticated data (DATA_SOURCES.md admits "login + HTML/export") PLUS live personal watchlist.csv/portfolio results, actively pushed same day as discovery
     purpose: "Quantitative multi-market (India/US/Europe/Japan/Korea) research platform — FastAPI+React screening,"
-    notes: "⚠ This IS the live $HOME origin (public). Publish-by-accident risk lives here, not working-files. LFS-pointer Kaggle payload removed from branches 2026-07-22; bundles in ~/repos/branch-archives"
+    notes: "⚠ This IS the live $HOME origin. Publish-by-accident risk lives here, not working-files — confirmed 2026-09-01, see [[feedback_proprietary_vendor_data_public_repos]]. LFS-pointer Kaggle payload removed from branches 2026-07-22; bundles in ~/repos/branch-archives"
   repo-data-dedup:
     tier: 1
     size_mb: 0
@@ -240,7 +240,7 @@ repos:
     tier: 3
     archived: 2026-07-22
     size_mb: 25
-    visibility: PUBLIC
+    visibility: PRIVATE  # flipped 2026-09-01: data/raw/TCPD_*_All_States_*.csv.gz (registration-gated Lok Dhaba election microdata) was committed despite the repo's own vote-share-modeling/README.md claiming these files were "not committed... not ours to redistribute" - see [[feedback_proprietary_vendor_data_public_repos]]
     purpose: ""
     notes: "25MB one-off analysis"
   india-forex-analysis:

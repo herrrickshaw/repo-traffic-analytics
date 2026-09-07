@@ -171,6 +171,62 @@
     "2026-08-22": {
       "count": 0,
       "uniques": 0
+    },
+    "2026-08-23": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-24": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-25": {
+      "count": 2,
+      "uniques": 2
+    },
+    "2026-08-26": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-27": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-28": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-29": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-30": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-08-31": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-01": {
+      "count": 2,
+      "uniques": 2
+    },
+    "2026-09-02": {
+      "count": 2,
+      "uniques": 2
+    },
+    "2026-09-03": {
+      "count": 3,
+      "uniques": 3
+    },
+    "2026-09-04": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-09-05": {
+      "count": 1,
+      "uniques": 1
     }
   },
   "period_totals": {
@@ -248,6 +304,26 @@
       "clones": {
         "count": 6,
         "uniques": 6
+      },
+      "views": {
+        "count": 0,
+        "uniques": 0
+      }
+    },
+    "2026-08-31": {
+      "clones": {
+        "count": 4,
+        "uniques": 4
+      },
+      "views": {
+        "count": 0,
+        "uniques": 0
+      }
+    },
+    "2026-09-07": {
+      "clones": {
+        "count": 12,
+        "uniques": 12
       },
       "views": {
         "count": 0,
@@ -422,6 +498,62 @@
       "uniques": 0
     },
     "2026-08-22": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-23": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-24": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-25": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-26": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-27": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-28": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-29": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-30": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-08-31": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-01": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-02": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-03": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-04": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-05": {
       "count": 0,
       "uniques": 0
     }
