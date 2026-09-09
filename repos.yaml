@@ -3,6 +3,12 @@
 # Excludes: already-archived repos. The 35 -archive-2026-07-17 twins were DELETED 2026-07-22 (LFS reclaim; verified + bundled first, see repo-data-dedup/audit/twin_verify.json)
 
 repos:
+  prompt-efficiency-tracker:
+    tier: 1
+    size_mb: 0
+    visibility: PRIVATE  # created 2026-09-09
+    purpose: "Real outcome/attribution tracking for Claude Code usage (fixed Stop/SubagentStop hook + heartbeat) + promptfoo pilots for LLM prompts in market-pipeline and ship2shore_rag"
+    notes: "Packages the 2026-09-09 prompt/token/outcome audit's P0+P1 fixes; see its own README for what's live vs. pending"
   working-files:
     tier: 2
     size_mb: 263
