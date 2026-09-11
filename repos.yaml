@@ -3,6 +3,12 @@
 # Excludes: already-archived repos. The 35 -archive-2026-07-17 twins were DELETED 2026-07-22 (LFS reclaim; verified + bundled first, see repo-data-dedup/audit/twin_verify.json)
 
 repos:
+  llm-extract-citation-fix:
+    tier: 2
+    size_mb: 0
+    visibility: PRIVATE  # created 2026-09-11
+    purpose: "Single-file fix: extract_structured()'s citation-grounding for array-typed fields, found via the promptfoo pilot in prompt-efficiency-tracker"
+    notes: "Standalone extraction of one bug fix from market-pipeline/code/python_files/llm_extract.py — not a live/maintained repo"
   prompt-efficiency-tracker:
     tier: 1
     size_mb: 0
