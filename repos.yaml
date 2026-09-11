@@ -329,3 +329,257 @@ repos:
     visibility: PUBLIC
     purpose: "RAG system for maritime/ocean-freight shipping literature — Postgres/pgvector + local sentence-transformer embeddings + optional Claude generation"
     notes: "New 2026-08-23. Ingests free/legal sources (arXiv, Wikipedia, curated PDFs). Local dev DB is an isolated postgresql@17 instance on port 5433 (pgvector has no bottle for the existing postgresql@16 service) — see README. gitleaks pre-commit hook + quality-gates CI installed at creation."
+
+  # --- Appended 2026-09-12: full GitHub-account scan (`gh repo list`) found 93 repos total
+  # against 54 tracked above — the 41 below were missing entirely. Found while building the
+  # "Repo City" gitcity-style portfolio visualization; see that conversation for method.
+  # Four of these are members of duplicate/related-content clusters identified in the same pass
+  # (noted per-entry below): the platform-rebuild cluster, EV-battery cluster, India-trade
+  # cluster, and India-infra-mapping cluster.
+  market-pipeline:
+    tier: 2
+    size_mb: 635
+    visibility: PRIVATE
+    purpose: "376-commit consolidation repo (CQL-heavy) merging from-global-market-research-platform / from-lit_review / from-working-files into one 650MB tree"
+    notes: "NOT the live $HOME origin (that's global-market-research-platform) — relationship unconfirmed, verify before treating as authoritative. Member of the platform-rebuild cluster (9 repos: this + global-market-research-platform + global-stock-screener + stock-screener-platform + stock-screener-ddd + working-files + BazaarTalks + Bazartalks_Py2Cplus)."
+  financial-analysis-toolkit:
+    tier: 1
+    size_mb: 1
+    visibility: PRIVATE
+    purpose: "Financial modelling engines distilled from CFI Excel templates: 3-statement/DCF/comps/LBO/merger models"
+    notes: "Active (57 commits, last touched 2026-09-09) — directly on-domain for market-pipeline, missed by the previous catalog pass entirely."
+  financial-analysis-toolkit-public:
+    tier: 2
+    size_mb: 3
+    visibility: PUBLIC
+    purpose: "Public snapshot: from-scratch financial modeling toolkit (comps/precedents/DCF/LBO/merger models, SEC EDGAR reader, sector-tuning, Excel formula engine) validated against real company data"
+    notes: "Public companion to financial-analysis-toolkit."
+  global-market-scanners:
+    tier: 1
+    size_mb: 1
+    visibility: PUBLIC
+    purpose: "Standalone full-universe equity scanners (Darvas + Piotroski + Coffee Can)"
+    notes: "Active (91 commits) local checkout at ~/repos/global-market-scanners — missed by the previous catalog pass."
+  market_screener_rag:
+    tier: 1
+    size_mb: 2
+    visibility: PUBLIC
+    purpose: "RAG layer over the market-screener platform"
+    notes: "Local checkout at ~/repos/market-screener-rag (hyphenated dir name, underscored GitHub name)."
+  price_prediction_backtest:
+    tier: 1
+    size_mb: 9
+    visibility: PUBLIC
+    purpose: "Markov/Kalman/LSTM walk-forward price-prediction backtests, regime-gated Darvas replay"
+    notes: ""
+  cell-guardian:
+    tier: 3
+    archived: 2026-07-22
+    size_mb: 1
+    visibility: PUBLIC
+    purpose: "BMS EKF SOC/SOH, 8 chemistries, Kaggle validation"
+    notes: "Third member of the EV-battery cluster (bms-battery-management, ev-battery-management-sim, cell-guardian) — same subject modeled three times, unclear which is current. Archive date inferred from the 2026-07-22 LFS-rewrite note shared with ev-battery-management-sim."
+  FCI-warehouse-MSPvsMSV:
+    tier: 2
+    size_mb: 16
+    visibility: PUBLIC
+    purpose: "FCI foodgrain warehouse stock vs. MSP-implied procurement value"
+    notes: "Member of the India-infra-mapping cluster (fuel-retail-outlets, cng-cgd-retail-outlet-mapping, toll-plaza-highways, FCI-warehouse-MSPvsMSV, india-omc-fuel-fleet-model) — same govt-data-extraction pattern reused across 5 repos; candidate for a shared extractor library."
+  india-omc-fuel-fleet-model:
+    tier: 2
+    size_mb: 5
+    visibility: PUBLIC
+    purpose: "India OMC retail fuel profitability, ethanol E20/E25/E30 blend scenarios, and fuel-based active-fleet estimates (PPAC + live Vahan data)"
+    notes: "GitHub-only, no local checkout found. Fifth member of the India-infra-mapping cluster; extracted from omc-retail-profitability-model."
+  india-commodity-trade-deficit:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "India's commodity-driven trade deficit: TRADESTAT 8-yr chapter data + 4-digit bare-metal imports (gold/silver/copper), rupee impact, and the metal-recycling counterforce"
+    notes: "One-off (3 commits). Eighth member of the India-trade-analysis cluster alongside india-trade-data-analysis, india-trade-sector-policy-recommendations, mospi-dataset-analysis(-public), india-trade-export-analysis, india-forex-analysis, india-trade-tracker."
+  gazette-translated-indexed:
+    tier: 1
+    size_mb: 1
+    visibility: PUBLIC
+    purpose: "Citation index pipeline for Indian gazette notifications — extraction, cross-referencing, 17 ministries"
+    notes: "Active (52 commits). See project_gazette_translated_indexed memory."
+  CBSE_paper_patterns:
+    tier: 2
+    size_mb: 42
+    visibility: PUBLIC
+    purpose: "Structural and topic-recurrence analysis of 1,955 CBSE Class-12 question papers"
+    notes: "Completed research artifact — 30,734-question DuckDB index. See project_cbse_paper_corpus memory."
+  india-govt-yellow-pages:
+    tier: 2
+    size_mb: 2
+    visibility: PUBLIC
+    purpose: "igod.gov.in org index (DuckDB) — India government yellow pages"
+    notes: "See project_india_govt_yellow_pages memory."
+  vehicle_fuel_mileage:
+    tier: 2
+    size_mb: 1
+    visibility: PUBLIC
+    purpose: "India E20/diesel/CNG/EV vehicle fuel-cost study"
+    notes: "See project_vehicle_fuel_cost memory."
+  research-design-system:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Token contract, four themes and one component set for research reports"
+    notes: "Design-system utility referenced by other report-generating repos."
+  blogger_writeups_code:
+    tier: 2
+    size_mb: 21
+    visibility: PRIVATE
+    purpose: "Version history and design log for masaladeutsch.blogspot.com"
+    notes: ""
+  masaladeutsch:
+    tier: 2
+    size_mb: 3
+    visibility: PUBLIC
+    purpose: "Entry page for masaladeutsch.blogspot.com — India's trade, energy and industrial policy blog"
+    notes: ""
+  blog-consistency-check:
+    tier: 2
+    size_mb: 1
+    visibility: PUBLIC
+    purpose: "Consistency/fact/grammar review tool for masaladeutsch.blogspot.com posts"
+    notes: "Backs the blog-review and site-audit skills."
+  cricket-data-analysis:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Cricket data collection/analysis script, extracted from stray copies in global-stock-screener"
+    notes: ""
+  personal-profile:
+    tier: 3
+    size_mb: 0
+    visibility: PRIVATE
+    purpose: "Personal LinkedIn/photo-setup content, extracted from stock-screener-platform"
+    notes: ""
+  cache_memory_cleaner:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "macOS cache/storage cleanup tool, distilled from a real disk-recovery session"
+    notes: ""
+  job-search:
+    tier: 3
+    size_mb: 0
+    visibility: PRIVATE
+    purpose: ""
+    notes: ""
+  lit_review:
+    tier: 3
+    size_mb: 1
+    visibility: PRIVATE
+    purpose: ""
+    notes: ""
+  kalki_flooding:
+    tier: 3
+    size_mb: 5
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  jai_kisan_jai_javan:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  jal_jeevan_lottery:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  amazon-product-selector:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  data-source-mining:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  memory-map-optimizer:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  claude-provenance:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  lfs_archive_work:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  transmission-client:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  us-stock-picks:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  ai-tools-tracker:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  cloud-map:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  colab:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: "Near-empty stub (1kb) — not to be confused with colab-experiments or colab-market-fundamentals below."
+  bin:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  k8s:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  mlflow:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  Ai_for_exploration:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: ""
+  .github:
+    tier: 3
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: ""
+    notes: "GitHub profile/config repo."
