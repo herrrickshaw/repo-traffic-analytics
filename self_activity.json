@@ -20,10 +20,12 @@
   "cng-cgd-retail-outlet-mapping",
   "colab",
   "colab-market-fundamentals",
+  "cricket-data-analysis",
   "data-source-mining",
   "digital-twin-for-ipa",
   "ev-battery-management-sim",
   "financial-analysis-toolkit",
+  "financial-analysis-toolkit-public",
   "focus-sector-investor-map",
   "fuel-retail-outlets",
   "gazette-translated-indexed",
@@ -48,6 +50,7 @@
   "karz",
   "lfs_archive_work",
   "lit_review",
+  "llm-extract-citation-fix",
   "ltm-warehouse-tests",
   "market-brief-base",
   "market-correlation-matrices",
@@ -59,12 +62,15 @@
   "mlflow",
   "mospi-dataset-analysis",
   "mospi-dataset-analysis-public",
+  "personal-profile",
   "piotroski-liquidity-research",
   "prenatal-care-toolkit",
   "price_prediction_backtest",
+  "prompt-efficiency-tracker",
   "repo-data-dedup",
   "repo-traffic-analytics",
   "research-design-system",
+  "research-toolkit",
   "ship2shore_rag",
   "stock-screener-platform",
   "transmission-client",
@@ -1096,7 +1102,7 @@
      ]
     },
     "global-ticker-universe": {
-     "clone": 7,
+     "clone": 4,
      "fetch": 0,
      "via": [
       "transcript",
@@ -1117,119 +1123,7 @@
       "transcript"
      ]
     },
-    "market_screener_rag": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "working-files": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "india-omc-fuel-fleet-model": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "kalki_flooding": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "Bazartalks_Py2Cplus": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "karz": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "bms-battery-management": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "market-data-artifacts": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "mospi-dataset-analysis-public": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "colab-market-fundamentals": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
     ".github": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "ev-battery-management-sim": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "ltm-warehouse-tests": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "stock-screener-platform": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "prenatal-care-toolkit": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "fuel-retail-outlets": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "heart-valve-defect-detection": {
      "clone": 3,
      "fetch": 0,
      "via": [
@@ -1661,48 +1555,6 @@
      "via": [
       "transcript"
      ]
-    },
-    "market_screener_rag": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
-    },
-    "global-ticker-universe": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
-    },
-    "india-omc-fuel-fleet-model": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
-    },
-    "Bazartalks_Py2Cplus": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
-    },
-    "Ai_for_exploration": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "jai_kisan_jai_javan": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
     }
    },
    "unattributed": 0
@@ -1792,10 +1644,9 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 9,
+     "fetch": 1,
      "via": [
-      "transcript",
-      "reflog"
+      "transcript"
      ]
     },
     "fuel-retail-outlets": {
@@ -1829,11 +1680,10 @@
   "2026-08-10": {
    "repos": {
     "masaladeutsch": {
-     "clone": 4,
+     "clone": 1,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "transcript"
      ]
     },
     "repo-traffic-analytics": {
@@ -1841,55 +1691,6 @@
      "fetch": 1,
      "via": [
       "transcript"
-     ]
-    },
-    "india-omc-fuel-fleet-model": {
-     "clone": 0,
-     "fetch": 1,
-     "via": [
-      "reflog"
-     ]
-    },
-    "kalki_flooding": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
-    },
-    "CBSE_paper_patterns": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "market-pipeline": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "blogger_writeups_code": {
-     "clone": 3,
-     "fetch": 2,
-     "via": [
-      "reflog"
-     ]
-    },
-    "fuel-retail-outlets": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
-    },
-    "research-design-system": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
      ]
     }
    },
@@ -1952,7 +1753,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 3,
+     "fetch": 4,
      "via": [
       "reflog"
      ]
@@ -1978,7 +1779,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 7,
+     "fetch": 8,
      "via": [
       "reflog"
      ]
@@ -1997,7 +1798,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 1,
+     "fetch": 2,
      "via": [
       "reflog"
      ]
@@ -2038,7 +1839,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 1,
+     "fetch": 2,
      "via": [
       "reflog"
      ]
@@ -2053,13 +1854,6 @@
      "fetch": 1,
      "via": [
       "transcript"
-     ]
-    },
-    "blogger_writeups_code": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
      ]
     }
    },
@@ -2140,27 +1934,6 @@
      "via": [
       "transcript"
      ]
-    },
-    "masaladeutsch": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
-    },
-    "amazon-product-selector": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "blogger_writeups_code": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "reflog"
-     ]
     }
    },
    "unattributed": 0
@@ -2188,7 +1961,7 @@
    "repos": {
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 6,
+     "fetch": 7,
      "via": [
       "reflog"
      ]
@@ -2219,7 +1992,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 31,
+     "fetch": 36,
      "via": [
       "reflog"
      ]
@@ -2236,14 +2009,6 @@
       "transcript"
      ]
     },
-    "focus-sector-investor-map": {
-     "clone": 0,
-     "fetch": 3,
-     "via": [
-      "transcript",
-      "reflog"
-     ]
-    },
     "india-ec-subsector-analysis": {
      "clone": 0,
      "fetch": 3,
@@ -2252,30 +2017,17 @@
       "reflog"
      ]
     },
-    "india-omc-fuel-fleet-model": {
-     "clone": 0,
-     "fetch": 1,
-     "via": [
-      "reflog"
-     ]
-    },
-    "lit_review": {
-     "clone": 3,
-     "fetch": 0,
-     "via": [
-      "reflog"
-     ]
-    },
-    "masaladeutsch": {
+    "focus-sector-investor-map": {
      "clone": 0,
      "fetch": 3,
      "via": [
+      "transcript",
       "reflog"
      ]
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 11,
+     "fetch": 10,
      "via": [
       "reflog"
      ]
@@ -2285,15 +2037,15 @@
   },
   "2026-09-01": {
    "repos": {
-    "working-files": {
-     "clone": 7,
-     "fetch": 1,
+    "stock-screener-platform": {
+     "clone": 5,
+     "fetch": 0,
      "via": [
       "transcript"
      ]
     },
-    "global-stock-screener": {
-     "clone": 4,
+    "global-market-data": {
+     "clone": 11,
      "fetch": 1,
      "via": [
       "transcript"
@@ -2307,8 +2059,15 @@
       "reflog"
      ]
     },
-    "global-market-data": {
-     "clone": 11,
+    "global-stock-screener": {
+     "clone": 4,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "working-files": {
+     "clone": 7,
      "fetch": 1,
      "via": [
       "transcript"
@@ -2316,13 +2075,6 @@
     },
     "lit_review": {
      "clone": 4,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "stock-screener-platform": {
-     "clone": 5,
      "fetch": 0,
      "via": [
       "transcript"
@@ -2342,15 +2094,15 @@
       "transcript"
      ]
     },
-    "toll-plaza-highways": {
-     "clone": 5,
+    "india-election-analysis": {
+     "clone": 3,
      "fetch": 2,
      "via": [
       "transcript"
      ]
     },
-    "india-election-analysis": {
-     "clone": 3,
+    "toll-plaza-highways": {
+     "clone": 5,
      "fetch": 2,
      "via": [
       "transcript"
@@ -2412,6 +2164,62 @@
       "transcript"
      ]
     },
+    "india-trade-export-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "kalki_flooding": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "jal_jeevan_lottery": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "karz": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "k8s": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "jai_kisan_jai_javan": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
     "ltm-warehouse-tests": {
      "clone": 1,
      "fetch": 0,
@@ -2426,13 +2234,6 @@
       "transcript"
      ]
     },
-    "k8s": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
     "lfs_archive_work": {
      "clone": 1,
      "fetch": 0,
@@ -2440,63 +2241,7 @@
       "transcript"
      ]
     },
-    "india-trade-tracker": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "india-trade-sector-policy-recommendations": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "jal_jeevan_lottery": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "jai_kisan_jai_javan": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "india-trade-export-analysis": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "karz": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "kalki_flooding": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
     "BazaarTalks": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "fuel-retail-outlets": {
      "clone": 1,
      "fetch": 0,
      "via": [
@@ -2511,6 +2256,13 @@
      ]
     },
     "digital-twin-for-ipa": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "fuel-retail-outlets": {
      "clone": 1,
      "fetch": 0,
      "via": [
@@ -2566,21 +2318,7 @@
       "transcript"
      ]
     },
-    "heart-valve-defect-detection": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "global-ticker-universe": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "india-govt-yellow-pages": {
+    "global-market-scanners": {
      "clone": 1,
      "fetch": 0,
      "via": [
@@ -2594,7 +2332,7 @@
       "transcript"
      ]
     },
-    "india-forex-analysis": {
+    "global-ticker-universe": {
      "clone": 1,
      "fetch": 0,
      "via": [
@@ -2602,13 +2340,6 @@
      ]
     },
     "india-commodity-trade-deficit": {
-     "clone": 1,
-     "fetch": 0,
-     "via": [
-      "transcript"
-     ]
-    },
-    "global-market-scanners": {
      "clone": 1,
      "fetch": 0,
      "via": [
@@ -2629,9 +2360,30 @@
       "transcript"
      ]
     },
+    "india-govt-yellow-pages": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "heart-valve-defect-detection": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-forex-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 69,
+     "fetch": 90,
      "via": [
       "reflog"
      ]
@@ -2643,7 +2395,7 @@
    "repos": {
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 21,
+     "fetch": 26,
      "via": [
       "reflog"
      ]
@@ -2663,7 +2415,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 26,
+     "fetch": 34,
      "via": [
       "reflog"
      ]
@@ -2682,7 +2434,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 11,
+     "fetch": 16,
      "via": [
       "reflog"
      ]
@@ -2701,7 +2453,7 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 39,
+     "fetch": 52,
      "via": [
       "reflog"
      ]
@@ -2740,9 +2492,10 @@
    "repos": {
     "financial-analysis-toolkit": {
      "clone": 0,
-     "fetch": 1,
+     "fetch": 30,
      "via": [
-      "transcript"
+      "transcript",
+      "reflog"
      ]
     },
     "repo-traffic-analytics": {
@@ -2751,9 +2504,277 @@
      "via": [
       "transcript"
      ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 19
+  },
+  "2026-09-08": {
+   "repos": {
+    "financial-analysis-toolkit": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "transcript"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-09-09": {
+   "repos": {
+    "financial-analysis-toolkit": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "transcript"
+     ]
+    }
+   },
+   "unattributed": 25
+  },
+  "2026-09-10": {
+   "repos": {
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "reflog"
+     ]
     }
    },
    "unattributed": 1
+  },
+  "2026-09-11": {
+   "repos": {
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-09-12": {
+   "repos": {
+    "market_screener_rag": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "working-files": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "india-omc-fuel-fleet-model": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "kalki_flooding": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "Ai_for_exploration": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "lit_review": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "masaladeutsch": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "karz": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "bms-battery-management": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "CBSE_paper_patterns": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "market-data-artifacts": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "market-pipeline": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "financial-analysis-toolkit-public": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "jai_kisan_jai_javan": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "cricket-data-analysis": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "amazon-product-selector": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 3,
+     "fetch": 4,
+     "via": [
+      "reflog"
+     ]
+    },
+    "mospi-dataset-analysis-public": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "personal-profile": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "colab-market-fundamentals": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "ev-battery-management-sim": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "ltm-warehouse-tests": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "stock-screener-platform": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "prenatal-care-toolkit": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "fuel-retail-outlets": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "heart-valve-defect-detection": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "research-design-system": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-09-14": {
+   "repos": {
+    "repo-traffic-analytics": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    }
+   },
+   "unattributed": 0
   }
  }
 }

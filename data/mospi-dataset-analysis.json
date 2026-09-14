@@ -208,6 +208,34 @@
     "2026-09-07": {
       "count": 0,
       "uniques": 0
+    },
+    "2026-09-08": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-09": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-10": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-11": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-12": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-13": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-09-14": {
+      "count": 0,
+      "uniques": 0
     }
   },
   "period_totals": {
@@ -307,6 +335,12 @@
         "uniques": 0
       },
       "views": {
+        "count": 0,
+        "uniques": 0
+      }
+    },
+    "2026-09-14": {
+      "clones": {
         "count": 0,
         "uniques": 0
       }
