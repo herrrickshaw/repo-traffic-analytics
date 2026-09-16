@@ -1,0 +1,39 @@
+# Published-artifact registry — durable reference pages on claude.ai, not GitHub.
+# (repos.yaml's governance tooling (scripts/portfolio_review.py) treats every
+#  2-space-indented key under `repos:` as a GitHub repo name and cross-checks it
+#  via `gh api` — an artifact entry there would false-positive as a missing or
+#  inaccessible repo. This is the artifact-equivalent of datasets.yaml's canonical
+#  registry: one entry per durable published reference, so "where's the latest
+#  playbook/snapshot" has one answer instead of being scattered across CLAUDE.md
+#  cross-links and memory.)
+#
+# Fields:
+#   url      -> the claude.ai/artifact link (private by default; check share state before assuming public)
+#   title    -> the artifact's own <title>
+#   scope    -> what it covers, one line
+#   status   -> living (kept current, edit in place) | snapshot (point-in-time, regenerate don't hand-edit)
+#   source   -> where the content is grounded (repo docs, memory files) — re-check these before trusting an old snapshot
+#   created  -> first-publish date
+#   updated  -> last-republish date (omit if same as created)
+
+artifacts:
+
+  delivery-playbook:
+    url: "https://claude.ai/artifact/9fGPDJMxVpKfifNeZ55MXj"
+    title: "The Delivery Playbook"
+    scope: "SDLC/Agile/DevOps model comparison, fit-finder quadrant, failure modes, CS theory + DDD (source: Eric Evans' Domain-Driven Design) + TOGAF (source: TOGAF Standard 10th Ed. Certification Portfolio) for products, further-reading pulled from the Zotero/Dropbox document catalog"
+    status: "living"
+    source: "repos/global-market-scanners/SDLC.md, repos/global-stock-screener/AGILE.md, research-toolkit/document_catalog.duckdb"
+    repo: "https://github.com/herrrickshaw/delivery-playbook"
+    created: "2026-09-16"
+    updated: "2026-09-16"
+    notes: "Now has a real GitHub repo (also tracked in repos.yaml, tier 2) as its versioned source — this is the exception to the artifacts.yaml/repos.yaml split: the claude.ai URL is still the canonical read surface, but edits should land in the repo's index.html first, then republish to the same artifact URL."
+
+  best-practices-playbook:
+    url: "https://claude.ai/code/artifact/e29ceaeb-099e-4de7-ab43-dcd97a2d8f57"
+    title: "Ways of Working"
+    scope: "128 incident-sourced rules across 13 categories — data freshness, secrets, scheduling, backtesting rigor, content-publishing workflow"
+    status: "snapshot"
+    source: "~/.claude/projects/-Users-umashankar/memory/ (the full memory system, distilled 2026-09-14)"
+    created: "2026-09-14"
+    notes: "Linked from 6 repo CLAUDE.md files; regenerate from memory rather than hand-editing — see reference_best_practices_playbook memory"

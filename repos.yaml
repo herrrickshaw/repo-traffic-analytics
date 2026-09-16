@@ -1,6 +1,9 @@
 # Repo portfolio catalog — herrrickshaw
 # Generated 2026-07-22. Tiers: 1=active/automation, 2=data store or referenced research, 3=dormant (archive candidates)
 # Excludes: already-archived repos. The 35 -archive-2026-07-17 twins were DELETED 2026-07-22 (LFS reclaim; verified + bundled first, see repo-data-dedup/audit/twin_verify.json)
+# Non-repo published artifacts (claude.ai reference pages, not GitHub repos) are tracked separately in
+# artifacts.yaml — do NOT add them under `repos:` below: portfolio_review.py treats every 2-space-indented
+# key here as a GitHub repo name and cross-checks it via `gh api`, so a non-repo entry reads as a broken repo.
 
 repos:
   llm-extract-citation-fix:
@@ -322,6 +325,12 @@ repos:
     visibility: PUBLIC
     purpose: "python_files snapshot + 759MB market_data.duckdb (LFS)"
     notes: "DELETED by user 2026-07-23 (freed 0.77GB LFS). duckdb verified derivable via build_warehouse.py from gss cache_seed (local + Dropbox + GDrive). History bundle: ~/repos/branch-archives/market-screener-backtests_full_pre-delete_2026-07-23.bundle"
+  delivery-playbook:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "SDLC/Agile/DevOps field guide + CS theory, DDD & TOGAF applied to products/tooling"
+    notes: "Versioned source for the published claude.ai artifact (see artifacts.yaml); single self-contained index.html, no build step. Created 2026-09-16. §11 library table cites real Zotero/Dropbox holdings: Eric Evans' Domain-Driven Design (source text for §09) and the TOGAF Standard 10th Edition Certification Portfolio + EA Foundation datasheet (source for §10)."
   ship2shore_rag:
     tier: 1
     created: 2026-08-23
