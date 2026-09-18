@@ -448,6 +448,12 @@ repos:
     visibility: PUBLIC
     purpose: "Entry page for masaladeutsch.blogspot.com — India's trade, energy and industrial policy blog"
     notes: ""
+  indian-wine-market-blog:
+    tier: 3
+    size_mb: 0
+    visibility: PRIVATE  # created 2026-09-18
+    purpose: "Pre-launch home for a dedicated Indian wine-market blog (production, imports/tariffs, market size, India-EU trade deal) — separate from masaladeutsch"
+    notes: "Scaffolding only as of creation: no Blogger blog exists yet, no canonical data file. Will likely split into a public entry-page repo + this one as the private archive, mirroring masaladeutsch/blogger_writeups_code, once it has a live blog."
   blog-consistency-check:
     tier: 2
     size_mb: 1
