@@ -11,18 +11,24 @@
   "ai-tools-tracker",
   "amazon-product-selector",
   "bin",
+  "biomass-to-syngas-opensource",
   "blog-consistency-check",
   "blogger_writeups_code",
   "bms-battery-management",
   "cache_memory_cleaner",
+  "cbg-design-opensource",
   "claude-provenance",
   "cloud-map",
   "cng-cgd-retail-outlet-mapping",
+  "coal-to-urea-design-opensource",
   "colab",
   "colab-market-fundamentals",
   "cricket-data-analysis",
   "data-source-mining",
+  "delivery-playbook",
   "digital-twin-for-ipa",
+  "ethanol-design-opensource",
+  "eu-ets-compliance-platform",
   "ev-battery-management-sim",
   "financial-analysis-toolkit",
   "financial-analysis-toolkit-public",
@@ -49,9 +55,13 @@
   "kalki_flooding",
   "karz",
   "lfs_archive_work",
+  "lignocellulosic-ethanol-opensource",
   "lit_review",
   "llm-extract-citation-fix",
+  "lng-design-opensource",
+  "lok-rajya-sabha-qa",
   "ltm-warehouse-tests",
+  "manga2anime",
   "market-brief-base",
   "market-correlation-matrices",
   "market-data-artifacts",
@@ -62,6 +72,7 @@
   "mlflow",
   "mospi-dataset-analysis",
   "mospi-dataset-analysis-public",
+  "patient-history-tracking",
   "personal-profile",
   "piotroski-liquidity-research",
   "prenatal-care-toolkit",
@@ -1023,10 +1034,9 @@
     },
     "agri-commodity-tracker": {
      "clone": 0,
-     "fetch": 5,
+     "fetch": 1,
      "via": [
-      "transcript",
-      "reflog"
+      "transcript"
      ]
     },
     "india-election-analysis": {
@@ -1054,25 +1064,16 @@
    "unattributed": 5
   },
   "2026-07-23": {
-   "repos": {
-    "agri-commodity-tracker": {
-     "clone": 0,
-     "fetch": 2,
-     "via": [
-      "reflog"
-     ]
-    }
-   },
+   "repos": {},
    "unattributed": 1
   },
   "2026-07-24": {
    "repos": {
     "market-correlation-matrices": {
      "clone": 0,
-     "fetch": 6,
+     "fetch": 1,
      "via": [
-      "transcript",
-      "reflog"
+      "transcript"
      ]
     },
     "global-market-data": {
@@ -1750,13 +1751,6 @@
      "via": [
       "transcript"
      ]
-    },
-    "blogger_writeups_code": {
-     "clone": 0,
-     "fetch": 4,
-     "via": [
-      "reflog"
-     ]
     }
    },
    "unattributed": 1
@@ -1776,13 +1770,6 @@
      "via": [
       "reflog"
      ]
-    },
-    "blogger_writeups_code": {
-     "clone": 0,
-     "fetch": 8,
-     "via": [
-      "reflog"
-     ]
     }
    },
    "unattributed": 3
@@ -1792,13 +1779,6 @@
     "global-market-research-platform": {
      "clone": 0,
      "fetch": 1,
-     "via": [
-      "reflog"
-     ]
-    },
-    "blogger_writeups_code": {
-     "clone": 0,
-     "fetch": 2,
      "via": [
       "reflog"
      ]
@@ -1834,13 +1814,6 @@
      "fetch": 6,
      "via": [
       "transcript",
-      "reflog"
-     ]
-    },
-    "blogger_writeups_code": {
-     "clone": 0,
-     "fetch": 2,
-     "via": [
       "reflog"
      ]
     }
@@ -2771,6 +2744,523 @@
      "fetch": 0,
      "via": [
       "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 24,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "lng-design-opensource": {
+     "clone": 5,
+     "fetch": 1,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "biomass-to-syngas-opensource": {
+     "clone": 5,
+     "fetch": 2,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "coal-to-urea-design-opensource": {
+     "clone": 7,
+     "fetch": 0,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "ethanol-design-opensource": {
+     "clone": 4,
+     "fetch": 4,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "cbg-design-opensource": {
+     "clone": 4,
+     "fetch": 2,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "lignocellulosic-ethanol-opensource": {
+     "clone": 4,
+     "fetch": 2,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "financial-analysis-toolkit": {
+     "clone": 1,
+     "fetch": 2,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "financial-analysis-toolkit-public": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-ec-subsector-analysis": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "focus-sector-investor-map": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "claude-stock-tools": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "Merlin": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "colab-experiments": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "claude-lmstudio-router": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-export-analysis": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "stock-screener-ddd": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-screener-backtests": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "stock-portfolio-evaluator": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-forex-analysis": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "toll-plaza-highways": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "saf-monitoring-system": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "interpreter_toolkit": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "event-driven-stock-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "discom-debt-and-revenue-models": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "data_validator": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "hydrogen-electrolyser-control": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "europe-stock-screener": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-election-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "cell-guardian": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "repo-data-dedup": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "india-omc-fuel-fleet-model": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "kalki_flooding": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "reflog"
+     ]
+    },
+    "us-stock-picks": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "price_prediction_backtest": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "lit_review": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 0,
+     "fetch": 24,
+     "via": [
+      "reflog"
+     ]
+    },
+    "india-trade-data-analysis": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 3
+  },
+  "2026-09-16": {
+   "repos": {
+    "blog-consistency-check": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "cng-cgd-retail-outlet-mapping": {
+     "clone": 0,
+     "fetch": 6,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "ai-tools-tracker": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "market-correlation-matrices": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "claude-provenance": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "vehicle_fuel_mileage": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "bin": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "india-commodity-trade-deficit": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "k8s": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "cache_memory_cleaner": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "data-source-mining": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "mlflow": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "india-govt-yellow-pages": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "jal_jeevan_lottery": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "transmission-client": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "cloud-map": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "colab": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "lfs_archive_work": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "FCI-warehouse-MSPvsMSV": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-09-17": {
+   "repos": {
+    "blog-consistency-check": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "transcript"
+     ]
+    },
+    "cng-cgd-retail-outlet-mapping": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "transcript"
+     ]
+    },
+    "stock-screener-platform": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    }
+   },
+   "unattributed": 1
+  },
+  "2026-09-19": {
+   "repos": {
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-09-21": {
+   "repos": {
+    "repo-traffic-analytics": {
+     "clone": 1,
+     "fetch": 3,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "lng-design-opensource": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "coal-to-urea-design-opensource": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ethanol-design-opensource": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "reflog"
      ]
     }
    },
