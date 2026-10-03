@@ -24,6 +24,7 @@
   "colab",
   "colab-market-fundamentals",
   "cricket-data-analysis",
+  "data-library-toolkit",
   "data-source-mining",
   "delivery-playbook",
   "digital-twin-for-ipa",
@@ -45,9 +46,11 @@
   "india-ec-subsector-analysis",
   "india-govt-yellow-pages",
   "india-omc-fuel-fleet-model",
+  "india-quality-regulation",
   "india-trade-data-analysis",
   "india-trade-sector-policy-recommendations",
   "india-trade-tracker",
+  "indian-wine-market-blog",
   "jai_kisan_jai_javan",
   "jal_jeevan_lottery",
   "job-search",
@@ -78,6 +81,7 @@
   "prenatal-care-toolkit",
   "price_prediction_backtest",
   "prompt-efficiency-tracker",
+  "refinery-design-opensource",
   "repo-data-dedup",
   "repo-traffic-analytics",
   "research-design-system",
@@ -2817,7 +2821,7 @@
       "transcript"
      ]
     },
-    "india-ec-subsector-analysis": {
+    "focus-sector-investor-map": {
      "clone": 0,
      "fetch": 2,
      "via": [
@@ -2825,7 +2829,7 @@
       "reflog"
      ]
     },
-    "focus-sector-investor-map": {
+    "india-ec-subsector-analysis": {
      "clone": 0,
      "fetch": 2,
      "via": [
@@ -3235,11 +3239,19 @@
       "reflog"
      ]
     },
-    "lng-design-opensource": {
+    "ethanol-design-opensource": {
      "clone": 1,
      "fetch": 0,
      "via": [
       "transcript"
+     ]
+    },
+    "lng-design-opensource": {
+     "clone": 1,
+     "fetch": 6,
+     "via": [
+      "transcript",
+      "reflog"
      ]
     },
     "coal-to-urea-design-opensource": {
@@ -3249,18 +3261,206 @@
       "transcript"
      ]
     },
-    "ethanol-design-opensource": {
-     "clone": 1,
-     "fetch": 0,
+    "refinery-design-opensource": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "transcript",
+      "reflog"
+     ]
+    },
+    "bin": {
+     "clone": 0,
+     "fetch": 1,
      "via": [
       "transcript"
      ]
     },
-    "blogger_writeups_code": {
+    "india-omc-fuel-fleet-model": {
      "clone": 0,
-     "fetch": 2,
+     "fetch": 3,
      "via": [
       "reflog"
+     ]
+    },
+    "kalki_flooding": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "Ai_for_exploration": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "lit_review": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "masaladeutsch": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "patient-history-tracking": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "karz": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "bms-battery-management": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "CBSE_paper_patterns": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "indian-wine-market-blog": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    },
+    "market-data-artifacts": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "financial-analysis-toolkit-public": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "jai_kisan_jai_javan": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "cricket-data-analysis": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "amazon-product-selector": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "reflog"
+     ]
+    },
+    "mospi-dataset-analysis-public": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "colab-market-fundamentals": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "ev-battery-management-sim": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "ltm-warehouse-tests": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "stock-screener-platform": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "prenatal-care-toolkit": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "heart-valve-defect-detection": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "research-design-system": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-09-28": {
+   "repos": {
+    "repo-traffic-analytics": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
      ]
     }
    },
