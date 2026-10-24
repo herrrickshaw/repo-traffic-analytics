@@ -78,6 +78,12 @@ repos:
     visibility: PUBLIC
     purpose: "Daily India APMC mandi commodity prices (Agmarknet/data.gov.in) + World Bank agriculture panel — ful"
     notes: "Agmarknet mandi daily; cron 14:30"
+  india-mandi-arrivals:
+    tier: 2
+    size_mb: 0
+    visibility: PUBLIC
+    purpose: "Agmarknet mandi arrivals/prices (state-monthly 2019-, market sample, masters) joined with UPAG APY, MSP, WPI, FCI, trade; insight tables"
+    notes: "Canonical data: data/agmarknet/*.csv.gz and data/upag/*.csv.gz; rebuildable via collectors/; no cron; created 2026-10-24"
   india-trade-tracker:
     tier: 1
     size_mb: 0
