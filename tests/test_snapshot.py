@@ -496,3 +496,31 @@ def test_self_label_still_reads_merged_entries():
         {"2026-08-14": {"repos": {"r": {"clone": 1, "fetch": 2}}, "unattributed": 0}},
     )
     assert sn.self_label(merged, "r", "2026-08-14") == "clone+fetch"
+
+
+def test_keep_history_retains_days_the_current_scan_no_longer_sees():
+    previous = {"2026-08-01": {"repos": {"alpha": {"clone": 1, "fetch": 0, "via": ["transcript"]}}, "unattributed": 0}}
+    current = {"2026-10-20": {"repos": {"beta": {"clone": 0, "fetch": 2, "via": ["reflog"]}}, "unattributed": 1}}
+    out = sn.keep_history(previous, current)
+    assert set(out) == {"2026-08-01", "2026-10-20"}            # the pruned-transcript day survives
+    assert out["2026-08-01"]["repos"]["alpha"]["clone"] == 1
+    assert out["2026-10-20"]["repos"]["beta"]["via"] == ["reflog"]
+
+
+def test_keep_history_is_idempotent_and_takes_the_larger_count():
+    previous = {"2026-10-20": {"repos": {"alpha": {"clone": 1, "fetch": 3, "via": ["transcript"]}}, "unattributed": 2}}
+    current = {"2026-10-20": {"repos": {"alpha": {"clone": 2, "fetch": 1, "via": ["reflog"]}}, "unattributed": 1}}
+    once = sn.keep_history(previous, current)
+    assert once["2026-10-20"]["repos"]["alpha"] == {"clone": 2, "fetch": 3, "via": ["reflog", "transcript"]}
+    assert once["2026-10-20"]["unattributed"] == 2
+    assert sn.keep_history(once, current) == once              # re-running never inflates
+    assert previous["2026-10-20"]["repos"]["alpha"]["clone"] == 1   # input not mutated
+
+
+def test_main_keeps_self_activity_days_from_the_committed_record(wired_main):
+    """A run whose scans see nothing must not erase previously recorded own-activity days."""
+    old = {"2026-07-15": {"repos": {"alpha": {"clone": 1, "fetch": 0, "via": ["transcript"]}}, "unattributed": 0}}
+    sn.SELF_ACTIVITY_PATH.write_text(json.dumps({"days": old}))
+    sn.main()
+    kept = json.loads(sn.SELF_ACTIVITY_PATH.read_text())["days"]
+    assert kept["2026-07-15"]["repos"]["alpha"]["clone"] == 1

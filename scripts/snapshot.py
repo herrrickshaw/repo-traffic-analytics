@@ -415,6 +415,37 @@ def merge_activity(transcript_days, reflog_days):
     return merged
 
 
+def load_previous_self_activity():
+    """The `days` of the committed self_activity.json, or {} when there is none."""
+    if not SELF_ACTIVITY_PATH.exists():
+        return {}
+    try:
+        return json.loads(SELF_ACTIVITY_PATH.read_text()).get("days", {})
+    except json.JSONDecodeError:
+        return {}
+
+
+def keep_history(previous, current):
+    """Union this run's evidence with the committed record so no repo-day is ever forgotten.
+
+    Both sources age out on their own: old session transcripts get pruned, git reflogs expire,
+    and the transcript cache is not committed, so a fresh clone or `--rescan` rebuilds from
+    whatever still exists. Overwriting the record with the current scan therefore dropped older
+    own-activity days, and their clones silently reappeared as external traffic. Where both
+    record a repo-day, the larger count wins: re-running must not inflate it.
+    """
+    out = json.loads(json.dumps(previous))  # deep copy; the record is plain JSON
+    for day, payload in current.items():
+        tgt = out.setdefault(day, {"repos": {}, "unattributed": 0})
+        tgt["unattributed"] = max(tgt.get("unattributed", 0), payload.get("unattributed", 0))
+        for repo, counts in payload.get("repos", {}).items():
+            e = tgt["repos"].setdefault(repo, {"clone": 0, "fetch": 0, "via": []})
+            e["clone"] = max(e.get("clone", 0), counts.get("clone", 0))
+            e["fetch"] = max(e.get("fetch", 0), counts.get("fetch", 0))
+            e["via"] = sorted(set(e.get("via", [])) | set(counts.get("via", [])))
+    return out
+
+
 def write_self_activity(merged, local_clones):
     SELF_ACTIVITY_PATH.write_text(
         json.dumps(
@@ -530,14 +561,16 @@ def main():
     transcript_days = scan_self_activity(known, rescan="--rescan" in sys.argv)
     local_clones = discover_local_clones(known)
     reflog_days = scan_reflog_activity(local_clones)
-    self_days = merge_activity(transcript_days, reflog_days)
+    scanned = merge_activity(transcript_days, reflog_days)
+    self_days = keep_history(load_previous_self_activity(), scanned)
     write_self_activity(self_days, local_clones)
     print(
         f"Local copies: {len(local_clones)}/{len(repos)} tracked repos have one "
         f"({len(repos) - len(local_clones)} can only be external)"
     )
     print(f"Reflog scan: {len(reflog_days)} dates flagged")
-    print(f"Self-activity: {len(self_days)} dates flagged after merge")
+    print(f"Self-activity: {len(self_days)} dates flagged after merge "
+          f"({len(scanned)} seen by this scan, the rest kept from the committed record)")
 
     # Rebuild a flat summary CSV for quick scanning
     summary_path = REPO_ROOT / "summary.csv"
