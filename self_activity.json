@@ -7,6 +7,7 @@
   "Bazartalks_Py2Cplus",
   "CBSE_paper_patterns",
   "FCI-warehouse-MSPvsMSV",
+  "agentic-insurance-agent",
   "agri-commodity-tracker",
   "ai-tools-tracker",
   "amazon-product-selector",
@@ -25,6 +26,7 @@
   "coal-to-urea-design-opensource",
   "colab",
   "colab-market-fundamentals",
+  "company-database",
   "cricket-data-analysis",
   "data-library-toolkit",
   "data-source-mining",
@@ -48,6 +50,7 @@
   "india-commodity-trade-deficit",
   "india-ec-subsector-analysis",
   "india-govt-yellow-pages",
+  "india-mandi-arrivals",
   "india-omc-fuel-fleet-model",
   "india-quality-regulation",
   "india-trade-data-analysis",
@@ -64,6 +67,7 @@
   "lignocellulosic-ethanol-opensource",
   "lit_review",
   "llm-extract-citation-fix",
+  "lng-cost",
   "lng-design-opensource",
   "lok-rajya-sabha-qa",
   "ltm-warehouse-tests",
@@ -86,6 +90,7 @@
   "price_prediction_backtest",
   "prompt-efficiency-tracker",
   "refinery-design-opensource",
+  "reg-intel",
   "repo-data-dedup",
   "repo-traffic-analytics",
   "research-design-system",
@@ -93,6 +98,7 @@
   "ship2shore_rag",
   "stock-screener-platform",
   "transmission-client",
+  "uco-ulo-tracking",
   "us-stock-picks",
   "vehicle_fuel_mileage",
   "working-files"
@@ -347,8 +353,8 @@
      "clone": 5,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-stock-screener": {
@@ -362,8 +368,8 @@
      "clone": 4,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "prenatal-care-toolkit": {
@@ -452,8 +458,8 @@
      "clone": 5,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "ocaml-stock-screener": {
@@ -474,16 +480,16 @@
      "clone": 4,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-data": {
      "clone": 6,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -850,8 +856,8 @@
      "clone": 0,
      "fetch": 3,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-research-platform": {
@@ -884,8 +890,8 @@
      "clone": 0,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -970,8 +976,8 @@
      "clone": 0,
      "fetch": 6,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "ocaml-stock-screener": {
@@ -992,8 +998,8 @@
      "clone": 1,
      "fetch": 10,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "digital-twin-for-ipa": {
@@ -1028,16 +1034,16 @@
      "clone": 5,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "india-trade-tracker": {
      "clone": 0,
      "fetch": 5,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "agri-commodity-tracker": {
@@ -1114,8 +1120,8 @@
      "clone": 4,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-research-platform": {
@@ -1426,16 +1432,16 @@
      "clone": 0,
      "fetch": 7,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-scanners": {
      "clone": 0,
      "fetch": 6,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -1478,16 +1484,16 @@
      "clone": 0,
      "fetch": 3,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "piotroski-liquidity-research": {
      "clone": 0,
      "fetch": 5,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-scanners": {
@@ -1508,8 +1514,8 @@
      "clone": 0,
      "fetch": 9,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "market-pipeline": {
@@ -1549,8 +1555,8 @@
      "clone": 0,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -1595,16 +1601,16 @@
      "clone": 2,
      "fetch": 44,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-data": {
      "clone": 1,
      "fetch": 3,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -1919,16 +1925,16 @@
      "clone": 0,
      "fetch": 3,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "focus-sector-investor-map": {
      "clone": 0,
      "fetch": 3,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -1954,8 +1960,8 @@
      "clone": 8,
      "fetch": 5,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-stock-screener": {
@@ -2289,8 +2295,8 @@
      "clone": 0,
      "fetch": 3,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -2340,8 +2346,8 @@
      "clone": 0,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     }
    },
@@ -2353,8 +2359,8 @@
      "clone": 0,
      "fetch": 30,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "repo-traffic-analytics": {
@@ -2636,56 +2642,56 @@
      "clone": 0,
      "fetch": 24,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "lng-design-opensource": {
      "clone": 5,
      "fetch": 1,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "biomass-to-syngas-opensource": {
      "clone": 5,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "coal-to-urea-design-opensource": {
      "clone": 7,
      "fetch": 0,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "ethanol-design-opensource": {
      "clone": 4,
      "fetch": 4,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "cbg-design-opensource": {
      "clone": 4,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "lignocellulosic-ethanol-opensource": {
      "clone": 4,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "financial-analysis-toolkit-public": {
@@ -2699,24 +2705,24 @@
      "clone": 1,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "focus-sector-investor-map": {
      "clone": 0,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "india-ec-subsector-analysis": {
      "clone": 0,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "claude-stock-tools": {
@@ -2924,24 +2930,24 @@
      "clone": 0,
      "fetch": 5,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "blog-consistency-check": {
      "clone": 0,
      "fetch": 5,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "cng-cgd-retail-outlet-mapping": {
      "clone": 0,
      "fetch": 6,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "ai-tools-tracker": {
@@ -3117,8 +3123,8 @@
      "clone": 1,
      "fetch": 3,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "ethanol-design-opensource": {
@@ -3132,8 +3138,8 @@
      "clone": 1,
      "fetch": 6,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "coal-to-urea-design-opensource": {
@@ -3147,8 +3153,8 @@
      "clone": 0,
      "fetch": 2,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "bin": {
@@ -3402,8 +3408,8 @@
      "clone": 0,
      "fetch": 5,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-data": {
@@ -3438,8 +3444,8 @@
      "clone": 0,
      "fetch": 8,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "global-market-scanners": {
@@ -3467,16 +3473,16 @@
      "clone": 0,
      "fetch": 9,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "blog-consistency-check": {
      "clone": 0,
      "fetch": 5,
      "via": [
-      "transcript",
-      "reflog"
+      "reflog",
+      "transcript"
      ]
     },
     "manga2anime": {
@@ -3741,6 +3747,1150 @@
   "2026-10-12": {
    "repos": {
     "repo-traffic-analytics": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "k8s": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "karz": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-data-artifacts": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    ".github": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ai-tools-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "cloud-map": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lfs_archive_work": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "mlflow": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "bin": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "BazaarTalks": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "data-source-mining": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "kalki_flooding": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-data-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "digital-twin-for-ipa": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "mospi-dataset-analysis-public": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "piotroski-liquidity-research": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "price_prediction_backtest": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-market-scanners": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "agri-commodity-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market_screener_rag": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lit_review": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "masaladeutsch": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 15,
+     "via": [
+      "reflog"
+     ]
+    },
+    "iem-tracker": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-10-13": {
+   "repos": {
+    "market-pipeline": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-10-14": {
+   "repos": {
+    "market-pipeline": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lit_review": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 17,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-10-16": {
+   "repos": {
+    "fuel-retail-outlets": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 16,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-10-17": {
+   "repos": {
+    "piotroski-liquidity-research": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "ship2shore_rag": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "cng-cgd-retail-outlet-mapping": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "global-ticker-universe": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "global-market-scanners": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "market-correlation-matrices": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "india-trade-tracker": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "agri-commodity-tracker": {
+     "clone": 0,
+     "fetch": 5,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "claude-lmstudio-router": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "interpreter_toolkit": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "bin": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "financial-analysis-toolkit-public": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "research-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "prenatal-care-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "data-library-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "financial-analysis-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-stock-screener": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "market_screener_rag": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog"
+     ]
+    },
+    "global-market-data": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "repo-data-dedup": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "delivery-playbook": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "reflog"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 20,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 3
+  },
+  "2026-10-18": {
+   "repos": {
+    "financial-analysis-toolkit-public": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "masaladeutsch": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "bin": {
+     "clone": 34,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ship2shore_rag": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "cache_memory_cleaner": {
+     "clone": 1,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "agri-commodity-tracker": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-tracker": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-omc-fuel-fleet-model": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "vehicle_fuel_mileage": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "eu-ets-compliance-platform": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "claude-lmstudio-router": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "agentic-insurance-agent": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market_screener_rag": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "digital-twin-for-ipa": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "transmission-client": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-ec-subsector-analysis": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "CBSE_paper_patterns": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ppac-ready-reckoner-data": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "delivery-playbook": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "repo-data-dedup": {
+     "clone": 5,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "claude-provenance": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "data-source-mining": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ltm-warehouse-tests": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "research-design-system": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "karz": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "amazon-product-selector": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "kalki_flooding": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "research-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "prenatal-care-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-stock-screener": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-pipeline": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-market-data": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "data-library-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "interpreter_toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-market-scanners": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "financial-analysis-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-data-analysis": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "mospi-dataset-analysis-public": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "cricket-data-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "bms-battery-management": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "patient-history-tracking": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lng-design-opensource": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "refinery-design-opensource": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ai-tools-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blog-consistency-check": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "Ai_for_exploration": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "indian-wine-market-blog": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "BazaarTalks": {
+     "clone": 4,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "piotroski-liquidity-research": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "gazette-translated-indexed": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "price_prediction_backtest": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "cng-cgd-retail-outlet-mapping": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lok-rajya-sabha-qa": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "focus-sector-investor-map": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-govt-yellow-pages": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "fuel-retail-outlets": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-commodity-trade-deficit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "FCI-warehouse-MSPvsMSV": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-quality-regulation": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "chemical_import_substitution": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "us-stock-picks": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-ticker-universe": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-correlation-matrices": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "colab-market-fundamentals": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ev-battery-management-sim": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "memory-map-optimizer": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 24,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 2
+  },
+  "2026-10-19": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "transcript"
+     ]
+    },
+    ".github": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blog-consistency-check": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-pipeline": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "bin": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "repo-traffic-analytics": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market_screener_rag": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "india-omc-fuel-fleet-model": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "kalki_flooding": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "Bazartalks_Py2Cplus": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "Ai_for_exploration": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "lit_review": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "masaladeutsch": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "patient-history-tracking": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "karz": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "bms-battery-management": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "CBSE_paper_patterns": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "indian-wine-market-blog": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "market-data-artifacts": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "refinery-design-opensource": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "financial-analysis-toolkit-public": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "jai_kisan_jai_javan": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "cricket-data-analysis": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "amazon-product-selector": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 17,
+     "via": [
+      "reflog"
+     ]
+    },
+    "mospi-dataset-analysis-public": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "personal-profile": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "colab-market-fundamentals": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "iem-tracker": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "ev-battery-management-sim": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "ltm-warehouse-tests": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "stock-screener-platform": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "prenatal-care-toolkit": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "heart-valve-defect-detection": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    },
+    "research-design-system": {
+     "clone": 0,
+     "fetch": 3,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 2
+  },
+  "2026-10-20": {
+   "repos": {
+    "saf-monitoring-system": {
      "clone": 1,
      "fetch": 0,
      "via": [
@@ -3749,6 +4899,483 @@
     }
    },
    "unattributed": 0
+  },
+  "2026-10-22": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 20,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-10-23": {
+   "repos": {
+    "llm-extract-citation-fix": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "reg-intel": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "saf-monitoring-system": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "hydrogen-electrolyser-control": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "discom-debt-and-revenue-models": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "stock-portfolio-evaluator": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "bin": {
+     "clone": 8,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-correlation-matrices": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "price_prediction_backtest": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "BazaarTalks": {
+     "clone": 5,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "piotroski-liquidity-research": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "us-stock-picks": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-stock-screener": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "company-database": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "apeda-exporter-directory": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lit_review": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "manga2anime": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "job-search": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "financial-analysis-toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-election-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "prompt-efficiency-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 1,
+     "fetch": 36,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "repo-traffic-analytics": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "iem-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "mospi-dataset-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-brief-base": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "personal-profile": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-export-analysis": {
+     "clone": 6,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-data-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-forex-analysis": {
+     "clone": 6,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-trade-sector-policy-recommendations": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "toll-plaza-highways": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    }
+   },
+   "unattributed": 1
+  },
+  "2026-10-24": {
+   "repos": {
+    "bin": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-commodity-trade-deficit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "colab": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-forex-analysis": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "Ai_for_exploration": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "k8s": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "interpreter_toolkit": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "mlflow": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "ai-tools-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-correlation-matrices": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "cloud-map": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "jai_kisan_jai_javan": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "price_prediction_backtest": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market_screener_rag": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "jal_jeevan_lottery": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "stock-screener-platform": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "financial-analysis-toolkit-public": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "prenatal-care-toolkit": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "saf-monitoring-system": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "financial-analysis-toolkit": {
+     "clone": 1,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "global-market-research-platform": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "market-pipeline": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lit_review": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "masaladeutsch": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "discom-debt-and-revenue-models": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "iem-tracker": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "CBSE_paper_patterns": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "repo-traffic-analytics": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 19,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
+  },
+  "2026-10-25": {
+   "repos": {
+    "repo-traffic-analytics": {
+     "clone": 1,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 8,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 1
   }
  }
 }
