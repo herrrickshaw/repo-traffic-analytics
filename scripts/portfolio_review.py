@@ -113,9 +113,12 @@ def traffic_30d(name, self_days):
         v.get("count", 0) for date, v in data.get("views", {}).items() if date >= cutoff
     )
     # Distinct viewers: GitHub's own 14-day dedup, recorded by snapshot.py.
+    # A window that ended more than 14 days ago no longer overlaps the trailing
+    # 14 days at all, so it is not evidence of current readers.
     periods = data.get("period_totals", {})
+    window_floor = (datetime.now(UTC) - timedelta(days=14)).strftime("%Y-%m-%d")
     viewers = None
-    if periods:
+    if periods and max(periods) >= window_floor:
         viewers = periods[max(periods)].get("views", {}).get("uniques")
     return external, raw, views, viewers
 
