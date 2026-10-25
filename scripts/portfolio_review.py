@@ -35,7 +35,7 @@ The human still makes the call — this file is the agenda, not the decision.
 import json
 import re
 import subprocess
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from snapshot import SELF_ACTIVITY_PATH, is_self_day
@@ -101,7 +101,7 @@ def traffic_30d(name, self_days):
         data = json.loads(path.read_text())
     except json.JSONDecodeError:
         return None, None, None, None
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d")
+    cutoff = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d")
     recent = {d: v for d, v in data.get("clones", {}).items() if d >= cutoff}
     raw = sum(v.get("count", 0) for v in recent.values())
     external = sum(
@@ -154,7 +154,7 @@ def decide(tier, viewers, exists=True, archived=False):
 def main():
     catalog = load_catalog()
     self_days = load_self_days()
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     REPORT_DIR.mkdir(exist_ok=True)
     out = REPORT_DIR / f"REVIEW_{now.strftime('%Y-%m')}.md"
 
@@ -168,9 +168,7 @@ def main():
         pushed = info.get("pushed_at")
         days_stale = None
         if pushed:
-            days_stale = (
-                now - datetime.fromisoformat(pushed.replace("Z", "+00:00"))
-            ).days
+            days_stale = (now - datetime.fromisoformat(pushed)).days
         clones, raw_clones, views, viewers = traffic_30d(name, self_days)
 
         verdict = decide(tier, viewers, exists, info.get("archived", False))

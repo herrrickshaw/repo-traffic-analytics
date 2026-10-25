@@ -437,7 +437,9 @@ def keep_history(previous, current):
     out = json.loads(json.dumps(previous))  # deep copy; the record is plain JSON
     for day, payload in current.items():
         tgt = out.setdefault(day, {"repos": {}, "unattributed": 0})
-        tgt["unattributed"] = max(tgt.get("unattributed", 0), payload.get("unattributed", 0))
+        tgt["unattributed"] = max(
+            tgt.get("unattributed", 0), payload.get("unattributed", 0)
+        )
         for repo, counts in payload.get("repos", {}).items():
             e = tgt["repos"].setdefault(repo, {"clone": 0, "fetch": 0, "via": []})
             e["clone"] = max(e.get("clone", 0), counts.get("clone", 0))
@@ -569,8 +571,10 @@ def main():
         f"({len(repos) - len(local_clones)} can only be external)"
     )
     print(f"Reflog scan: {len(reflog_days)} dates flagged")
-    print(f"Self-activity: {len(self_days)} dates flagged after merge "
-          f"({len(scanned)} seen by this scan, the rest kept from the committed record)")
+    print(
+        f"Self-activity: {len(self_days)} dates flagged after merge "
+        f"({len(scanned)} seen by this scan, the rest kept from the committed record)"
+    )
 
     # Rebuild a flat summary CSV for quick scanning
     summary_path = REPO_ROOT / "summary.csv"
