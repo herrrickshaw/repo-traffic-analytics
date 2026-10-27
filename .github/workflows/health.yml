@@ -1,7 +1,7 @@
 # Shared health workflow, rolled out across the herrrickshaw repos on 2026-10-26.
 # install -> import every module offline -> pytest -> ruff bug gate -> pip-audit (report only).
 # The import step is .github/scripts/import_all.py; it never runs top-level script bodies
-# and blocks the network. Python matrix: 3.10-3.14 (private repo: floor + latest only, CI minutes are metered).
+# and blocks the network. Python matrix: 3.11-3.14 (private repo: floor + latest only, CI minutes are metered).
 name: Health
 
 on:
@@ -30,7 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python: ["3.10", "3.14"]
+        python: ["3.11", "3.14"]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
