@@ -416,6 +416,14 @@
     "2026-10-23": {
       "count": 0,
       "uniques": 0
+    },
+    "2026-10-24": {
+      "count": 2,
+      "uniques": 1
+    },
+    "2026-10-25": {
+      "count": 8,
+      "uniques": 4
     }
   },
   "period_totals": {
@@ -587,6 +595,16 @@
       "views": {
         "count": 0,
         "uniques": 0
+      }
+    },
+    "2026-10-27": {
+      "clones": {
+        "count": 32,
+        "uniques": 21
+      },
+      "views": {
+        "count": 5,
+        "uniques": 4
       }
     }
   },
@@ -1007,6 +1025,14 @@
     "2026-10-23": {
       "count": 0,
       "uniques": 0
+    },
+    "2026-10-24": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-25": {
+      "count": 5,
+      "uniques": 4
     }
   }
 }
