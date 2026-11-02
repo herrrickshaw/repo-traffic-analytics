@@ -6501,13 +6501,149 @@
     },
     "blogger_writeups_code": {
      "clone": 0,
-     "fetch": 12,
+     "fetch": 25,
+     "via": [
+      "reflog"
+     ]
+    },
+    "global-market-kdb": {
+     "clone": 0,
+     "fetch": 2,
+     "via": [
+      "reflog",
+      "transcript"
+     ]
+    }
+   },
+   "unattributed": 8
+  },
+  "2026-10-28": {
+   "repos": {
+    "uco-ulo-tracking": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-mandi-arrivals": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "lng-cost": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "bin": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "saf-monitoring-system": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "repo-traffic-analytics": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "reflog"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 34,
      "via": [
       "reflog"
      ]
     }
    },
    "unattributed": 1
+  },
+  "2026-10-29": {
+   "repos": {},
+   "unattributed": 1
+  },
+  "2026-10-30": {
+   "repos": {
+    "global-market-research-platform": {
+     "clone": 1,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 6,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 2
+  },
+  "2026-10-31": {
+   "repos": {},
+   "unattributed": 2
+  },
+  "2026-11-02": {
+   "repos": {
+    "iem-tracker": {
+     "clone": 3,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "company-database-public": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "reg-intel": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "bin": {
+     "clone": 2,
+     "fetch": 0,
+     "via": [
+      "transcript"
+     ]
+    },
+    "india-govt-yellow-pages": {
+     "clone": 0,
+     "fetch": 1,
+     "via": [
+      "transcript"
+     ]
+    },
+    "blogger_writeups_code": {
+     "clone": 0,
+     "fetch": 4,
+     "via": [
+      "reflog"
+     ]
+    }
+   },
+   "unattributed": 0
   }
  }
 }

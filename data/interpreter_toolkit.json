@@ -444,6 +444,30 @@
     "2026-10-25": {
       "count": 0,
       "uniques": 0
+    },
+    "2026-10-26": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-10-27": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-28": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-29": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-30": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-31": {
+      "count": 0,
+      "uniques": 0
     }
   },
   "period_totals": {
@@ -621,6 +645,26 @@
       "clones": {
         "count": 15,
         "uniques": 11
+      },
+      "views": {
+        "count": 0,
+        "uniques": 0
+      }
+    },
+    "2026-10-28": {
+      "clones": {
+        "count": 8,
+        "uniques": 6
+      },
+      "views": {
+        "count": 0,
+        "uniques": 0
+      }
+    },
+    "2026-11-02": {
+      "clones": {
+        "count": 5,
+        "uniques": 3
       },
       "views": {
         "count": 0,
@@ -1071,6 +1115,30 @@
       "uniques": 0
     },
     "2026-10-25": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-26": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-27": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-28": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-29": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-30": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-10-31": {
       "count": 0,
       "uniques": 0
     }
