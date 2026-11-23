@@ -277,10 +277,10 @@ def test_keep_history_does_not_mutate_inputs():
 
 
 def test_merge_activity_sums_counts_per_source():
-    t = {"d": {"repos": {"a": {"clone": 1, "fetch": 0}}, "unattributed": 2}}
-    r = {"d": {"repos": {"a": {"clone": 0, "fetch": 4}}, "unattributed": 1}}
+    t = {"d": {"repos": {"a": {"clone": 1, "fetch": 2}}, "unattributed": 2}}
+    r = {"d": {"repos": {"a": {"clone": 3, "fetch": 4}}, "unattributed": 1}}
     m = sn.merge_activity(t, r)
-    assert m["d"] == {"repos": {"a": {"clone": 1, "fetch": 4, "via": ["transcript", "reflog"]}}, "unattributed": 3}
+    assert m["d"] == {"repos": {"a": {"clone": 4, "fetch": 6, "via": ["transcript", "reflog"]}}, "unattributed": 3}
 
 
 def test_scan_self_activity_skips_files_whose_stat_fails(paths, monkeypatch):
@@ -296,3 +296,44 @@ def test_scan_self_activity_skips_files_whose_stat_fails(paths, monkeypatch):
 
     monkeypatch.setattr(type(root), "stat", flaky)
     assert sn.scan_self_activity({"alpha"}) == {}
+
+
+def test_today_is_the_utc_date_even_when_local_time_is_a_day_behind(monkeypatch):
+    from datetime import datetime as real_datetime
+
+    class Clock(real_datetime):
+        @classmethod
+        def now(cls, tz=None):
+            utc = real_datetime(2026, 8, 1, 0, 30, tzinfo=UTC)
+            return utc if tz is not None else real_datetime(2026, 7, 31, 17, 30)        # same instant, UTC-7 wall clock
+
+    monkeypatch.setattr(sn, "datetime", Clock)
+    assert str(sn.today()) == "2026-08-01"
+
+
+def test_home_cd_fallback_needs_the_home_repo_to_be_tracked():
+    assert sn._repos_in_command("cd ~ && git fetch", {"alpha"}) == set()
+    assert sn._repos_in_command("cd ~ && git fetch", {"alpha", sn.HOME_REPO}) == {sn.HOME_REPO}
+
+
+def test_reflog_day_is_utc_whatever_the_machine_timezone(monkeypatch):
+    import time
+    if not hasattr(time, "tzset"):
+        pytest.skip("tzset is Unix-only")
+    monkeypatch.setenv("TZ", "Pacific/Auckland")                                       # UTC+12/13
+    time.tzset()
+    try:
+        epoch = int(real_epoch("2026-08-20T23:30:00+00:00"))                           # already 2026-08-21 locally
+        assert sn.reflog_utc_day(f"main@{{{epoch}}}") == "2026-08-20"
+    finally:
+        monkeypatch.undo()
+        time.tzset()
+
+
+def real_epoch(iso):
+    from datetime import datetime as real_datetime
+    return real_datetime.fromisoformat(iso).timestamp()
+
+
+def test_self_label_orders_clone_before_fetch():
+    assert sn.self_label({"d": {"repos": {"r": {"clone": 1, "fetch": 2}}}}, "r", "d") == "clone+fetch"
