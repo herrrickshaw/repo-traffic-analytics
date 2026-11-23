@@ -7,7 +7,7 @@ import sys
 import pytest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "scripts"))
-import add_ai_helper as ah  # noqa: E402
+import add_ai_helper as ah
 
 
 def repo(name, lang="Python", vis="PUBLIC", archived=False, fork=False, desc="A repo"):

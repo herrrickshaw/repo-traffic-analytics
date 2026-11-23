@@ -9,7 +9,7 @@ from datetime import UTC, datetime, timedelta
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
-import portfolio_review as pr  # noqa: E402
+import portfolio_review as pr
 
 
 def day(n):
