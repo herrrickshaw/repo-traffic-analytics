@@ -3,6 +3,7 @@
 No network: gh_api is replaced with a stub, and every path (catalog, data,
 reports, self-activity) points into tmp_path. snapshot.py is never run.
 """
+
 import json
 import os
 import sys
@@ -10,8 +11,13 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
-import portfolio_review as pr  # noqa: E402
+sys.path.insert(
+    0,
+    os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"
+    ),
+)
+import portfolio_review as pr
 
 
 def _day(n):
@@ -34,21 +40,26 @@ def _write_data(env, name, data):
 
 # ── decide ───────────────────────────────────────────────────────────────
 
-@pytest.mark.parametrize("args,expected", [
-    ((1, None, False, False), "MISSING"),       # 404 beats everything
-    ((1, 50, True, True), "ARCHIVED"),
-    ((1, 0, True, False), "KEEP"),              # tier-1 automation exemption
-    ((1, None, True, False), "KEEP"),
-    ((3, None, True, False), "NO-DATA"),
-    ((3, pr.MIN_VIEWERS, True, False), "KEEP"),  # boundary is inclusive
-    ((2, pr.MIN_VIEWERS - 1, True, False), "REVIEW"),
-    ((3, 0, True, False), "ARCHIVE-CANDIDATE"),
-])
+
+@pytest.mark.parametrize(
+    "args,expected",
+    [
+        ((1, None, False, False), "MISSING"),  # 404 beats everything
+        ((1, 50, True, True), "ARCHIVED"),
+        ((1, 0, True, False), "KEEP"),  # tier-1 automation exemption
+        ((1, None, True, False), "KEEP"),
+        ((3, None, True, False), "NO-DATA"),
+        ((3, pr.MIN_VIEWERS, True, False), "KEEP"),  # boundary is inclusive
+        ((2, pr.MIN_VIEWERS - 1, True, False), "REVIEW"),
+        ((3, 0, True, False), "ARCHIVE-CANDIDATE"),
+    ],
+)
 def test_decide_verdicts(args, expected):
     assert pr.decide(*args) == expected
 
 
 # ── load_catalog ─────────────────────────────────────────────────────────
+
 
 def test_load_catalog_parses_keys_and_strips_comments_and_quotes(env):
     (env / "repos.yaml").write_text(
@@ -58,21 +69,27 @@ def test_load_catalog_parses_keys_and_strips_comments_and_quotes(env):
         "  beta.repo-2:\n    tier: 3\n"
     )
     cat = pr.load_catalog()
-    assert cat == {"alpha": {"tier": "1", "visibility": "PRIVATE", "purpose": "does things"},
-                   "beta.repo-2": {"tier": "3"}}
+    assert cat == {
+        "alpha": {"tier": "1", "visibility": "PRIVATE", "purpose": "does things"},
+        "beta.repo-2": {"tier": "3"},
+    }
 
 
 # ── load_self_days ───────────────────────────────────────────────────────
+
 
 def test_load_self_days_missing_or_corrupt_is_empty(env):
     assert pr.load_self_days() == {}
     (env / "self_activity.json").write_text("{bad")
     assert pr.load_self_days() == {}
-    (env / "self_activity.json").write_text(json.dumps({"days": {"2026-10-01": {"repos": {"a": 1}}}}))
+    (env / "self_activity.json").write_text(
+        json.dumps({"days": {"2026-10-01": {"repos": {"a": 1}}}})
+    )
     assert pr.load_self_days() == {"2026-10-01": {"repos": {"a": 1}}}
 
 
 # ── traffic_30d ──────────────────────────────────────────────────────────
+
 
 def test_traffic_30d_no_file_or_bad_json(env):
     assert pr.traffic_30d("nope", {}) == (None, None, None, None)
@@ -81,17 +98,28 @@ def test_traffic_30d_no_file_or_bad_json(env):
 
 
 def test_traffic_30d_window_and_self_day_exclusion(env):
-    _write_data(env, "r", {
-        "clones": {_day(1): {"count": 5}, _day(10): {"count": 7}, _day(40): {"count": 100}},
-        "views": {_day(2): {"count": 3}, _day(31): {"count": 50}},
-        "period_totals": {_day(8): {"views": {"uniques": 2}}, _day(1): {"views": {"uniques": 4}}},
-    })
+    _write_data(
+        env,
+        "r",
+        {
+            "clones": {
+                _day(1): {"count": 5},
+                _day(10): {"count": 7},
+                _day(40): {"count": 100},
+            },
+            "views": {_day(2): {"count": 3}, _day(31): {"count": 50}},
+            "period_totals": {
+                _day(8): {"views": {"uniques": 2}},
+                _day(1): {"views": {"uniques": 4}},
+            },
+        },
+    )
     self_days = {_day(10): {"repos": {"r": 1}}, _day(1): {"repos": {"other": 1}}}
     external, raw, views, viewers = pr.traffic_30d("r", self_days)
-    assert raw == 12            # 40-day-old clone excluded
-    assert external == 5        # owner's own clone day dropped
-    assert views == 3           # 31-day-old view excluded
-    assert viewers == 4         # latest 14-day window wins
+    assert raw == 12  # 40-day-old clone excluded
+    assert external == 5  # owner's own clone day dropped
+    assert views == 3  # 31-day-old view excluded
+    assert viewers == 4  # latest 14-day window wins
 
 
 def test_traffic_30d_viewers_none_when_no_period_totals(env):
@@ -104,14 +132,22 @@ def test_traffic_30d_ignores_viewer_count_from_a_long_expired_window(env):
     the newest recorded window ended months ago (snapshots stopped for this
     repo), that number says nothing about current readership and must not be
     allowed to vote KEEP."""
-    _write_data(env, "r", {"clones": {}, "views": {},
-                           "period_totals": {_day(90): {"views": {"uniques": 9}}}})
+    _write_data(
+        env,
+        "r",
+        {
+            "clones": {},
+            "views": {},
+            "period_totals": {_day(90): {"views": {"uniques": 9}}},
+        },
+    )
     viewers = pr.traffic_30d("r", {})[3]
     assert viewers is None
     assert pr.decide(3, viewers) == "NO-DATA"
 
 
 # ── main (report) ────────────────────────────────────────────────────────
+
 
 def test_main_writes_ordered_report(env, monkeypatch, capsys):
     (env / "repos.yaml").write_text(
@@ -135,9 +171,18 @@ def test_main_writes_ordered_report(env, monkeypatch, capsys):
     pr.main()
     out = env / "reports" / f"REVIEW_{datetime.now(UTC).strftime('%Y-%m')}.md"
     text = out.read_text()
-    table = [l for l in text.splitlines() if l.startswith("| ") and not l.startswith("| Verdict")]
+    table = [
+        l
+        for l in text.splitlines()
+        if l.startswith("| ") and not l.startswith("| Verdict")
+    ]
     assert [row.split(" | ")[0].lstrip("| ") for row in table] == [
-        "MISSING", "ARCHIVE-CANDIDATE", "KEEP", "KEEP", "ARCHIVED"]
+        "MISSING",
+        "ARCHIVE-CANDIDATE",
+        "KEEP",
+        "KEEP",
+        "ARCHIVED",
+    ]
     assert "| KEEP | 1 | auto | 3 |" in text
     assert "Kept by readers (1): read (5 viewers)" in text
     assert "Summary: ARCHIVE-CANDIDATE: 1, ARCHIVED: 1, KEEP: 2, MISSING: 1" in text
