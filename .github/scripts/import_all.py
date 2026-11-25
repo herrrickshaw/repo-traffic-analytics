@@ -13,6 +13,7 @@ ModuleNotFoundError that names a module *inside this repo*. A third-party module
 missing from the CI environment, a data file that is not checked in, a blocked
 socket, or a missing env var is reported as a warning, not a failure.
 """
+
 from __future__ import annotations
 
 import os
@@ -21,13 +22,15 @@ import subprocess
 import sys
 
 ROOT = os.getcwd()
-SKIP_DIRS = re.compile(r"^(tests?/|from-working-files/|from-[^/]+/|\.venv/|venv/|node_modules/|build/|dist/|.*/migrations/)")
+SKIP_DIRS = re.compile(
+    r"^(tests?/|from-working-files/|from-[^/]+/|\.venv/|venv/|node_modules/|build/|dist/|.*/migrations/)"
+)
 SKIP_FILES = re.compile(r"(^|/)(test_[^/]*|[^/]*_test|conftest|setup)\.py$")
 DANGEROUS = re.compile(
     r"smtplib|yagmail|sendmail|cassandra|psycopg|pymongo|boto3|rclone|kiteconnect|upstox|smartapi"
     r"|shutil\.rmtree|os\.remove|os\.unlink|\.unlink\(|subprocess|os\.system|requests\.(post|put|delete)"
     r"|selenium|playwright|schedule\.|apscheduler|launchctl|crontab",
-    re.I,
+    re.IGNORECASE,
 )
 MAIN_GUARD = re.compile(r"__name__\s*==\s*[\"']__main__[\"']")
 
@@ -49,7 +52,9 @@ except BaseException as e:  # noqa: BLE001 - we classify by type name below
 
 
 def tracked_py_files() -> list[str]:
-    out = subprocess.run(["git", "ls-files", "*.py"], capture_output=True, text=True, check=True).stdout
+    out = subprocess.run(
+        ["git", "ls-files", "*.py"], capture_output=True, text=True, check=True
+    ).stdout
     return [f for f in out.split("\n") if f]
 
 
@@ -61,7 +66,8 @@ def candidate_modules(files: list[str]) -> list[tuple[str, str]]:
         d = os.path.dirname(f)
         in_pkg = os.path.exists(os.path.join(d, "__init__.py")) if d else False
         try:
-            src = open(f, encoding="utf-8", errors="replace").read()
+            with open(f, encoding="utf-8", errors="replace") as fh:
+                src = fh.read()
         except OSError:
             continue
         if not (in_pkg or MAIN_GUARD.search(src)):
@@ -69,8 +75,7 @@ def candidate_modules(files: list[str]) -> list[tuple[str, str]]:
         if DANGEROUS.search(src):
             continue
         m = f[:-3].replace("/", ".")
-        if m.endswith(".__init__"):
-            m = m[: -len(".__init__")]
+        m = m.removesuffix(".__init__")
         mods.append((f, m))
     return mods[:400]
 
@@ -87,7 +92,9 @@ def classify(msg: str, local: set[str]) -> str:
     if kind in ("SyntaxError", "NameError", "IndentationError", "TabError"):
         return "bug"
     if kind in ("ModuleNotFoundError", "ImportError"):
-        m = re.search(r"No module named '([^'.]+)", rest) or re.search(r"cannot import name '[^']+' from '([^'.]+)", rest)
+        m = re.search(r"No module named '([^'.]+)", rest) or re.search(
+            r"cannot import name '[^']+' from '([^'.]+)", rest
+        )
         if m and m.group(1) in local:
             return "bug"
         return "dep"
@@ -101,8 +108,18 @@ def main() -> int:
     rows: list[tuple[str, str, str]] = []
     for f, m in mods:
         try:
-            p = subprocess.run([sys.executable, "-I", "-c", RUNNER, m], capture_output=True, text=True, timeout=20)
-            msg = (p.stdout + p.stderr).strip().splitlines()[-1] if (p.stdout + p.stderr).strip() else ""
+            p = subprocess.run(
+                [sys.executable, "-I", "-c", RUNNER, m],
+                capture_output=True,
+                text=True,
+                timeout=20,
+                check=False,
+            )
+            msg = (
+                (p.stdout + p.stderr).strip().splitlines()[-1]
+                if (p.stdout + p.stderr).strip()
+                else ""
+            )
             if p.returncode == 0 or not msg:
                 continue
             rows.append((classify(msg, local), f, msg))
@@ -111,11 +128,16 @@ def main() -> int:
     bugs = [r for r in rows if r[0] == "bug"]
     deps = [r for r in rows if r[0] == "dep"]
     warns = [r for r in rows if r[0] == "warn"]
-    lines = [f"### import-all: {len(mods)} modules, {len(bugs)} bugs, {len(deps)} missing deps, {len(warns)} warnings", ""]
+    lines = [
+        f"### import-all: {len(mods)} modules, {len(bugs)} bugs, {len(deps)} missing deps, {len(warns)} warnings",
+        "",
+    ]
     if rows:
         lines += ["| class | module | error |", "|---|---|---|"]
         for k, f, msg in sorted(rows):
-            cell = msg.replace("|", "\\|")  # kept out of the f-string: a backslash there is a SyntaxError before 3.12
+            cell = msg.replace(
+                "|", "\\|"
+            )  # kept out of the f-string: a backslash there is a SyntaxError before 3.12
             lines.append(f"| {k} | `{f}` | {cell} |")
     report = "\n".join(lines)
     print(report)

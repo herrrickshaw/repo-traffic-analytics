@@ -8,14 +8,30 @@ files locally, printing a summary. Nothing is pushed unless --push is given.
   python3 add_ai_helper.py --only karz     # one repo
   python3 add_ai_helper.py --push          # commit + push to default branch
 """
+
 import os
+
 os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"
-import argparse, json, subprocess, sys, tempfile, pathlib, re
+import argparse
+import json
+import pathlib
+import subprocess
+import tempfile
 
 OWNER = "herrrickshaw"
-HOME_REPOS = {"global-market-research-platform", "working-files"}  # live $HOME origin / rescue copy: a push would diverge from ~/.git
-SKIP = {".github", "k8s", "cloud-map", "lfs_archive_work", "market-data-artifacts",
-        "ai-tools-tracker", "mlflow"}
+HOME_REPOS = {
+    "global-market-research-platform",
+    "working-files",
+}  # live $HOME origin / rescue copy: a push would diverge from ~/.git
+SKIP = {
+    ".github",
+    "k8s",
+    "cloud-map",
+    "lfs_archive_work",
+    "market-data-artifacts",
+    "ai-tools-tracker",
+    "mlflow",
+}
 MARK = "<!-- how-to-use-with-ai -->"
 
 RUN_HINT = {
@@ -90,8 +106,10 @@ Copy, paste, and edit the parts in `[brackets]`.
 Found a problem or have a question? Open an issue on the repo.
 """
 
+
 def sh(*a, **k):
     return subprocess.run(a, check=True, capture_output=True, text=True, **k).stdout
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -99,32 +117,56 @@ def main():
     ap.add_argument("--only", nargs="*")
     ap.add_argument("--include-private", action="store_true")
     ap.add_argument("--include-archived", action="store_true")
-    ap.add_argument("--all", action="store_true", help="public+private+archived, incl. no-language repos")
+    ap.add_argument(
+        "--all",
+        action="store_true",
+        help="public+private+archived, incl. no-language repos",
+    )
     ap.add_argument("--workdir", default=tempfile.mkdtemp(prefix="aihelper_"))
     a = ap.parse_args()
 
-    repos = json.loads(sh("gh", "repo", "list", OWNER, "--limit", "300", "--json",
-        "name,visibility,isArchived,isFork,primaryLanguage,description,defaultBranchRef"))
-    work = pathlib.Path(a.workdir); work.mkdir(exist_ok=True)
+    repos = json.loads(
+        sh(
+            "gh",
+            "repo",
+            "list",
+            OWNER,
+            "--limit",
+            "300",
+            "--json",
+            "name,visibility,isArchived,isFork,primaryLanguage,description,defaultBranchRef",
+        )
+    )
+    work = pathlib.Path(a.workdir)
+    work.mkdir(exist_ok=True)
     done = []
     for r in repos:
         n = r["name"]
-        if a.only and n not in a.only: continue
-        if n in HOME_REPOS: continue
-        if a.all: pass
+        if a.only and n not in a.only:
+            continue
+        if n in HOME_REPOS:
+            continue
+        if a.all:
+            pass
         elif not a.only:
-            if n in SKIP or r["isFork"] or not r["primaryLanguage"]: continue
-            if r["isArchived"] and not a.include_archived: continue
-            if r["visibility"] == "PRIVATE" and not a.include_private: continue
+            if n in SKIP or r["isFork"] or not r["primaryLanguage"]:
+                continue
+            if r["isArchived"] and not a.include_archived:
+                continue
+            if r["visibility"] == "PRIVATE" and not a.include_private:
+                continue
         lang = r["primaryLanguage"]["name"] if r["primaryLanguage"] else ""
         desc = (r["description"] or "").strip()
         body = TEMPLATE.format(
-            name=n, owner=OWNER,
+            name=n,
+            owner=OWNER,
             desc_line=(desc + "\n\n") if desc else "",
-            run_hint=RUN_HINT.get(lang, "the tools named in the README"))
+            run_hint=RUN_HINT.get(lang, "the tools named in the README"),
+        )
         d = work / n
         unarch = a.push and r["isArchived"]
-        if unarch: sh("gh", "repo", "unarchive", f"{OWNER}/{n}", "--yes")
+        if unarch:
+            sh("gh", "repo", "unarchive", f"{OWNER}/{n}", "--yes")
         if not d.exists():
             sh("gh", "repo", "clone", f"{OWNER}/{n}", str(d), "--", "--depth", "1")
         (d / "HOW_TO_USE_WITH_AI.md").write_text(body)
@@ -145,18 +187,28 @@ def main():
         if a.push and status:
             try:
                 sh("git", "-C", str(d), "add", "HOW_TO_USE_WITH_AI.md", "README.md")
-                sh("git", "-C", str(d), "commit", "-m",
-                   "docs: add how-to-use-with-AI helper (clone, paste into Claude/Gemini, sample prompts)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>")
+                sh(
+                    "git",
+                    "-C",
+                    str(d),
+                    "commit",
+                    "-m",
+                    "docs: add how-to-use-with-AI helper (clone, paste into Claude/Gemini, sample prompts)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
+                )
                 sh("git", "-C", str(d), "push")
             except subprocess.CalledProcessError as e:
                 print("FAILED", n, (e.stderr or "")[-300:])
                 status = "FAILED"
             finally:
-                if unarch: sh("gh", "repo", "archive", f"{OWNER}/{n}", "--yes")
-        elif unarch: sh("gh", "repo", "archive", f"{OWNER}/{n}", "--yes")
+                if unarch:
+                    sh("gh", "repo", "archive", f"{OWNER}/{n}", "--yes")
+        elif unarch:
+            sh("gh", "repo", "archive", f"{OWNER}/{n}", "--yes")
         done.append((n, r["visibility"], lang, bool(status)))
-    for x in done: print(*x)
+    for x in done:
+        print(*x)
     print(f"{len(done)} repos; workdir={work}; pushed={a.push}")
+
 
 if __name__ == "__main__":
     main()
